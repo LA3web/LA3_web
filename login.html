@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ورود | LA3</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #030303;
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 430px;
+    padding: 22px;
+}
+
+.logo {
+    text-align: center;
+    font-size: 58px;
+    font-weight: bold;
+    color: #38bdf8;
+    text-shadow:
+        0 0 10px #2563eb,
+        0 0 30px #2563eb;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: #0d1117;
+    border: 1px solid #2563eb;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 0 30px rgba(37, 99, 235, .25);
+}
+
+h2 {
+    margin-top: 0;
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    color: #93c5fd;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 18px;
+    border: 1px solid #334155;
+    outline: none;
+    background: #050505;
+    color: white;
+    font-size: 15px;
+}
+
+input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56,189,248,.25);
+}
+
+input[type="file"] {
+    padding: 12px;
+}
+
+button {
+    width: 100%;
+    border: 0;
+    border-radius: 20px;
+    padding: 15px;
+    margin-top: 22px;
+    background: linear-gradient(90deg, #2563eb, #7c3aed);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.owner {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+.note {
+    text-align: center;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">LA3</div>
+
+    <div class="subtitle">
+        به شبکه LA3 خوش آمدید
+    </div>
+
+    <div class="card">
+
+        <h2>ورود به LA3</h2>
+
+        <label>نام</label>
+        <input
+            type="text"
+            id="name"
+            placeholder="نام خود را وارد کنید"
+        >
+
+        <label>نام کاربری</label>
+        <input
+            type="text"
+            id="username"
+            placeholder="@username"
+        >
+
+        <label>تصویر پروفایل</label>
+        <input
+            type="file"
+            id="profile"
+            accept="image/*"
+        >
+
+        <button onclick="login()">
+            ورود به LA3
+        </button>
+
+        <a class="owner" href="owner-login.html">
+            ورود مالک 🔐
+        </a>
+
+        <div class="note">
+            در ورودهای بعدی، در صورت فعال بودن حساب،
+            نیازی به وارد کردن رمز نخواهد بود.
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function login() {
+
+    const name = document.getElementById("name").value.trim();
+    const username = document.getElementById("username").value.trim();
+
+    if (!name || !username) {
+        alert("لطفاً نام و نام کاربری را وارد کنید.");
+        return;
+    }
+
+    /*
+      این بخش فعلاً نمایشی است.
+      بعداً با Supabase جایگزین می‌شود
+      تا حساب واقعاً در دیتابیس ثبت شود.
+    */
+
+    localStorage.setItem("la3_name", name);
+    localStorage.setItem("la3_username", username);
+
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+  </html>
