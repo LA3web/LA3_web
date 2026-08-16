@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ورود مالک | LA3</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(circle at top,#162d4d,#050505 60%);
+
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+.box{
+  width:min(430px,92%);
+  background:rgba(17,24,39,.97);
+
+  border:1px solid #2563eb;
+  border-radius:30px;
+
+  padding:28px 22px;
+
+  box-shadow:
+    0 0 40px rgba(37,99,235,.3);
+}
+
+.logo{
+  text-align:center;
+  font-size:55px;
+  font-weight:900;
+
+  color:#38bdf8;
+
+  text-shadow:
+    0 0 25px #2563eb;
+}
+
+.owner-title{
+  text-align:center;
+  margin-top:5px;
+
+  font-size:20px;
+  color:#bfdbfe;
+}
+
+.subtitle{
+  text-align:center;
+  color:#718096;
+  font-size:12px;
+
+  margin:8px 0 25px;
+}
+
+label{
+  display:block;
+
+  margin:15px 4px 7px;
+
+  color:#bfdbfe;
+  font-size:13px;
+}
+
+input{
+  width:100%;
+
+  padding:14px;
+
+  border-radius:17px;
+
+  border:1px solid #334155;
+
+  background:#070b12;
+
+  color:white;
+
+  outline:none;
+
+  font-family:inherit;
+  font-size:14px;
+}
+
+input:focus{
+  border-color:#38bdf8;
+
+  box-shadow:
+    0 0 12px rgba(56,189,248,.2);
+}
+
+button{
+  width:100%;
+
+  margin-top:22px;
+
+  padding:15px;
+
+  border:0;
+
+  border-radius:18px;
+
+  background:#1d4ed8;
+
+  color:white;
+
+  font-family:inherit;
+
+  font-size:15px;
+
+  cursor:pointer;
+}
+
+button:hover{
+  background:#2563eb;
+}
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.message{
+  min-height:22px;
+
+  text-align:center;
+
+  margin-top:15px;
+
+  color:#93c5fd;
+
+  font-size:12px;
+}
+
+.back{
+  display:block;
+
+  text-align:center;
+
+  margin-top:18px;
+
+  color:#60a5fa;
+
+  text-decoration:none;
+
+  font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+  <div class="logo">
+    LA3
+  </div>
+
+  <div class="owner-title">
+    👑 پنل مالک
+  </div>
+
+  <div class="subtitle">
+    ورود مدیریت LA3
+  </div>
+
+
+  <label for="email">
+    ایمیل مالک
+  </label>
+
+  <input
+    id="email"
+    type="email"
+    placeholder="ایمیل مالک"
+    autocomplete="username"
+  >
+
+
+  <label for="password">
+    رمز عبور
+  </label>
+
+  <input
+    id="password"
+    type="password"
+    placeholder="رمز عبور"
+    autocomplete="current-password"
+  >
+
+
+  <button id="loginButton">
+    ورود به پنل مالک 👑
+  </button>
+
+
+  <div id="message" class="message"></div>
+
+
+  <a class="back" href="login.html">
+    بازگشت به ورود کاربران
+  </a>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =====================================
+   SUPABASE
+===================================== */
+
+const SUPABASE_URL =
+"https://ibqhyqzolkzzpziocfvp.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+
+
+const supabaseClient =
+window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const emailInput =
+document.getElementById("email");
+
+const passwordInput =
+document.getElementById("password");
+
+const loginButton =
+document.getElementById("loginButton");
+
+const messageBox =
+document.getElementById("message");
+
+
+/* =====================================
+   MESSAGE
+===================================== */
+
+function showMessage(
+  text,
+  error=false
+){
+
+  messageBox.textContent =
+    text;
+
+  messageBox.style.color =
+    error
+      ? "#fca5a5"
+      : "#93c5fd";
+
+}
+
+
+/* =====================================
+   LOGIN OWNER
+===================================== */
+
+loginButton.addEventListener(
+  "click",
+  async function(){
+
+    const email =
+      emailInput.value.trim();
+
+    const password =
+      passwordInput.value;
+
+
+    if(!email){
+
+      showMessage(
+        "ایمیل را وارد کن.",
+        true
+      );
+
+      return;
+    }
+
+
+    if(!password){
+
+      showMessage(
+        "رمز عبور را وارد کن.",
+        true
+      );
+
+      return;
+    }
+
+
+    loginButton.disabled = true;
+
+    showMessage(
+      "در حال بررسی..."
+    );
+
+
+    try{
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithPassword({
+
+            email:email,
+
+            password:password
+
+          });
+
+
+      if(error){
+
+        throw error;
+
+      }
+
+
+      if(!data.user){
+
+        throw new Error(
+          "ورود انجام نشد."
+        );
+
+      }
+
+
+      /*
+       * فعلاً فقط ورود Supabase را بررسی می‌کنیم.
+       *
+       * مرحله بعد:
+       * بررسی می‌کنیم که این حساب واقعاً
+       * مالک LA3 باشد.
+       */
+
+
+      showMessage(
+        "ورود موفق بود؛ در حال انتقال..."
+      );
+
+
+      setTimeout(
+        function(){
+
+          window.location.href =
+            "admin.html";
+
+        },
+        500
+      );
+
+    }
+    catch(error){
+
+      console.error(error);
+
+      showMessage(
+        "ایمیل یا رمز عبور صحیح نیست.",
+        true
+      );
+
+      loginButton.disabled = false;
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+  </html>
