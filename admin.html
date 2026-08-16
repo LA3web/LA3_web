@@ -1,255 +1,179 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>پنل مالک | LA3</title>
+<title>LA3 | پنل مالک</title>
 
 <style>
 *{
     box-sizing:border-box;
 }
 
-body{
+html,body{
     margin:0;
-    min-height:100vh;
+    padding:0;
+    min-height:100%;
+}
+
+body{
     background:
-        radial-gradient(circle at top,#162d4d 0%,#07101d 45%,#020202 100%);
-    color:white;
+        radial-gradient(circle at top,#17345a 0%,#07101e 45%,#020409 100%);
+    color:#fff;
     font-family:Tahoma,Arial,sans-serif;
-    padding-bottom:40px;
 }
 
-.hidden{
-    display:none !important;
+.container{
+    width:min(900px,94%);
+    margin:30px auto 80px;
 }
 
-/* LOADING */
-
-#loading{
-    position:fixed;
-    inset:0;
-    background:#020617;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-}
-
-.loading-box{
+.header{
+    background:rgba(15,23,42,.97);
+    border:1px solid #2563eb;
+    border-radius:30px;
+    padding:28px;
+    box-shadow:0 0 35px rgba(37,99,235,.25);
     text-align:center;
+    position:relative;
 }
 
-.loading-logo{
-    font-size:60px;
+.logo{
+    font-size:58px;
     font-weight:900;
     color:#38bdf8;
     text-shadow:0 0 25px #2563eb;
 }
 
-.loading-text{
-    margin-top:15px;
+.title{
+    font-size:27px;
+    color:#dbeafe;
+    margin-top:8px;
+    font-weight:bold;
+}
+
+.subtitle{
+    margin-top:10px;
     color:#94a3b8;
     font-size:14px;
 }
 
-/* HEADER */
-
-.header{
-    width:min(1100px,94%);
-    margin:20px auto;
-    padding:20px;
-    background:rgba(15,23,42,.97);
-    border:1px solid #2563eb;
-    border-radius:28px;
-    box-shadow:0 0 30px rgba(37,99,235,.25);
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:15px;
-}
-
-.logo{
-    font-size:40px;
-    font-weight:900;
-    color:#38bdf8;
-    text-shadow:0 0 20px #2563eb;
-}
-
-.header-title{
-    flex:1;
-    text-align:center;
-}
-
-.header-title h1{
-    margin:0;
-    font-size:22px;
-    color:#dbeafe;
-}
-
-.header-title p{
-    margin:7px 0 0;
-    color:#94a3b8;
-    font-size:12px;
-}
-
 .logout{
+    position:absolute;
+    left:20px;
+    top:20px;
     border:0;
-    border-radius:15px;
-    padding:12px 17px;
-    background:#991b1b;
+    border-radius:17px;
+    padding:12px 22px;
+    background:#b91c1c;
     color:white;
     font-family:inherit;
+    font-size:14px;
     cursor:pointer;
-    font-size:13px;
 }
 
 .logout:hover{
-    background:#b91c1c;
-}
-
-/* MAIN */
-
-.container{
-    width:min(1100px,94%);
-    margin:auto;
-}
-
-/* SECURITY */
-
-.security{
-    background:rgba(15,23,42,.97);
-    border:1px solid #2563eb;
-    border-radius:25px;
-    padding:22px;
-    margin-bottom:22px;
-    text-align:center;
-    box-shadow:0 0 20px rgba(37,99,235,.12);
-}
-
-.security-user{
-    color:#38bdf8;
-    font-size:17px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-.security-status{
-    color:#93c5fd;
-    font-size:13px;
-    line-height:2;
+    background:#dc2626;
 }
 
 .error-box{
-    margin-top:15px;
-    padding:12px;
-    border-radius:15px;
-    background:#450a0a;
-    border:1px solid #ef4444;
-    color:#fecaca;
-    text-align:right;
-    direction:ltr;
-    word-break:break-word;
-    font-family:Arial,sans-serif;
+    margin-top:28px;
+    padding:22px;
+    background:rgba(15,23,42,.97);
+    border:1px solid #2563eb;
+    border-radius:25px;
+    text-align:center;
 }
 
-/* GRID */
+.error-box h2{
+    margin:0 0 12px;
+    color:#38bdf8;
+}
 
-.grid{
+.error-box p{
+    color:#93c5fd;
+    line-height:2;
+    margin:0;
+}
+
+.cards{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
+    margin-top:28px;
 }
-
-/* CARD */
 
 .card{
     background:rgba(15,23,42,.97);
-    border:1px solid #1e3a8a;
-    border-radius:25px;
-    padding:22px;
-    min-height:210px;
-    box-shadow:0 0 20px rgba(30,64,175,.12);
-    transition:.2s;
+    border:1px solid #1d4ed8;
+    border-radius:28px;
+    padding:30px;
+    min-height:250px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    box-shadow:0 0 25px rgba(30,64,175,.12);
 }
 
-.card:hover{
-    transform:translateY(-3px);
-    border-color:#38bdf8;
-    box-shadow:0 0 25px rgba(56,189,248,.18);
-}
-
-.icon{
-    font-size:38px;
-    margin-bottom:12px;
+.card-icon{
+    font-size:55px;
 }
 
 .card h2{
-    margin:0 0 8px;
+    margin:10px 0;
     color:#bfdbfe;
-    font-size:19px;
 }
 
 .card p{
     color:#94a3b8;
-    font-size:12px;
     line-height:1.9;
-    min-height:45px;
 }
 
 .card button{
     width:100%;
     border:0;
-    border-radius:16px;
-    padding:13px;
-    margin-top:12px;
-    background:#1d4ed8;
-    color:white;
+    border-radius:18px;
+    padding:15px;
+    background:#2563eb;
+    color:#fff;
     font-family:inherit;
-    font-size:13px;
+    font-size:16px;
     cursor:pointer;
 }
 
 .card button:hover{
-    background:#2563eb;
+    background:#3b82f6;
 }
 
-/* FOOTER */
-
-.footer{
+.status{
+    margin-top:25px;
     text-align:center;
-    margin-top:28px;
-    color:#475569;
-    font-size:11px;
+    color:#86efac;
+    font-size:13px;
 }
 
-/* MOBILE */
-
-@media(max-width:600px){
-
-    .header{
-        flex-wrap:wrap;
-        justify-content:center;
-    }
-
-    .header-title{
-        order:3;
-        flex-basis:100%;
-    }
-
-    .logo{
-        font-size:34px;
+@media(max-width:700px){
+    .cards{
+        grid-template-columns:1fr;
     }
 
     .logout{
-        font-size:12px;
+        position:static;
+        margin-bottom:15px;
     }
 
-    .card{
-        min-height:190px;
+    .header{
+        padding:22px 16px;
+    }
+
+    .logo{
+        font-size:48px;
+    }
+
+    .title{
+        font-size:23px;
     }
 }
 </style>
@@ -257,93 +181,48 @@ body{
 
 <body>
 
-<!-- LOADING -->
+<div class="container">
 
-<div id="loading">
-    <div class="loading-box">
+    <section class="header">
 
-        <div class="loading-logo">
-            LA3
-        </div>
-
-        <div class="loading-text">
-            در حال بررسی دسترسی مالک...
-        </div>
-
-    </div>
-</div>
-
-
-<!-- ADMIN PANEL -->
-
-<div id="adminPanel" class="hidden">
-
-    <header class="header">
+        <button id="logoutButton" class="logout">
+            خروج 🚪
+        </button>
 
         <div class="logo">
             LA3
         </div>
 
-        <div class="header-title">
-
-            <h1>
-                👑 پنل مدیریت مالک
-            </h1>
-
-            <p>
-                مدیریت کامل شبکه اجتماعی LA3
-            </p>
-
+        <div class="title">
+            👑 پنل مدیریت مالک
         </div>
 
-        <button
-            id="logout"
-            class="logout"
-            type="button"
-        >
-            🚪 خروج
-        </button>
+        <div class="subtitle">
+            مدیریت کامل شبکه اجتماعی LA3
+        </div>
 
-    </header>
+    </section>
 
 
-    <main class="container">
+    <section id="errorBox" class="error-box" style="display:none;">
 
-        <!-- SECURITY -->
+        <h2>
+            ⚠️ خطا در بررسی مالک
+        </h2>
 
-        <section class="security">
+        <p id="errorText">
+            در حال بررسی حساب مالک...
+        </p>
 
-            <div
-                id="ownerEmail"
-                class="security-user"
-            >
-                در حال بررسی حساب مالک...
-            </div>
-
-            <div
-                id="securityStatus"
-                class="security-status"
-            >
-                در حال بررسی دسترسی مالک...
-            </div>
-
-            <div
-                id="errorBox"
-                class="error-box hidden"
-            ></div>
-
-        </section>
+    </section>
 
 
-        <!-- CARDS -->
+    <section class="cards">
 
-        <section class="grid">
+        <div class="card">
 
-            <!-- USERS -->
-
-            <div class="card">
-
-                <div class="icon">👥</div>
+            <div>
+                <div class="card-icon">👥</div>
 
                 <h2>
                     کاربران
@@ -352,503 +231,315 @@ body{
                 <p>
                     مشاهده و مدیریت کاربران ثبت‌نام‌شده در LA3.
                 </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت کاربران')"
-                >
-                    مدیریت کاربران
-                </button>
-
             </div>
 
+            <button onclick="openUsers()">
+                مدیریت کاربران
+            </button>
 
-            <!-- BLUE TICK -->
+        </div>
 
-            <div class="card">
 
-                <div class="icon">🔵</div>
+        <div class="card">
+
+            <div>
+                <div class="card-icon">🔵</div>
 
                 <h2>
                     تیک آبی
                 </h2>
 
                 <p>
-                    مدیریت تأیید حساب‌ها و تیک آبی کاربران.
+                    مدیریت تأیید حساب کاربران.
                 </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت تیک آبی')"
-                >
-                    مدیریت تیک آبی
-                </button>
-
             </div>
 
+            <button onclick="openVerification()">
+                مدیریت تیک آبی
+            </button>
 
-            <!-- OFFICIAL CHANNEL -->
+        </div>
 
-            <div class="card">
 
-                <div class="icon">📢</div>
+        <div class="card">
+
+            <div>
+                <div class="card-icon">📢</div>
 
                 <h2>
                     کانال رسمی
                 </h2>
 
                 <p>
-                    ارسال پیام و تصویر در کانال رسمی LA3.
+                    مدیریت کانال رسمی LA3 و انتشار پیام و عکس.
                 </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت کانال رسمی')"
-                >
-                    مدیریت کانال
-                </button>
-
             </div>
 
+            <button onclick="openOfficialChannel()">
+                مدیریت کانال
+            </button>
 
-            <!-- TWEET -->
+        </div>
 
-            <div class="card">
 
-                <div class="icon">📝</div>
+        <div class="card">
+
+            <div>
+                <div class="card-icon">🐦</div>
 
                 <h2>
-                    توییت
+                    Tweet
                 </h2>
 
                 <p>
-                    انتشار توییت توسط مالک LA3.
+                    انتشار پست‌های مالک در بخش Tweet.
                 </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت توییت')"
-                >
-                    مدیریت توییت
-                </button>
-
             </div>
 
+            <button onclick="openTweets()">
+                مدیریت Tweet
+            </button>
 
-            <!-- LAC -->
-
-            <div class="card">
-
-                <div class="icon">📺</div>
-
-                <h2>
-                    LAC
-                </h2>
-
-                <p>
-                    ساخت و مدیریت کانال‌های LAC و مدیران آن‌ها.
-                </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت LAC')"
-                >
-                    مدیریت LAC
-                </button>
-
-            </div>
+        </div>
 
 
-            <!-- ADS -->
+        <div class="card">
 
-            <div class="card">
-
-                <div class="icon">📣</div>
+            <div>
+                <div class="card-icon">📣</div>
 
                 <h2>
                     تبلیغات
                 </h2>
 
                 <p>
-                    مدیریت بنرها و تبلیغات نمایش داده‌شده.
+                    مدیریت بنرها و تبلیغات LA3.
                 </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت تبلیغات')"
-                >
-                    مدیریت تبلیغات
-                </button>
-
             </div>
 
+            <button onclick="openAds()">
+                مدیریت تبلیغات
+            </button>
 
-            <!-- CHAT -->
-
-            <div class="card">
-
-                <div class="icon">💬</div>
-
-                <h2>
-                    چت
-                </h2>
-
-                <p>
-                    مدیریت بخش چت کاربران LA3.
-                </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('مدیریت چت')"
-                >
-                    مدیریت چت
-                </button>
-
-            </div>
-
-
-            <!-- SETTINGS -->
-
-            <div class="card">
-
-                <div class="icon">⚙️</div>
-
-                <h2>
-                    تنظیمات
-                </h2>
-
-                <p>
-                    تنظیمات کلی شبکه اجتماعی LA3.
-                </p>
-
-                <button
-                    type="button"
-                    onclick="openSection('تنظیمات')"
-                >
-                    تنظیمات
-                </button>
-
-            </div>
-
-        </section>
-
-
-        <div class="footer">
-            🔐 LA3 — پنل اختصاصی مالک
         </div>
 
-    </main>
+
+        <div class="card">
+
+            <div>
+                <div class="card-icon">📺</div>
+
+                <h2>
+                    LAC
+                </h2>
+
+                <p>
+                    مدیریت کانال‌ها و مدیران کانال.
+                </p>
+            </div>
+
+            <button onclick="openLAC()">
+                مدیریت LAC
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <div id="status" class="status">
+        در حال بررسی دسترسی مالک...
+    </div>
 
 </div>
 
 
-<!-- SUPABASE -->
-
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =====================================
+/* =========================================
    SUPABASE
-===================================== */
+========================================= */
 
 const SUPABASE_URL =
-    "https://ibqhyqzolkzzpziocfvp.supabase.co";
+"https://ibqhyqzolkzzpziocfvp.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
-
-const OWNER_EMAIL =
-    "g36316139@gmail.com";
-
+"sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
 
 const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
 
 
-/* =====================================
+/* =========================================
    ELEMENTS
-===================================== */
-
-const loading =
-    document.getElementById("loading");
-
-const adminPanel =
-    document.getElementById("adminPanel");
-
-const ownerEmail =
-    document.getElementById("ownerEmail");
-
-const securityStatus =
-    document.getElementById("securityStatus");
+========================================= */
 
 const errorBox =
-    document.getElementById("errorBox");
+document.getElementById("errorBox");
+
+const errorText =
+document.getElementById("errorText");
+
+const statusBox =
+document.getElementById("status");
 
 const logoutButton =
-    document.getElementById("logout");
+document.getElementById("logoutButton");
 
 
-/* =====================================
+/* =========================================
    SHOW ERROR
-===================================== */
+========================================= */
 
-function showDatabaseError(error){
+function showError(text){
 
-    console.error(
-        "LA3 OWNER DATABASE ERROR:",
-        error
-    );
+    errorBox.style.display = "block";
 
-    ownerEmail.textContent =
-        "⚠️ خطا در بررسی مالک";
+    errorText.textContent = text;
 
-    securityStatus.textContent =
-        "Supabase خطایی هنگام بررسی حساب مالک برگرداند.";
+    statusBox.style.color = "#fca5a5";
 
-    errorBox.classList.remove("hidden");
-
-    errorBox.textContent =
-        "خطای واقعی Supabase: " +
-        (
-            error?.message ||
-            "خطای نامشخص"
-        );
-
-    loading.classList.add("hidden");
-
-    adminPanel.classList.remove("hidden");
+    statusBox.textContent =
+        "دسترسی مالک تأیید نشد.";
 }
 
 
-/* =====================================
+/* =========================================
    CHECK OWNER
-===================================== */
+========================================= */
 
-async function checkOwnerLogin(){
+async function checkOwner(){
 
     try{
 
-        ownerEmail.textContent =
-            "در حال بررسی حساب مالک...";
-
-        securityStatus.textContent =
-            "در حال بررسی دسترسی مالک...";
-
-
         /*
-            1. بررسی Session
-        */
+         * ابتدا بررسی می‌کنیم که کاربر
+         * وارد حساب Supabase شده باشد.
+         */
 
         const {
             data: sessionData,
             error: sessionError
         } =
-            await supabaseClient.auth.getSession();
+        await supabaseClient.auth.getSession();
 
 
         if(sessionError){
 
-            showDatabaseError(sessionError);
+            throw new Error(
+                sessionError.message
+            );
 
-            return;
         }
 
 
-        if(
-            !sessionData ||
-            !sessionData.session
-        ){
+        const session =
+            sessionData.session;
+
+
+        if(!session){
 
             window.location.replace(
                 "owner-login.html"
             );
 
             return;
-        }
 
-
-        const user =
-            sessionData.session.user;
-
-
-        if(!user){
-
-            window.location.replace(
-                "owner-login.html"
-            );
-
-            return;
         }
 
 
         /*
-            2. بررسی ایمیل مالک
-        */
-
-        if(
-            !user.email ||
-            user.email.toLowerCase()
-            !==
-            OWNER_EMAIL.toLowerCase()
-        ){
-
-            await supabaseClient.auth.signOut();
-
-            alert(
-                "⛔ این حساب مالک LA3 نیست."
-            );
-
-            window.location.replace(
-                "owner-login.html"
-            );
-
-            return;
-        }
-
-
-        /*
-            3. بررسی owner_accounts
-        */
+         * مهم:
+         *
+         * دیگر مستقیم از owner_accounts
+         * SELECT نمی‌زنیم.
+         *
+         * از تابع امن check_is_owner
+         * استفاده می‌کنیم.
+         */
 
         const {
-            data: ownerData,
-            error: ownerError
-        } =
-            await supabaseClient
-                .from("owner_accounts")
-                .select(
-                    "user_id,email,is_owner"
-                )
-                .eq(
-                    "user_id",
-                    user.id
-                )
-                .eq(
-                    "is_owner",
-                    true
-                )
-                .maybeSingle();
-
-
-        /*
-            خطای دیتابیس
-        */
-
-        if(ownerError){
-
-            showDatabaseError(ownerError);
-
-            return;
-        }
-
-
-        /*
-            مالک در جدول وجود ندارد
-        */
-
-        if(!ownerData){
-
-            await supabaseClient.auth.signOut();
-
-            alert(
-                "⛔ این حساب در owner_accounts به عنوان مالک ثبت نشده است."
-            );
-
-            window.location.replace(
-                "owner-login.html"
-            );
-
-            return;
-        }
-
-
-        /*
-            4. مالک تأیید شد
-        */
-
-        ownerEmail.textContent =
-            "👑 " +
-            user.email;
-
-        securityStatus.innerHTML =
-            "✅ حساب مالک با موفقیت احراز هویت شد." +
-            "<br>" +
-            "🔐 دسترسی پنل مدیریت فعال است." +
-            "<br>" +
-            "👑 مالک تأیید شده است.";
-
-
-        /*
-            نمایش پنل
-        */
-
-        loading.classList.add("hidden");
-
-        adminPanel.classList.remove("hidden");
-
-
-        console.log(
-            "LA3 OWNER VERIFIED",
-            {
-                id:user.id,
-                email:user.email,
-                ownerData:ownerData
-            }
-        );
-
-    }
-
-    catch(error){
-
-        showDatabaseError(error);
-
-    }
-}
-
-
-/* =====================================
-   LOGOUT
-===================================== */
-
-logoutButton.addEventListener(
-    "click",
-    async function(){
-
-        logoutButton.disabled = true;
-
-        logoutButton.textContent =
-            "در حال خروج...";
-
-
-        const {
+            data,
             error
         } =
-            await supabaseClient.auth.signOut();
+        await supabaseClient.rpc(
+            "check_is_owner"
+        );
 
 
         if(error){
 
             console.error(
-                "LOGOUT ERROR:",
+                "Supabase RPC error:",
                 error
             );
 
-            alert(
-                "خروج انجام نشد."
+            throw new Error(
+                "Supabase خطایی هنگام بررسی حساب مالک برگرداند.\n" +
+                "خطای واقعی Supabase: " +
+                error.message
             );
 
-            logoutButton.disabled = false;
-
-            logoutButton.textContent =
-                "🚪 خروج";
-
-            return;
         }
 
+
+        if(data !== true){
+
+            await supabaseClient.auth.signOut();
+
+            showError(
+                "این حساب مالک LA3 نیست."
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * مالک تأیید شد
+         */
+
+        errorBox.style.display =
+            "none";
+
+        statusBox.style.color =
+            "#86efac";
+
+        statusBox.textContent =
+            "✅ حساب مالک با موفقیت تأیید شد.";
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        showError(
+            error.message ||
+            "خطای نامشخص هنگام بررسی مالک."
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+logoutButton.addEventListener(
+    "click",
+    async function(){
+
+        await supabaseClient.auth.signOut();
 
         window.location.replace(
             "owner-login.html"
@@ -858,29 +549,61 @@ logoutButton.addEventListener(
 );
 
 
-/* =====================================
-   PANEL BUTTONS
-===================================== */
+/* =========================================
+   BUTTONS
+========================================= */
 
-function openSection(section){
+function openUsers(){
 
-    alert(
-        "بخش «" +
-        section +
-        "» با موفقیت کلیک شد. 💙\n\n" +
-        "اتصال این بخش به دیتابیس را در مرحله بعد انجام می‌دهیم."
-    );
+    window.location.href =
+        "users.html";
+
+}
+
+function openVerification(){
+
+    window.location.href =
+        "verification.html";
+
+}
+
+function openOfficialChannel(){
+
+    window.location.href =
+        "official-channel.html";
+
+}
+
+function openTweets(){
+
+    window.location.href =
+        "tweets.html";
+
+}
+
+function openAds(){
+
+    window.location.href =
+        "advertising.html";
+
+}
+
+function openLAC(){
+
+    window.location.href =
+        "lac.html";
 
 }
 
 
-/* =====================================
+/* =========================================
    START
-===================================== */
+========================================= */
 
-checkOwnerLogin();
+checkOwner();
 
 </script>
 
 </body>
-    </html>
+</html>
+```
