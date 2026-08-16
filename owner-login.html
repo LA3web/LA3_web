@@ -7,430 +7,615 @@
 <title>ورود مالک | LA3</title>
 
 <style>
-*{
-  box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:
-    radial-gradient(circle at top,#162d4d,#050505 60%);
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
+body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #162d4d 0%, #07101d 45%, #020202 100%);
+    color: white;
+    font-family: Tahoma, Arial, sans-serif;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
 }
 
-.box{
-  width:min(430px,92%);
-  background:rgba(17,24,39,.97);
-  border:1px solid #2563eb;
-  border-radius:30px;
-  padding:28px 22px;
-  box-shadow:0 0 40px rgba(37,99,235,.3);
+.box {
+    width: 100%;
+    max-width: 430px;
+
+    background: rgba(15, 23, 42, 0.97);
+
+    border: 1px solid #2563eb;
+    border-radius: 30px;
+
+    padding: 28px 22px;
+
+    box-shadow:
+        0 0 35px rgba(37, 99, 235, 0.35);
+
+    animation: showBox 0.5s ease;
 }
 
-.logo{
-  text-align:center;
-  font-size:55px;
-  font-weight:900;
-  color:#38bdf8;
-  text-shadow:0 0 25px #2563eb;
+@keyframes showBox {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.owner-title{
-  text-align:center;
-  margin-top:5px;
-  font-size:20px;
-  color:#bfdbfe;
+.logo {
+    text-align: center;
+
+    font-size: 58px;
+    font-weight: 900;
+
+    color: #38bdf8;
+
+    text-shadow:
+        0 0 15px #2563eb,
+        0 0 35px rgba(37, 99, 235, 0.8);
 }
 
-.subtitle{
-  text-align:center;
-  color:#718096;
-  font-size:12px;
-  margin:8px 0 25px;
+.owner-title {
+    text-align: center;
+
+    margin-top: 5px;
+
+    font-size: 21px;
+    font-weight: bold;
+
+    color: #dbeafe;
 }
 
-label{
-  display:block;
-  margin:15px 4px 7px;
-  color:#bfdbfe;
-  font-size:13px;
+.subtitle {
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    margin:
+        8px 0 25px;
 }
 
-input{
-  width:100%;
-  padding:14px;
-  border-radius:17px;
-  border:1px solid #334155;
-  background:#070b12;
-  color:white;
-  outline:none;
-  font-family:inherit;
-  font-size:14px;
+label {
+    display: block;
+
+    margin:
+        15px 4px 7px;
+
+    color: #bfdbfe;
+
+    font-size: 13px;
 }
 
-input:focus{
-  border-color:#38bdf8;
-  box-shadow:0 0 12px rgba(56,189,248,.2);
+input {
+    width: 100%;
+
+    padding: 15px;
+
+    border-radius: 17px;
+
+    border: 1px solid #334155;
+
+    background: #050a12;
+
+    color: white;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition: 0.2s;
 }
 
-button{
-  width:100%;
-  margin-top:22px;
-  padding:15px;
-  border:0;
-  border-radius:18px;
-  background:#1d4ed8;
-  color:white;
-  font-family:inherit;
-  font-size:15px;
-  cursor:pointer;
+input:focus {
+    border-color: #38bdf8;
+
+    box-shadow:
+        0 0 12px rgba(56, 189, 248, 0.25);
 }
 
-button:hover{
-  background:#2563eb;
+input::placeholder {
+    color: #64748b;
 }
 
-button:disabled{
-  opacity:.6;
-  cursor:not-allowed;
+button {
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 15px;
+
+    border: 0;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+    box-shadow:
+        0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
-.message{
-  min-height:22px;
-  text-align:center;
-  margin-top:15px;
-  color:#93c5fd;
-  font-size:12px;
+button:hover {
+    transform: translateY(-1px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #3b82f6,
+            #2563eb
+        );
 }
 
-.back{
-  display:block;
-  text-align:center;
-  margin-top:18px;
-  color:#60a5fa;
-  text-decoration:none;
-  font-size:12px;
+button:active {
+    transform: scale(0.98);
+}
+
+button:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+.message {
+    min-height: 22px;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    color: #93c5fd;
+
+    font-size: 12px;
+
+    line-height: 1.8;
+}
+
+.back {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 18px;
+
+    color: #60a5fa;
+
+    text-decoration: none;
+
+    font-size: 12px;
+}
+
+.back:hover {
+    color: #93c5fd;
+}
+
+.security {
+    text-align: center;
+
+    margin-top: 18px;
+
+    color: #475569;
+
+    font-size: 10px;
 }
 </style>
+
 </head>
 
 <body>
 
 <div class="box">
 
-  <div class="logo">
-    LA3
-  </div>
+    <div class="logo">
+        LA3
+    </div>
 
-  <div class="owner-title">
-    👑 پنل مالک
-  </div>
+    <div class="owner-title">
+        👑 پنل مالک
+    </div>
 
-  <div class="subtitle">
-    ورود مدیریت LA3
-  </div>
-
-
-  <label for="email">
-    ایمیل مالک
-  </label>
-
-  <input
-    id="email"
-    type="email"
-    placeholder="ایمیل مالک"
-    autocomplete="username"
-  >
+    <div class="subtitle">
+        ورود مدیریت LA3
+    </div>
 
 
-  <label for="password">
-    رمز عبور
-  </label>
+    <label for="email">
+        ایمیل مالک
+    </label>
 
-  <input
-    id="password"
-    type="password"
-    placeholder="رمز عبور"
-    autocomplete="current-password"
-  >
-
-
-  <button id="loginButton">
-    ورود به پنل مالک 👑
-  </button>
+    <input
+        id="email"
+        type="email"
+        value="g36316139@gmail.com"
+        placeholder="ایمیل مالک"
+        autocomplete="username"
+    >
 
 
-  <div id="message" class="message"></div>
+    <label for="password">
+        رمز عبور
+    </label>
+
+    <input
+        id="password"
+        type="password"
+        placeholder="رمز عبور مالک"
+        autocomplete="current-password"
+    >
 
 
-  <a class="back" href="login.html">
-    بازگشت به ورود کاربران
-  </a>
+    <button
+        id="loginButton"
+        type="button"
+    >
+        ورود به پنل مالک 👑
+    </button>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <a
+        class="back"
+        href="login.html"
+    >
+        بازگشت به ورود کاربران
+    </a>
+
+
+    <div class="security">
+        🔒 ورود مالک با سیستم احراز هویت امن Supabase
+    </div>
 
 </div>
 
 
+<!-- Supabase -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-/* =====================================
+/* =========================================
    SUPABASE
-===================================== */
+========================================= */
 
 const SUPABASE_URL =
-  "https://ibqhyqzolkzzpziocfvp.supabase.co";
+    "https://ibqhyqzolkzzpziocfvp.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+    "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
 
+
+/* =========================================
+   CREATE SUPABASE CLIENT
+========================================= */
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
 
 
-/* =====================================
+/* =========================================
    ELEMENTS
-===================================== */
+========================================= */
 
 const emailInput =
-  document.getElementById("email");
+    document.getElementById("email");
 
 const passwordInput =
-  document.getElementById("password");
+    document.getElementById("password");
 
 const loginButton =
-  document.getElementById("loginButton");
+    document.getElementById("loginButton");
 
 const messageBox =
-  document.getElementById("message");
+    document.getElementById("message");
 
 
-/* =====================================
+/* =========================================
    MESSAGE
-===================================== */
+========================================= */
 
-function showMessage(text, error=false){
+function showMessage(text, error = false) {
 
-  messageBox.textContent = text;
+    messageBox.textContent = text;
 
-  messageBox.style.color =
-    error
-      ? "#fca5a5"
-      : "#93c5fd";
+    messageBox.style.color =
+        error
+            ? "#fca5a5"
+            : "#93c5fd";
 }
 
 
-/* =====================================
-   LOGIN OWNER
-===================================== */
+/* =========================================
+   LOGIN
+========================================= */
 
-async function loginOwner(){
+async function loginOwner() {
 
-  const email =
-    emailInput.value.trim();
+    const email =
+        emailInput.value.trim();
 
-  const password =
-    passwordInput.value;
-
-
-  if(!email){
-
-    showMessage(
-      "ایمیل را وارد کن.",
-      true
-    );
-
-    return;
-  }
+    const password =
+        passwordInput.value;
 
 
-  if(!password){
+    /* بررسی ایمیل */
 
-    showMessage(
-      "رمز عبور را وارد کن.",
-      true
-    );
+    if (!email) {
 
-    return;
-  }
+        showMessage(
+            "لطفاً ایمیل مالک را وارد کن.",
+            true
+        );
 
+        emailInput.focus();
 
-  loginButton.disabled = true;
-
-  showMessage(
-    "در حال بررسی اطلاعات..."
-  );
-
-
-  try{
-
-    /* =================================
-       ورود به Supabase
-    ================================= */
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.signInWithPassword({
-
-        email: email,
-
-        password: password
-
-      });
-
-
-    if(error){
-
-      throw error;
-
+        return;
     }
 
 
-    if(!data || !data.user){
+    /* بررسی رمز */
 
-      throw new Error(
-        "کاربر پیدا نشد."
-      );
+    if (!password) {
 
+        showMessage(
+            "لطفاً رمز عبور را وارد کن.",
+            true
+        );
+
+        passwordInput.focus();
+
+        return;
     }
 
 
-    const user =
-      data.user;
+    /* جلوگیری از چند کلیک */
 
+    loginButton.disabled = true;
 
-    /* =================================
-       بررسی مالک بودن حساب
-    ================================= */
+    loginButton.textContent =
+        "در حال بررسی...";
+
 
     showMessage(
-      "ورود موفق بود؛ در حال بررسی مالک..."
+        "در حال اتصال به حساب مالک..."
     );
 
 
-    const {
-      data: ownerData,
-      error: ownerError
-    } =
-      await supabaseClient
-        .from("owner_accounts")
-        .select("user_id")
-        .eq("user_id", user.id)
-        .maybeSingle();
+    try {
+
+        /* ورود به Supabase */
+
+        const result =
+            await supabaseClient.auth.signInWithPassword({
+
+                email: email,
+
+                password: password
+
+            });
 
 
-    if(ownerError){
+        const data = result.data;
 
-      console.error(
-        "Owner check error:",
-        ownerError
-      );
+        const error = result.error;
 
-      throw new Error(
-        "خطا در بررسی مالک."
-      );
 
+        /* اگر خطا وجود داشت */
+
+        if (error) {
+
+            console.error(
+                "Supabase login error:",
+                error
+            );
+
+            throw error;
+        }
+
+
+        /* بررسی کاربر */
+
+        if (!data || !data.user) {
+
+            throw new Error(
+                "کاربر پیدا نشد."
+            );
+        }
+
+
+        /* فقط ایمیل مالک مجاز است */
+
+        if (
+            data.user.email.toLowerCase()
+            !==
+            "g36316139@gmail.com"
+        ) {
+
+            await supabaseClient.auth.signOut();
+
+            throw new Error(
+                "این حساب مالک LA3 نیست."
+            );
+        }
+
+
+        /* ورود موفق */
+
+        showMessage(
+            "ورود موفق بود 👑 در حال ورود به پنل..."
+        );
+
+
+        loginButton.textContent =
+            "ورود موفق ✓";
+
+
+        /* انتقال به پنل */
+
+        setTimeout(function() {
+
+            window.location.href =
+                "admin.html";
+
+        }, 700);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        let text =
+            "ایمیل یا رمز عبور صحیح نیست.";
+
+
+        if (
+            error.message ===
+            "این حساب مالک LA3 نیست."
+        ) {
+
+            text =
+                "این حساب اجازه ورود به پنل مالک را ندارد.";
+
+        }
+
+
+        showMessage(
+            text,
+            true
+        );
+
+
+        loginButton.disabled = false;
+
+        loginButton.textContent =
+            "ورود به پنل مالک 👑";
     }
-
-
-    /* =================================
-       حساب مالک نیست
-    ================================= */
-
-    if(!ownerData){
-
-      await supabaseClient.auth.signOut();
-
-      showMessage(
-        "⛔ این حساب مالک LA3 نیست.",
-        true
-      );
-
-      loginButton.disabled = false;
-
-      return;
-
-    }
-
-
-    /* =================================
-       مالک تأیید شد
-    ================================= */
-
-    showMessage(
-      "✅ ورود مالک موفق بود؛ در حال ورود به پنل..."
-    );
-
-
-    setTimeout(function(){
-
-      window.location.href =
-        "admin.html";
-
-    },700);
-
-
-  }
-  catch(error){
-
-    console.error(
-      "Login error:",
-      error
-    );
-
-
-    showMessage(
-      "❌ ایمیل یا رمز عبور صحیح نیست.",
-      true
-    );
-
-
-    loginButton.disabled = false;
-
-  }
-
 }
 
 
-/* =====================================
+/* =========================================
    BUTTON
-===================================== */
+========================================= */
 
 loginButton.addEventListener(
-  "click",
-  loginOwner
+    "click",
+    loginOwner
 );
 
 
-/* =====================================
+/* =========================================
    ENTER KEY
-===================================== */
+========================================= */
 
 passwordInput.addEventListener(
-  "keydown",
-  function(event){
+    "keydown",
+    function(event) {
 
-    if(event.key === "Enter"){
+        if (event.key === "Enter") {
 
-      loginOwner();
+            event.preventDefault();
 
+            loginOwner();
+        }
     }
-
-  }
 );
+
+
+/* =========================================
+   CHECK EXISTING SESSION
+========================================= */
+
+async function checkSession() {
+
+    try {
+
+        const result =
+            await supabaseClient.auth.getSession();
+
+        const session =
+            result.data.session;
+
+
+        if (
+            session &&
+            session.user &&
+            session.user.email &&
+            session.user.email.toLowerCase()
+            ===
+            "g36316139@gmail.com"
+        ) {
+
+            showMessage(
+                "حساب مالک از قبل وارد شده است؛ انتقال..."
+            );
+
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "admin.html";
+
+            }, 500);
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Session check error:",
+            error
+        );
+    }
+}
+
+
+/* اجرای بررسی */
+
+checkSession();
 
 </script>
 
 </body>
-</html>
+  </html>
