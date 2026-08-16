@@ -1,413 +1,265 @@
-```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>پنل مالک | LA3</title>
 
 <style>
-
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-
+body{
+    margin:0;
+    min-height:100vh;
     background:
-        radial-gradient(
-            circle at top,
-            #162d4d 0%,
-            #07101d 45%,
-            #020202 100%
-        );
-
-    color: white;
-
-    font-family:
-        Tahoma,
-        Arial,
-        sans-serif;
-
-    padding-bottom: 40px;
+        radial-gradient(circle at top,#162d4d 0%,#07101d 45%,#020202 100%);
+    color:white;
+    font-family:Tahoma,Arial,sans-serif;
+    padding-bottom:40px;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-
-    width: min(1100px, 94%);
-
-    margin: 20px auto;
-
-    padding: 20px;
-
-    background: rgba(15, 23, 42, .96);
-
-    border: 1px solid #2563eb;
-
-    border-radius: 28px;
-
-    box-shadow:
-        0 0 30px rgba(37, 99, 235, .25);
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 15px;
+.hidden{
+    display:none !important;
 }
 
-.logo {
+/* LOADING */
 
-    font-size: 38px;
-
-    font-weight: 900;
-
-    color: #38bdf8;
-
-    text-shadow:
-        0 0 20px #2563eb;
+#loading{
+    position:fixed;
+    inset:0;
+    background:#020617;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
 }
 
-.header-title {
-
-    flex: 1;
-
-    text-align: center;
+.loading-box{
+    text-align:center;
 }
 
-.header-title h1 {
-
-    margin: 0;
-
-    font-size: 21px;
-
-    color: #dbeafe;
+.loading-logo{
+    font-size:60px;
+    font-weight:900;
+    color:#38bdf8;
+    text-shadow:0 0 25px #2563eb;
 }
 
-.header-title p {
-
-    margin: 6px 0 0;
-
-    color: #94a3b8;
-
-    font-size: 12px;
+.loading-text{
+    margin-top:15px;
+    color:#94a3b8;
+    font-size:14px;
 }
 
-.logout {
+/* HEADER */
 
-    border: 0;
+.header{
+    width:min(1100px,94%);
+    margin:20px auto;
+    padding:20px;
+    background:rgba(15,23,42,.97);
+    border:1px solid #2563eb;
+    border-radius:28px;
+    box-shadow:0 0 30px rgba(37,99,235,.25);
 
-    border-radius: 15px;
-
-    padding: 11px 15px;
-
-    background: #991b1b;
-
-    color: white;
-
-    font-family: inherit;
-
-    cursor: pointer;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
 }
 
-.logout:hover {
-
-    background: #b91c1c;
+.logo{
+    font-size:40px;
+    font-weight:900;
+    color:#38bdf8;
+    text-shadow:0 0 20px #2563eb;
 }
 
-
-/* =========================
-   MAIN
-========================= */
-
-.container {
-
-    width: min(1100px, 94%);
-
-    margin: auto;
+.header-title{
+    flex:1;
+    text-align:center;
 }
 
-
-/* =========================
-   SECURITY
-========================= */
-
-.security {
-
-    background: rgba(15, 23, 42, .96);
-
-    border: 1px solid #1e40af;
-
-    border-radius: 24px;
-
-    padding: 20px;
-
-    margin-bottom: 20px;
-
-    text-align: center;
+.header-title h1{
+    margin:0;
+    font-size:22px;
+    color:#dbeafe;
 }
 
-.security-user {
-
-    color: #38bdf8;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    margin-bottom: 10px;
+.header-title p{
+    margin:7px 0 0;
+    color:#94a3b8;
+    font-size:12px;
 }
 
-.security-status {
-
-    color: #93c5fd;
-
-    font-size: 12px;
-
-    line-height: 2;
+.logout{
+    border:0;
+    border-radius:15px;
+    padding:12px 17px;
+    background:#991b1b;
+    color:white;
+    font-family:inherit;
+    cursor:pointer;
+    font-size:13px;
 }
 
-
-/* =========================
-   GRID
-========================= */
-
-.grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fit,
-            minmax(220px, 1fr)
-        );
-
-    gap: 16px;
+.logout:hover{
+    background:#b91c1c;
 }
 
+/* MAIN */
 
-/* =========================
-   CARDS
-========================= */
-
-.card {
-
-    background: rgba(15, 23, 42, .96);
-
-    border: 1px solid #1e3a8a;
-
-    border-radius: 25px;
-
-    padding: 20px;
-
-    min-height: 170px;
-
-    box-shadow:
-        0 0 20px rgba(30, 64, 175, .12);
-
-    transition: .2s;
+.container{
+    width:min(1100px,94%);
+    margin:auto;
 }
 
-.card:hover {
+/* SECURITY */
 
-    transform: translateY(-3px);
-
-    border-color: #38bdf8;
-
-    box-shadow:
-        0 0 25px rgba(56, 189, 248, .18);
+.security{
+    background:rgba(15,23,42,.97);
+    border:1px solid #2563eb;
+    border-radius:25px;
+    padding:22px;
+    margin-bottom:22px;
+    text-align:center;
+    box-shadow:0 0 20px rgba(37,99,235,.12);
 }
 
-.icon {
-
-    font-size: 34px;
-
-    margin-bottom: 10px;
+.security-user{
+    color:#38bdf8;
+    font-size:17px;
+    font-weight:bold;
+    margin-bottom:10px;
 }
 
-.card h2 {
-
-    margin: 0 0 8px;
-
-    color: #bfdbfe;
-
-    font-size: 18px;
+.security-status{
+    color:#93c5fd;
+    font-size:13px;
+    line-height:2;
 }
 
-.card p {
-
-    color: #94a3b8;
-
-    font-size: 12px;
-
-    line-height: 1.8;
-
-    min-height: 42px;
+.error-box{
+    margin-top:15px;
+    padding:12px;
+    border-radius:15px;
+    background:#450a0a;
+    border:1px solid #ef4444;
+    color:#fecaca;
+    text-align:right;
+    direction:ltr;
+    word-break:break-word;
+    font-family:Arial,sans-serif;
 }
 
-.card button {
+/* GRID */
 
-    width: 100%;
-
-    border: 0;
-
-    border-radius: 15px;
-
-    padding: 12px;
-
-    margin-top: 10px;
-
-    background: #1d4ed8;
-
-    color: white;
-
-    font-family: inherit;
-
-    cursor: pointer;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:18px;
 }
 
-.card button:hover {
+/* CARD */
 
-    background: #2563eb;
+.card{
+    background:rgba(15,23,42,.97);
+    border:1px solid #1e3a8a;
+    border-radius:25px;
+    padding:22px;
+    min-height:210px;
+    box-shadow:0 0 20px rgba(30,64,175,.12);
+    transition:.2s;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer {
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    color: #475569;
-
-    font-size: 11px;
+.card:hover{
+    transform:translateY(-3px);
+    border-color:#38bdf8;
+    box-shadow:0 0 25px rgba(56,189,248,.18);
 }
 
-
-/* =========================
-   LOADING
-========================= */
-
-#loading {
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        #020617;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    z-index: 9999;
+.icon{
+    font-size:38px;
+    margin-bottom:12px;
 }
 
-.loading-box {
-
-    text-align: center;
+.card h2{
+    margin:0 0 8px;
+    color:#bfdbfe;
+    font-size:19px;
 }
 
-.loading-logo {
-
-    font-size: 55px;
-
-    font-weight: 900;
-
-    color: #38bdf8;
-
-    text-shadow:
-        0 0 25px #2563eb;
+.card p{
+    color:#94a3b8;
+    font-size:12px;
+    line-height:1.9;
+    min-height:45px;
 }
 
-.loading-text {
-
-    color: #94a3b8;
-
-    margin-top: 12px;
-
-    font-size: 13px;
+.card button{
+    width:100%;
+    border:0;
+    border-radius:16px;
+    padding:13px;
+    margin-top:12px;
+    background:#1d4ed8;
+    color:white;
+    font-family:inherit;
+    font-size:13px;
+    cursor:pointer;
 }
 
-
-/* =========================
-   HIDDEN
-========================= */
-
-.hidden {
-
-    display: none !important;
+.card button:hover{
+    background:#2563eb;
 }
 
+/* FOOTER */
 
-/* =========================
-   MOBILE
-========================= */
+.footer{
+    text-align:center;
+    margin-top:28px;
+    color:#475569;
+    font-size:11px;
+}
 
-@media (max-width: 600px) {
+/* MOBILE */
 
-    .header {
+@media(max-width:600px){
 
-        flex-wrap: wrap;
-
-        justify-content: center;
+    .header{
+        flex-wrap:wrap;
+        justify-content:center;
     }
 
-    .header-title {
-
-        order: 3;
-
-        flex-basis: 100%;
+    .header-title{
+        order:3;
+        flex-basis:100%;
     }
 
-    .logo {
-
-        font-size: 32px;
+    .logo{
+        font-size:34px;
     }
 
-    .logout {
+    .logout{
+        font-size:12px;
+    }
 
-        font-size: 12px;
+    .card{
+        min-height:190px;
     }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     LOADING
-========================= -->
+<!-- LOADING -->
 
 <div id="loading">
-
     <div class="loading-box">
 
         <div class="loading-logo">
@@ -419,25 +271,18 @@ body {
         </div>
 
     </div>
-
 </div>
 
 
-<!-- =========================
-     ADMIN PANEL
-========================= -->
+<!-- ADMIN PANEL -->
 
 <div id="adminPanel" class="hidden">
-
-
-    <!-- HEADER -->
 
     <header class="header">
 
         <div class="logo">
             LA3
         </div>
-
 
         <div class="header-title">
 
@@ -451,7 +296,6 @@ body {
 
         </div>
 
-
         <button
             id="logout"
             class="logout"
@@ -464,7 +308,6 @@ body {
 
 
     <main class="container">
-
 
         <!-- SECURITY -->
 
@@ -484,6 +327,11 @@ body {
                 در حال بررسی دسترسی مالک...
             </div>
 
+            <div
+                id="errorBox"
+                class="error-box hidden"
+            ></div>
+
         </section>
 
 
@@ -491,14 +339,11 @@ body {
 
         <section class="grid">
 
-
             <!-- USERS -->
 
             <div class="card">
 
-                <div class="icon">
-                    👥
-                </div>
+                <div class="icon">👥</div>
 
                 <h2>
                     کاربران
@@ -510,7 +355,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('مدیریت کاربران')"
+                    onclick="openSection('مدیریت کاربران')"
                 >
                     مدیریت کاربران
                 </button>
@@ -522,9 +367,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    🔵
-                </div>
+                <div class="icon">🔵</div>
 
                 <h2>
                     تیک آبی
@@ -536,7 +379,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('تیک آبی')"
+                    onclick="openSection('مدیریت تیک آبی')"
                 >
                     مدیریت تیک آبی
                 </button>
@@ -548,9 +391,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    📢
-                </div>
+                <div class="icon">📢</div>
 
                 <h2>
                     کانال رسمی
@@ -562,7 +403,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('کانال رسمی')"
+                    onclick="openSection('مدیریت کانال رسمی')"
                 >
                     مدیریت کانال
                 </button>
@@ -574,9 +415,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    📝
-                </div>
+                <div class="icon">📝</div>
 
                 <h2>
                     توییت
@@ -588,7 +427,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('توییت')"
+                    onclick="openSection('مدیریت توییت')"
                 >
                     مدیریت توییت
                 </button>
@@ -600,9 +439,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    📺
-                </div>
+                <div class="icon">📺</div>
 
                 <h2>
                     LAC
@@ -614,7 +451,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('LAC')"
+                    onclick="openSection('مدیریت LAC')"
                 >
                     مدیریت LAC
                 </button>
@@ -626,9 +463,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    📣
-                </div>
+                <div class="icon">📣</div>
 
                 <h2>
                     تبلیغات
@@ -640,7 +475,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('تبلیغات')"
+                    onclick="openSection('مدیریت تبلیغات')"
                 >
                     مدیریت تبلیغات
                 </button>
@@ -652,9 +487,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    💬
-                </div>
+                <div class="icon">💬</div>
 
                 <h2>
                     چت
@@ -666,7 +499,7 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('چت')"
+                    onclick="openSection('مدیریت چت')"
                 >
                     مدیریت چت
                 </button>
@@ -678,9 +511,7 @@ body {
 
             <div class="card">
 
-                <div class="icon">
-                    ⚙️
-                </div>
+                <div class="icon">⚙️</div>
 
                 <h2>
                     تنظیمات
@@ -692,35 +523,28 @@ body {
 
                 <button
                     type="button"
-                    onclick="notReady('تنظیمات')"
+                    onclick="openSection('تنظیمات')"
                 >
                     تنظیمات
                 </button>
 
             </div>
 
-
         </section>
 
 
         <div class="footer">
-
             🔐 LA3 — پنل اختصاصی مالک
-
         </div>
-
 
     </main>
 
 </div>
 
 
-<!-- =========================
-     SUPABASE
-========================= -->
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
 <script>
 
@@ -733,6 +557,9 @@ const SUPABASE_URL =
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+
+const OWNER_EMAIL =
+    "g36316139@gmail.com";
 
 
 const supabaseClient =
@@ -758,17 +585,52 @@ const ownerEmail =
 const securityStatus =
     document.getElementById("securityStatus");
 
+const errorBox =
+    document.getElementById("errorBox");
+
 const logoutButton =
     document.getElementById("logout");
+
+
+/* =====================================
+   SHOW ERROR
+===================================== */
+
+function showDatabaseError(error){
+
+    console.error(
+        "LA3 OWNER DATABASE ERROR:",
+        error
+    );
+
+    ownerEmail.textContent =
+        "⚠️ خطا در بررسی مالک";
+
+    securityStatus.textContent =
+        "Supabase خطایی هنگام بررسی حساب مالک برگرداند.";
+
+    errorBox.classList.remove("hidden");
+
+    errorBox.textContent =
+        "خطای واقعی Supabase: " +
+        (
+            error?.message ||
+            "خطای نامشخص"
+        );
+
+    loading.classList.add("hidden");
+
+    adminPanel.classList.remove("hidden");
+}
 
 
 /* =====================================
    CHECK OWNER
 ===================================== */
 
-async function checkOwnerLogin() {
+async function checkOwnerLogin(){
 
-    try {
+    try{
 
         ownerEmail.textContent =
             "در حال بررسی حساب مالک...";
@@ -778,7 +640,7 @@ async function checkOwnerLogin() {
 
 
         /*
-         گرفتن Session
+            1. بررسی Session
         */
 
         const {
@@ -788,11 +650,18 @@ async function checkOwnerLogin() {
             await supabaseClient.auth.getSession();
 
 
-        if (
-            sessionError ||
+        if(sessionError){
+
+            showDatabaseError(sessionError);
+
+            return;
+        }
+
+
+        if(
             !sessionData ||
             !sessionData.session
-        ) {
+        ){
 
             window.location.replace(
                 "owner-login.html"
@@ -806,7 +675,7 @@ async function checkOwnerLogin() {
             sessionData.session.user;
 
 
-        if (!user) {
+        if(!user){
 
             window.location.replace(
                 "owner-login.html"
@@ -817,32 +686,22 @@ async function checkOwnerLogin() {
 
 
         /*
-         ایمیل مالک
+            2. بررسی ایمیل مالک
         */
 
-        const OWNER_EMAIL =
-            "g36316139@gmail.com";
-
-
-        /*
-         بررسی ایمیل
-        */
-
-        if (
+        if(
             !user.email ||
             user.email.toLowerCase()
             !==
             OWNER_EMAIL.toLowerCase()
-        ) {
+        ){
 
             await supabaseClient.auth.signOut();
-
 
             alert(
                 "⛔ این حساب مالک LA3 نیست."
             );
 
-
             window.location.replace(
                 "owner-login.html"
             );
@@ -852,7 +711,7 @@ async function checkOwnerLogin() {
 
 
         /*
-         بررسی owner_accounts
+            3. بررسی owner_accounts
         */
 
         const {
@@ -861,58 +720,43 @@ async function checkOwnerLogin() {
         } =
             await supabaseClient
                 .from("owner_accounts")
-                .select("user_id")
-                .eq("user_id", user.id)
+                .select(
+                    "user_id,email,is_owner"
+                )
+                .eq(
+                    "user_id",
+                    user.id
+                )
+                .eq(
+                    "is_owner",
+                    true
+                )
                 .maybeSingle();
 
 
         /*
-         اگر جدول یا Policy مشکل داشته باشد
+            خطای دیتابیس
         */
 
-        if (ownerError) {
+        if(ownerError){
 
-            console.error(
-                "Owner database error:",
-                ownerError
-            );
-
-
-            ownerEmail.textContent =
-                "⚠️ خطا در بررسی مالک";
-
-
-            securityStatus.innerHTML =
-                "خطا در ارتباط با جدول <b>owner_accounts</b>." +
-                "<br>" +
-                "جزئیات خطا در Console مرورگر قابل مشاهده است.";
-
-
-            loading.classList.add(
-                "hidden"
-            );
-
-            adminPanel.classList.remove(
-                "hidden"
-            );
+            showDatabaseError(ownerError);
 
             return;
         }
 
 
         /*
-         کاربر باید در owner_accounts باشد
+            مالک در جدول وجود ندارد
         */
 
-        if (!ownerData) {
+        if(!ownerData){
 
             await supabaseClient.auth.signOut();
 
-
             alert(
-                "⛔ این حساب در owner_accounts ثبت نشده است."
+                "⛔ این حساب در owner_accounts به عنوان مالک ثبت نشده است."
             );
-
 
             window.location.replace(
                 "owner-login.html"
@@ -923,58 +767,45 @@ async function checkOwnerLogin() {
 
 
         /*
-         مالک تأیید شد
+            4. مالک تأیید شد
         */
 
         ownerEmail.textContent =
             "👑 " +
-            (user.email || "مالک LA3");
-
+            user.email;
 
         securityStatus.innerHTML =
             "✅ حساب مالک با موفقیت احراز هویت شد." +
             "<br>" +
             "🔐 دسترسی پنل مدیریت فعال است." +
             "<br>" +
-            "👑 فقط مالک می‌تواند این پنل را مشاهده کند.";
+            "👑 مالک تأیید شده است.";
 
 
         /*
-         نمایش پنل
+            نمایش پنل
         */
 
-        loading.classList.add(
-            "hidden"
-        );
+        loading.classList.add("hidden");
 
-        adminPanel.classList.remove(
-            "hidden"
-        );
+        adminPanel.classList.remove("hidden");
 
 
         console.log(
-            "LA3 Owner verified:",
-            user.email
+            "LA3 OWNER VERIFIED",
+            {
+                id:user.id,
+                email:user.email,
+                ownerData:ownerData
+            }
         );
 
     }
 
-    catch (error) {
+    catch(error){
 
-        console.error(
-            "Admin error:",
-            error
-        );
+        showDatabaseError(error);
 
-
-        alert(
-            "خطایی هنگام بررسی پنل رخ داد."
-        );
-
-
-        window.location.replace(
-            "owner-login.html"
-        );
     }
 }
 
@@ -985,10 +816,9 @@ async function checkOwnerLogin() {
 
 logoutButton.addEventListener(
     "click",
-    async function() {
+    async function(){
 
-        logoutButton.disabled =
-            true;
+        logoutButton.disabled = true;
 
         logoutButton.textContent =
             "در حال خروج...";
@@ -1000,21 +830,18 @@ logoutButton.addEventListener(
             await supabaseClient.auth.signOut();
 
 
-        if (error) {
+        if(error){
 
             console.error(
-                "Logout error:",
+                "LOGOUT ERROR:",
                 error
             );
-
 
             alert(
                 "خروج انجام نشد."
             );
 
-
-            logoutButton.disabled =
-                false;
+            logoutButton.disabled = false;
 
             logoutButton.textContent =
                 "🚪 خروج";
@@ -1032,15 +859,16 @@ logoutButton.addEventListener(
 
 
 /* =====================================
-   TEMP BUTTONS
+   PANEL BUTTONS
 ===================================== */
 
-function notReady(section) {
+function openSection(section){
 
     alert(
         "بخش «" +
         section +
-        "» آماده اتصال به Supabase است. 💙"
+        "» با موفقیت کلیک شد. 💙\n\n" +
+        "اتصال این بخش به دیتابیس را در مرحله بعد انجام می‌دهیم."
     );
 
 }
@@ -1054,9 +882,5 @@ checkOwnerLogin();
 
 </script>
 
-
 </body>
-
-</html>
-```
-   
+    </html>
