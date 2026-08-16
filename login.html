@@ -1,194 +1,674 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ورود | LA3</title>
+  <title>ورود به LA3</title>
 
-<style>
-* {
-    box-sizing: border-box;
-}
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    background: #030303;
-    color: white;
-    font-family: Tahoma, Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.container {
-    width: 100%;
-    max-width: 430px;
-    padding: 22px;
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, #101c35 0%, #050505 45%, #000 100%);
+      color: white;
+      font-family: Arial, Tahoma, sans-serif;
 
-.logo {
-    text-align: center;
-    font-size: 58px;
-    font-weight: bold;
-    color: #38bdf8;
-    text-shadow:
-        0 0 10px #2563eb,
-        0 0 30px #2563eb;
-    margin-bottom: 8px;
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-.subtitle {
-    text-align: center;
-    color: #94a3b8;
-    margin-bottom: 30px;
-}
+      padding: 20px;
+    }
 
-.card {
-    background: #0d1117;
-    border: 1px solid #2563eb;
-    border-radius: 30px;
-    padding: 25px;
-    box-shadow: 0 0 30px rgba(37, 99, 235, .25);
-}
+    .container {
+      width: 100%;
+      max-width: 430px;
+    }
 
-h2 {
-    margin-top: 0;
-    text-align: center;
-}
+    .logo {
+      text-align: center;
+      font-size: 58px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      color: #4da3ff;
 
-label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 8px;
-    color: #93c5fd;
-}
+      text-shadow:
+        0 0 20px rgba(77, 163, 255, .35);
 
-input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 18px;
-    border: 1px solid #334155;
-    outline: none;
-    background: #050505;
-    color: white;
-    font-size: 15px;
-}
+      margin-bottom: 8px;
+    }
 
-input:focus {
-    border-color: #38bdf8;
-    box-shadow: 0 0 12px rgba(56,189,248,.25);
-}
+    .subtitle {
+      text-align: center;
+      color: #9ba9bd;
+      font-size: 15px;
+      margin-bottom: 25px;
+    }
 
-input[type="file"] {
-    padding: 12px;
-}
+    .card {
+      background: rgba(12, 16, 25, .94);
+      border: 1px solid #263449;
+      border-radius: 28px;
+      padding: 25px;
 
-button {
-    width: 100%;
-    border: 0;
-    border-radius: 20px;
-    padding: 15px;
-    margin-top: 22px;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-}
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, .55),
+        0 0 30px rgba(56, 141, 248, .08);
+    }
 
-.owner {
-    display: block;
-    text-align: center;
-    margin-top: 22px;
-    color: #38bdf8;
-    text-decoration: none;
-}
+    h2 {
+      text-align: center;
+      margin: 0 0 25px;
+      font-size: 23px;
+    }
 
-.note {
-    text-align: center;
-    color: #64748b;
-    font-size: 12px;
-    margin-top: 20px;
-}
-</style>
+    label {
+      display: block;
+      margin: 15px 0 8px;
+      color: #cbd5e1;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+
+      border-radius: 17px;
+      border: 1px solid #334155;
+
+      outline: none;
+
+      background: #080b10;
+      color: white;
+
+      font-size: 15px;
+    }
+
+    input:focus {
+      border-color: #389bf8;
+
+      box-shadow:
+        0 0 12px rgba(56, 155, 248, .25);
+    }
+
+    input[type="file"] {
+      padding: 12px;
+    }
+
+    button {
+      width: 100%;
+
+      border: none;
+      border-radius: 19px;
+
+      padding: 15px;
+      margin-top: 23px;
+
+      background:
+        linear-gradient(
+          90deg,
+          #2563eb,
+          #389bf8
+        );
+
+      color: white;
+
+      font-size: 17px;
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: .2s;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+      box-shadow:
+        0 8px 25px rgba(56, 155, 248, .25);
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
+    .owner {
+      display: block;
+
+      text-align: center;
+
+      margin-top: 20px;
+
+      color: #389bf8;
+      text-decoration: none;
+
+      font-size: 14px;
+    }
+
+    .owner:hover {
+      text-decoration: underline;
+    }
+
+    .note {
+      text-align: center;
+
+      color: #64748b;
+
+      font-size: 12px;
+
+      line-height: 1.8;
+
+      margin-top: 20px;
+    }
+
+    .message {
+      display: none;
+
+      margin-top: 15px;
+      padding: 12px;
+
+      border-radius: 14px;
+
+      text-align: center;
+
+      font-size: 13px;
+    }
+
+    .message.error {
+      display: block;
+
+      background: rgba(239, 68, 68, .12);
+      border: 1px solid rgba(239, 68, 68, .3);
+
+      color: #ff8b8b;
+    }
+
+    .message.success {
+      display: block;
+
+      background: rgba(34, 197, 94, .12);
+      border: 1px solid rgba(34, 197, 94, .3);
+
+      color: #75e6a0;
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="container">
+  <div class="container">
 
     <div class="logo">LA3</div>
 
     <div class="subtitle">
-        به شبکه LA3 خوش آمدید
+      خوش آمدید به شبکه LA3
     </div>
 
     <div class="card">
 
-        <h2>ورود به LA3</h2>
+      <h2>ورود به LA3</h2>
 
-        <label>نام</label>
-        <input
-            type="text"
-            id="name"
-            placeholder="نام خود را وارد کنید"
-        >
+      <label for="name">
+        نام
+      </label>
 
-        <label>نام کاربری</label>
-        <input
-            type="text"
-            id="username"
-            placeholder="@username"
-        >
+      <input
+        type="text"
+        id="name"
+        placeholder="نام خود را وارد کنید"
+        autocomplete="name"
+      >
 
-        <label>تصویر پروفایل</label>
-        <input
-            type="file"
-            id="profile"
-            accept="image/*"
-        >
+      <label for="username">
+        نام کاربری
+      </label>
 
-        <button onclick="login()">
-            ورود به LA3
-        </button>
+      <input
+        type="text"
+        id="username"
+        placeholder="@username"
+        autocomplete="username"
+      >
 
-        <a class="owner" href="owner-login.html">
-            ورود مالک 🔐
-        </a>
+      <label for="profile">
+        تصویر پروفایل
+      </label>
 
-        <div class="note">
-            در ورودهای بعدی، در صورت فعال بودن حساب،
-            نیازی به وارد کردن رمز نخواهد بود.
-        </div>
+      <input
+        type="file"
+        id="profile"
+        accept="image/*"
+      >
+
+      <button
+        id="loginButton"
+        onclick="login()"
+      >
+        ورود به LA3
+      </button>
+
+      <div id="message" class="message"></div>
+
+      <a
+        class="owner"
+        href="owner-login.html"
+      >
+        🔐 ورود مالک
+      </a>
+
+      <div class="note">
+        در ورودهای بعدی، حساب شما با همان شناسه ادامه پیدا می‌کند.
+      </div>
 
     </div>
 
-</div>
+  </div>
+
 
 <script>
-function login() {
 
-    const name = document.getElementById("name").value.trim();
-    const username = document.getElementById("username").value.trim();
+  /*
+   * ==========================================
+   * تنظیمات Supabase
+   * ==========================================
+   *
+   * این دو مقدار را از Supabase خودت وارد کن.
+   *
+   * مهم:
+   * فقط Publishable / anon key را اینجا قرار بده.
+   *
+   * Secret key را هرگز داخل این فایل نگذار.
+   */
+
+  const SUPABASE_URL =
+    "https://ibqhyqzolkzzpziocfvp.supabase.co/rest/v1/";
+
+  const SUPABASE_ANON_KEY =
+    "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+
+  /*
+   * ==========================================
+   * پیام
+   * ==========================================
+   */
+
+  function showMessage(text, type) {
+
+    const message =
+      document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+  }
+
+
+  /*
+   * ==========================================
+   * ورود
+   * ==========================================
+   */
+
+  async function login() {
+
+    const name =
+      document
+        .getElementById("name")
+        .value
+        .trim();
+
+    const username =
+      document
+        .getElementById("username")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const profileFile =
+      document
+        .getElementById("profile")
+        .files[0];
+
 
     if (!name || !username) {
-        alert("لطفاً نام و نام کاربری را وارد کنید.");
-        return;
+
+      showMessage(
+        "لطفاً نام و نام کاربری را وارد کنید.",
+        "error"
+      );
+
+      return;
     }
 
+
     /*
-      این بخش فعلاً نمایشی است.
-      بعداً با Supabase جایگزین می‌شود
-      تا حساب واقعاً در دیتابیس ثبت شود.
-    */
+     * جلوگیری از username نامعتبر
+     */
 
-    localStorage.setItem("la3_name", name);
-    localStorage.setItem("la3_username", username);
+    const usernamePattern =
+      /^[a-zA-Z0-9_]{3,30}$/;
 
-    window.location.href = "index.html";
-}
+
+    const cleanUsername =
+      username.replace(/^@/, "");
+
+
+    if (!usernamePattern.test(cleanUsername)) {
+
+      showMessage(
+        "نام کاربری باید حداقل ۳ حرف و فقط شامل حروف، عدد و _ باشد.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const button =
+      document.getElementById("loginButton");
+
+    button.disabled = true;
+
+    button.textContent =
+      "در حال ورود...";
+
+
+    try {
+
+      /*
+       * ======================================
+       * 1. ساخت Anonymous User
+       * ======================================
+       */
+
+      let {
+        data: sessionData,
+        error: sessionError
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (sessionError) {
+        throw sessionError;
+      }
+
+
+      let user =
+        sessionData.session?.user;
+
+
+      /*
+       * اگر قبلاً کاربر وجود نداشت،
+       * یک حساب Anonymous بساز.
+       */
+
+      if (!user) {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth.signInAnonymously();
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        user =
+          data.user;
+      }
+
+
+      if (!user) {
+
+        throw new Error(
+          "کاربر ایجاد نشد."
+        );
+      }
+
+
+      /*
+       * ======================================
+       * 2. ذخیره اطلاعات پروفایل
+       * ======================================
+       */
+
+      let avatarUrl = null;
+
+
+      /*
+       * فعلاً عکس را در localStorage
+       * نگه می‌داریم.
+       *
+       * بعداً Storage را هم کامل وصل می‌کنیم.
+       */
+
+      if (profileFile) {
+
+        if (
+          !profileFile.type.startsWith("image/")
+        ) {
+
+          throw new Error(
+            "فایل انتخاب‌شده تصویر نیست."
+          );
+        }
+
+
+        if (
+          profileFile.size > 5 * 1024 * 1024
+        ) {
+
+          throw new Error(
+            "حجم تصویر نباید بیشتر از ۵ مگابایت باشد."
+          );
+        }
+
+
+        avatarUrl =
+          URL.createObjectURL(
+            profileFile
+          );
+      }
+
+
+      /*
+       * ======================================
+       * 3. ذخیره در profiles
+       * ======================================
+       */
+
+      const profileData = {
+
+        id: user.id,
+
+        username: cleanUsername,
+
+        name: name
+
+      };
+
+
+      /*
+       * اگر جدول profiles ستون avatar_url دارد،
+       * عکس را هم ثبت می‌کنیم.
+       */
+
+      if (avatarUrl) {
+        profileData.avatar_url =
+          avatarUrl;
+      }
+
+
+      const {
+        error: profileError
+      } =
+        await supabaseClient
+          .from("profiles")
+          .upsert(
+            profileData,
+            {
+              onConflict: "id"
+            }
+          );
+
+
+      if (profileError) {
+
+        throw profileError;
+      }
+
+
+      /*
+       * ======================================
+       * 4. ذخیره اطلاعات محلی
+       * ======================================
+       */
+
+      localStorage.setItem(
+        "la3_name",
+        name
+      );
+
+      localStorage.setItem(
+        "la3_username",
+        cleanUsername
+      );
+
+      localStorage.setItem(
+        "la3_user_id",
+        user.id
+      );
+
+
+      if (avatarUrl) {
+
+        localStorage.setItem(
+          "la3_avatar",
+          avatarUrl
+        );
+      }
+
+
+      /*
+       * ======================================
+       * 5. ورود موفق
+       * ======================================
+       */
+
+      showMessage(
+        "ورود با موفقیت انجام شد ✓",
+        "success"
+      );
+
+
+      button.textContent =
+        "ورود موفق ✓";
+
+
+      /*
+       * کمی مکث برای نمایش پیام
+       */
+
+      setTimeout(() => {
+
+        window.location.href =
+          "index.html";
+
+      }, 700);
+
+
+    } catch (error) {
+
+      console.error(
+        "LA3 Login Error:",
+        error
+      );
+
+
+      showMessage(
+        "خطا در ورود: " +
+        (error.message || "خطای نامشخص"),
+        "error"
+      );
+
+
+      button.disabled = false;
+
+      button.textContent =
+        "ورود به LA3";
+    }
+
+  }
+
+
+  /*
+   * ==========================================
+   * اگر کاربر قبلاً وارد شده باشد
+   * ==========================================
+   */
+
+  async function checkExistingUser() {
+
+    try {
+
+      const {
+        data
+      } =
+        await supabaseClient.auth.getSession();
+
+
+      if (
+        data.session?.user &&
+        localStorage.getItem("la3_name") &&
+        localStorage.getItem("la3_username")
+      ) {
+
+        /*
+         * اگر قبلاً وارد شده،
+         * دوباره فرم ورود را نشان نده.
+         */
+
+        window.location.href =
+          "index.html";
+      }
+
+    } catch (error) {
+
+      console.log(
+        "Session check:",
+        error
+      );
+
+    }
+
+  }
+
+
+  checkExistingUser();
+
 </script>
 
 </body>
-  </html>
+</html>
