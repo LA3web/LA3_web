@@ -8,148 +8,978 @@
 
 <style>
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
 }
 
 body{
-margin:0;
-background:#050505;
-color:white;
-font-family:tahoma;
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top,#10233d 0,#050505 42%,#000 100%);
+  color:#fff;
+  font-family:Tahoma,Arial,sans-serif;
+}
+
+button{
+  font-family:inherit;
 }
 
 .container{
-max-width:450px;
-margin:auto;
-padding:20px;
+  max-width:500px;
+  margin:auto;
+  padding:18px 16px 110px;
+}
+
+/* ---------- Header ---------- */
+
+.header{
+  text-align:center;
+  padding:8px 0 20px;
 }
 
 .logo{
-text-align:center;
-font-size:55px;
-font-weight:bold;
-color:#38bdf8;
-text-shadow:0 0 25px #2563eb;
+  font-size:52px;
+  font-weight:900;
+  color:#38bdf8;
+  letter-spacing:3px;
+  text-shadow:0 0 25px #2563eb;
 }
 
+.welcome{
+  color:#8fa3b8;
+  font-size:13px;
+  margin-top:4px;
+}
+
+/* ---------- Cards ---------- */
+
 .card{
-background:#111827;
-border-radius:30px;
-padding:20px;
-margin-top:20px;
-border:1px solid #2563eb;
-box-shadow:0 0 20px #1d4ed8;
+  background:rgba(17,24,39,.94);
+  border:1px solid #1e5fa8;
+  border-radius:25px;
+  padding:18px;
+  margin-top:15px;
+  box-shadow:0 8px 30px rgba(0,0,0,.28);
+}
+
+.card-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
 }
 
 .title{
-font-size:22px;
-color:#60a5fa;
+  color:#60a5fa;
+  font-size:19px;
+  font-weight:bold;
 }
 
+.open{
+  color:#38bdf8;
+  font-size:12px;
+}
+
+/* ---------- Profile ---------- */
+
 .profile{
-display:flex;
-align-items:center;
-gap:15px;
+  display:flex;
+  align-items:center;
+  gap:14px;
 }
 
 .avatar{
-width:60px;
-height:60px;
-border-radius:50%;
-background:#2563eb;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:
+    linear-gradient(135deg,#2563eb,#38bdf8);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:25px;
+  overflow:hidden;
+  flex-shrink:0;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.profile h3{
+  margin:0 0 5px;
+  font-size:17px;
+}
+
+.profile p{
+  margin:0;
+  color:#8495a8;
+  font-size:13px;
 }
 
 .tick{
-color:#38bdf8;
+  color:#38bdf8;
+  font-size:17px;
 }
 
-.button{
-background:#2563eb;
-padding:15px;
-border-radius:25px;
-text-align:center;
-margin-top:15px;
+/* ---------- Official Channel ---------- */
+
+.channel-head{
+  display:flex;
+  align-items:center;
+  gap:12px;
 }
+
+.channel-avatar{
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  background:#2563eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.channel-name{
+  font-weight:bold;
+}
+
+.channel-name small{
+  display:block;
+  color:#38bdf8;
+  margin-top:4px;
+}
+
+.post{
+  margin-top:15px;
+  padding:14px;
+  background:#0a111b;
+  border-radius:18px;
+  border:1px solid #1b344e;
+}
+
+.post-text{
+  color:#d7e3ef;
+  line-height:1.9;
+  font-size:14px;
+}
+
+.post-time{
+  color:#627589;
+  font-size:11px;
+  margin-top:8px;
+}
+
+/* ---------- Buttons ---------- */
+
+.action{
+  width:100%;
+  border:0;
+  border-radius:17px;
+  padding:13px;
+  margin-top:12px;
+  background:#1d4ed8;
+  color:#fff;
+  font-size:14px;
+  cursor:pointer;
+}
+
+.action:hover{
+  background:#2563eb;
+}
+
+.secondary{
+  background:#172235;
+  border:1px solid #294765;
+}
+
+.secondary:hover{
+  background:#1e3149;
+}
+
+/* ---------- Grid ---------- */
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.small-card{
+  background:#0b1320;
+  border:1px solid #203a55;
+  border-radius:20px;
+  padding:16px;
+  min-height:120px;
+}
+
+.small-icon{
+  font-size:28px;
+  margin-bottom:10px;
+}
+
+.small-title{
+  font-weight:bold;
+  color:#9ecbff;
+}
+
+.small-text{
+  color:#71859a;
+  font-size:11px;
+  margin-top:7px;
+  line-height:1.6;
+}
+
+/* ---------- Settings ---------- */
+
+.setting{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:13px;
+  background:#0b1320;
+  border-radius:17px;
+  margin-top:9px;
+  cursor:pointer;
+}
+
+.setting-icon{
+  width:38px;
+  height:38px;
+  border-radius:13px;
+  background:#173d6a;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.setting-text{
+  flex:1;
+}
+
+.setting-title{
+  font-size:14px;
+}
+
+.setting-sub{
+  color:#65798d;
+  font-size:11px;
+  margin-top:4px;
+}
+
+/* ---------- Bottom Navigation ---------- */
 
 .bottom{
-position:fixed;
-bottom:15px;
-left:20px;
-right:20px;
-background:#111827;
-border-radius:35px;
-display:flex;
-justify-content:space-around;
-padding:15px;
-border:1px solid #38bdf8;
+  position:fixed;
+  z-index:100;
+
+  bottom:12px;
+  left:12px;
+  right:12px;
+
+  max-width:500px;
+  margin:auto;
+
+  background:rgba(12,18,29,.97);
+
+  border:1px solid #2563a5;
+  border-radius:28px;
+
+  display:flex;
+  justify-content:space-around;
+
+  padding:10px 5px;
+
+  box-shadow:0 12px 35px rgba(0,0,0,.5);
 }
 
-.item{
-color:#93c5fd;
-font-size:13px;
+.nav-item{
+  flex:1;
+  text-align:center;
+  color:#7189a2;
+  font-size:11px;
+  padding:8px 2px;
+  cursor:pointer;
+  border-radius:18px;
 }
 
+.nav-item.active{
+  color:#38bdf8;
+  background:#102b49;
+}
+
+.nav-icon{
+  display:block;
+  font-size:20px;
+  margin-bottom:3px;
+}
+
+/* ---------- Sections ---------- */
+
+.section{
+  scroll-margin-top:15px;
+}
+
+/* ---------- Mobile ---------- */
+
+@media(max-width:380px){
+
+  .logo{
+    font-size:45px;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .bottom{
+    left:8px;
+    right:8px;
+  }
+}
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<div class="logo">
-LA3
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">LA3</div>
+    <div class="welcome">
+      شبکه اجتماعی LA3
+    </div>
+  </header>
+
+
+  <!-- USER PROFILE -->
+  <section class="card section" id="profile">
+
+    <div class="profile">
+
+      <div class="avatar" id="userAvatar">
+        👤
+      </div>
+
+      <div>
+
+        <h3>
+          <span id="userName">
+            کاربر LA3
+          </span>
+
+          <span class="tick" id="userTick">
+            <!-- تیک در صورت تأیید نمایش داده می‌شود -->
+          </span>
+        </h3>
+
+        <p id="userUsername">
+          @username
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- OFFICIAL CHANNEL -->
+  <section class="card section" id="official">
+
+    <div class="card-title">
+
+      <div class="title">
+        📢 کانال رسمی
+      </div>
+
+      <div class="open">
+        رسمی ✓
+      </div>
+
+    </div>
+
+
+    <div class="channel-head">
+
+      <div class="channel-avatar">
+        📢
+      </div>
+
+      <div>
+
+        <div class="channel-name">
+          کانال رسمی LA3
+          <span class="tick">✔</span>
+        </div>
+
+        <small>
+          @LA3Official
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="post">
+
+      <div class="post-text">
+        به کانال رسمی LA3 خوش آمدید 🌐
+        <br>
+        اخبار و اطلاعیه‌های رسمی در اینجا منتشر می‌شوند.
+      </div>
+
+      <div class="post-time">
+        آخرین پیام
+      </div>
+
+    </div>
+
+
+    <button
+      class="action"
+      onclick="openOfficialChannel()"
+    >
+      ورود به کانال رسمی
+    </button>
+
+  </section>
+
+
+  <!-- MAIN FEATURES -->
+  <section class="card section" id="features">
+
+    <div class="card-title">
+
+      <div class="title">
+        امکانات LA3
+      </div>
+
+    </div>
+
+
+    <div class="grid">
+
+      <!-- Tweet -->
+
+      <div
+        class="small-card"
+        onclick="openTweets()"
+        style="cursor:pointer"
+      >
+
+        <div class="small-icon">
+          📝
+        </div>
+
+        <div class="small-title">
+          Tweet
+        </div>
+
+        <div class="small-text">
+          توییت‌های منتشرشده توسط مالک
+        </div>
+
+      </div>
+
+
+      <!-- LAC -->
+
+      <div
+        class="small-card"
+        onclick="openLAC()"
+        style="cursor:pointer"
+      >
+
+        <div class="small-icon">
+          📺
+        </div>
+
+        <div class="small-title">
+          LAC
+        </div>
+
+        <div class="small-text">
+          کانال‌های ایجادشده در LA3
+        </div>
+
+      </div>
+
+
+      <!-- Chat -->
+
+      <div
+        class="small-card"
+        onclick="openChat()"
+        style="cursor:pointer"
+      >
+
+        <div class="small-icon">
+          💬
+        </div>
+
+        <div class="small-title">
+          چت‌روم
+        </div>
+
+        <div class="small-text">
+          گفت‌وگوی کاربران با یکدیگر
+        </div>
+
+      </div>
+
+
+      <!-- Ads -->
+
+      <div
+        class="small-card"
+        onclick="openAds()"
+        style="cursor:pointer"
+      >
+
+        <div class="small-icon">
+          📢
+        </div>
+
+        <div class="small-title">
+          تبلیغات
+        </div>
+
+        <div class="small-text">
+          مشاهده تبلیغات و بنرها
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SETTINGS -->
+  <section class="card section" id="settings">
+
+    <div class="card-title">
+
+      <div class="title">
+        ⚙️ تنظیمات
+      </div>
+
+    </div>
+
+
+    <div
+      class="setting"
+      onclick="openProfile()"
+    >
+
+      <div class="setting-icon">
+        👤
+      </div>
+
+      <div class="setting-text">
+
+        <div class="setting-title">
+          پروفایل من
+        </div>
+
+        <div class="setting-sub">
+          نام، نام کاربری و عکس پروفایل
+        </div>
+
+      </div>
+
+      <div>
+        ›
+      </div>
+
+    </div>
+
+
+    <div
+      class="setting"
+      onclick="openOfficialChannel()"
+    >
+
+      <div class="setting-icon">
+        📢
+      </div>
+
+      <div class="setting-text">
+
+        <div class="setting-title">
+          کانال رسمی
+        </div>
+
+        <div class="setting-sub">
+          اطلاعیه‌های رسمی LA3
+        </div>
+
+      </div>
+
+      <div>
+        ›
+      </div>
+
+    </div>
+
+
+    <div
+      class="setting"
+      onclick="openLAC()"
+    >
+
+      <div class="setting-icon">
+        📺
+      </div>
+
+      <div class="setting-text">
+
+        <div class="setting-title">
+          کانال‌های LAC
+        </div>
+
+        <div class="setting-sub">
+          کانال‌های ایجادشده توسط مالک
+        </div>
+
+      </div>
+
+      <div>
+        ›
+      </div>
+
+    </div>
+
+
+    <div
+      class="setting"
+      onclick="openAds()"
+    >
+
+      <div class="setting-icon">
+        📣
+      </div>
+
+      <div class="setting-text">
+
+        <div class="setting-title">
+          تبلیغات
+        </div>
+
+        <div class="setting-sub">
+          مدیریت و مشاهده تبلیغات
+        </div>
+
+      </div>
+
+      <div>
+        ›
+      </div>
+
+    </div>
+
+  </section>
+
 </div>
 
-<div class="card profile">
-<div class="avatar"></div>
 
-<div>
-<h3>مالک LA3 <span class="tick">✔</span></h3>
-<p>@LA3Official</p>
-</div>
+<!-- BOTTOM NAVIGATION -->
 
-</div>
+<nav class="bottom">
 
-
-<div class="card">
-<div class="title">کانال رسمی</div>
-<p>آخرین پیام مالک در کانال رسمی</p>
-</div>
+  <div
+    class="nav-item active"
+    onclick="goHome(this)"
+  >
+    <span class="nav-icon">🏠</span>
+    خانه
+  </div>
 
 
-<div class="card">
-<div class="title">توییت</div>
-<p>
-به LA3 خوش آمدید 🌐
-</p>
-</div>
+  <div
+    class="nav-item"
+    onclick="openTweets(this)"
+  >
+    <span class="nav-icon">📝</span>
+    Tweet
+  </div>
 
 
-<div class="card">
-<div class="title">📺 LAC</div>
-<p>کانال‌های ساخته شده توسط مالک</p>
-</div>
+  <div
+    class="nav-item"
+    onclick="openLAC(this)"
+  >
+    <span class="nav-icon">📺</span>
+    LAC
+  </div>
 
 
-<div class="card">
-<div class="title">📢 تبلیغات</div>
-<p>بنر تبلیغاتی</p>
-</div>
+  <div
+    class="nav-item"
+    onclick="openChat(this)"
+  >
+    <span class="nav-icon">💬</span>
+    چت
+  </div>
 
 
-</div>
+  <div
+    class="nav-item"
+    onclick="openSettings(this)"
+  >
+    <span class="nav-icon">⚙️</span>
+    تنظیمات
+  </div>
+
+</nav>
 
 
-<div class="bottom">
+<script>
 
-<div class="item">🏠 خانه</div>
-<div class="item">📝 توییت</div>
-<div class="item">📺 LAC</div>
-<div class="item">⚙️ تنظیمات</div>
+/*
+========================================
+اطلاعات کاربر
+========================================
+*/
 
-</div>
+function loadUser(){
 
+  const name =
+    localStorage.getItem("la3_name");
+
+  const username =
+    localStorage.getItem("la3_username");
+
+  const avatar =
+    localStorage.getItem("la3_avatar");
+
+
+  if(name){
+
+    document.getElementById(
+      "userName"
+    ).textContent = name;
+
+  }
+
+
+  if(username){
+
+    document.getElementById(
+      "userUsername"
+    ).textContent =
+      "@" + username.replace(/^@/,"");
+
+  }
+
+
+  if(avatar){
+
+    const box =
+      document.getElementById(
+        "userAvatar"
+      );
+
+    box.innerHTML =
+      `<img src="${avatar}" alt="پروفایل">`;
+
+  }
+
+}
+
+
+/*
+========================================
+حرکت به بخش
+========================================
+*/
+
+function scrollToSection(id){
+
+  const section =
+    document.getElementById(id);
+
+  if(section){
+
+    section.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+}
+
+
+/*
+========================================
+خانه
+========================================
+*/
+
+function goHome(item){
+
+  setActive(item);
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/*
+========================================
+تنظیمات
+========================================
+*/
+
+function openSettings(item){
+
+  setActive(item);
+
+  scrollToSection("settings");
+
+}
+
+
+/*
+========================================
+پروفایل
+========================================
+*/
+
+function openProfile(){
+
+  scrollToSection("profile");
+
+}
+
+
+/*
+========================================
+کانال رسمی
+========================================
+*/
+
+function openOfficialChannel(){
+
+  alert(
+    "کانال رسمی LA3 در مرحله بعد به صورت کامل متصل می‌شود."
+  );
+
+}
+
+
+/*
+========================================
+Tweet
+========================================
+*/
+
+function openTweets(item){
+
+  setActive(item);
+
+  alert(
+    "بخش Tweet در مرحله بعد به Supabase متصل می‌شود."
+  );
+
+}
+
+
+/*
+========================================
+LAC
+========================================
+*/
+
+function openLAC(item){
+
+  setActive(item);
+
+  window.location.href =
+    "lac.html";
+
+}
+
+
+/*
+========================================
+چت
+========================================
+*/
+
+function openChat(item){
+
+  setActive(item);
+
+  alert(
+    "چت‌روم در مرحله بعد به صورت زنده فعال می‌شود."
+  );
+
+}
+
+
+/*
+========================================
+تبلیغات
+========================================
+*/
+
+function openAds(){
+
+  alert(
+    "بخش تبلیغات در مرحله بعد به Supabase متصل می‌شود."
+  );
+
+}
+
+
+/*
+========================================
+فعال کردن دکمه پایین
+========================================
+*/
+
+function setActive(item){
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(
+      element =>
+        element.classList.remove("active")
+    );
+
+
+  if(item){
+
+    item.classList.add("active");
+
+  }
+
+}
+
+
+/*
+========================================
+شروع
+========================================
+*/
+
+loadUser();
+
+</script>
 
 </body>
-</html>
+  </html>
