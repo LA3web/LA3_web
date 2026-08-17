@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -131,15 +132,6 @@ button:disabled{
   font-size:12px;
   color:#93c5fd;
 }
-
-.owner{
-  display:block;
-  text-align:center;
-  margin-top:18px;
-  color:#60a5fa;
-  text-decoration:none;
-  font-size:12px;
-}
 </style>
 </head>
 
@@ -147,7 +139,9 @@ button:disabled{
 
 <div class="box">
 
-  <div class="logo">LA3</div>
+  <div class="logo">
+    LA3
+  </div>
 
   <div class="subtitle">
     ورود به شبکه اجتماعی LA3
@@ -158,7 +152,10 @@ button:disabled{
 
   <div class="avatar-area">
 
-    <div class="avatar-preview" id="avatarPreview">
+    <div
+      class="avatar-preview"
+      id="avatarPreview"
+    >
       👤
     </div>
 
@@ -231,17 +228,18 @@ button:disabled{
   >
 
 
-  <button id="loginButton">
+  <button
+    id="loginButton"
+    type="button"
+  >
     ورود / ساخت حساب
   </button>
 
 
-  <div id="message" class="message"></div>
-
-
-  <a class="owner" href="owner-login.html">
-    🔐 ورود مالک LA3
-  </a>
+  <div
+    id="message"
+    class="message"
+  ></div>
 
 </div>
 
@@ -254,7 +252,7 @@ button:disabled{
 
 /* =========================================
    SUPABASE
-   ========================================= */
+========================================= */
 
 const SUPABASE_URL =
 "https://ibqhyqzolkzzpziocfvp.supabase.co";
@@ -272,7 +270,7 @@ window.supabase.createClient(
 
 /* =========================================
    ELEMENTS
-   ========================================= */
+========================================= */
 
 const nameInput =
 document.getElementById("name");
@@ -304,9 +302,9 @@ let selectedAvatar = null;
 
 /* =========================================
    MESSAGE
-   ========================================= */
+========================================= */
 
-function showMessage(text, error=false){
+function showMessage(text,error=false){
 
   messageBox.textContent = text;
 
@@ -318,7 +316,7 @@ function showMessage(text, error=false){
 
 /* =========================================
    AVATAR PREVIEW
-   ========================================= */
+========================================= */
 
 avatarInput.addEventListener(
   "change",
@@ -363,7 +361,7 @@ avatarInput.addEventListener(
 
 /* =========================================
    NORMALIZE USERNAME
-   ========================================= */
+========================================= */
 
 function normalizeUsername(value){
 
@@ -377,7 +375,7 @@ function normalizeUsername(value){
 
 /* =========================================
    SAVE PROFILE
-   ========================================= */
+========================================= */
 
 async function saveProfile(user){
 
@@ -432,11 +430,6 @@ async function saveProfile(user){
   }
 
 
-  /*
-   * فعلاً اطلاعاتی که قبلاً سایت استفاده می‌کرد
-   * در localStorage هم نگه می‌داریم.
-   */
-
   localStorage.setItem(
     "la3_name",
     name
@@ -462,7 +455,7 @@ async function saveProfile(user){
 
 /* =========================================
    LOGIN / SIGN UP
-   ========================================= */
+========================================= */
 
 loginButton.addEventListener(
   "click",
@@ -536,10 +529,6 @@ loginButton.addEventListener(
 
     try{
 
-      /*
-       * ابتدا تلاش برای ورود
-       */
-
       let {
         data,
         error
@@ -552,11 +541,6 @@ loginButton.addEventListener(
 
         });
 
-
-      /*
-       * اگر حساب وجود نداشت،
-       * حساب جدید ساخته می‌شود.
-       */
 
       if(error){
 
@@ -581,11 +565,6 @@ loginButton.addEventListener(
           signUp.data;
 
 
-        /*
-         * اگر تأیید ایمیل فعال باشد،
-         * ممکن است session فعلاً null باشد.
-         */
-
         if(!data.session){
 
           showMessage(
@@ -608,10 +587,6 @@ loginButton.addEventListener(
 
       }
 
-
-      /*
-       * ذخیره پروفایل
-       */
 
       await saveProfile(
         data.user
@@ -653,8 +628,28 @@ loginButton.addEventListener(
 
 
 /* =========================================
+   ENTER KEY
+========================================= */
+
+passwordInput.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Enter"){
+
+      event.preventDefault();
+
+      loginButton.click();
+
+    }
+
+  }
+);
+
+
+/* =========================================
    CHECK EXISTING SESSION
-   ========================================= */
+========================================= */
 
 async function checkSession(){
 
@@ -680,3 +675,5 @@ checkSession();
 
 </body>
 </html>
+```
+  
