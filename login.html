@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +23,12 @@ body{
     radial-gradient(circle at top,#102a49,#050505 55%);
   color:white;
   font-family:Tahoma,Arial,sans-serif;
+  padding:20px;
 }
 
 .box{
   width:min(430px,92%);
-  background:rgba(17,24,39,.96);
+  background:rgba(17,24,39,.97);
   border:1px solid #2563eb;
   border-radius:30px;
   padding:28px 22px;
@@ -126,10 +128,11 @@ button:disabled{
 }
 
 .message{
-  min-height:20px;
+  min-height:22px;
   text-align:center;
   margin-top:15px;
   font-size:12px;
+  line-height:1.8;
   color:#93c5fd;
 }
 </style>
@@ -169,14 +172,14 @@ button:disabled{
   </div>
 
 
-  <!-- نام -->
+  <!-- نام نمایشی -->
 
-  <label for="name">
+  <label for="displayName">
     نام
   </label>
 
   <input
-    id="name"
+    id="displayName"
     type="text"
     maxlength="50"
     placeholder="نام خود را وارد کنید"
@@ -199,20 +202,6 @@ button:disabled{
   >
 
 
-  <!-- ایمیل -->
-
-  <label for="email">
-    ایمیل
-  </label>
-
-  <input
-    id="email"
-    type="email"
-    placeholder="example@email.com"
-    autocomplete="email"
-  >
-
-
   <!-- رمز -->
 
   <label for="password">
@@ -224,7 +213,7 @@ button:disabled{
     type="password"
     minlength="6"
     placeholder="حداقل ۶ کاراکتر"
-    autocomplete="new-password"
+    autocomplete="current-password"
   >
 
 
@@ -260,7 +249,6 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
 
-
 const supabaseClient =
 window.supabase.createClient(
   SUPABASE_URL,
@@ -272,14 +260,11 @@ window.supabase.createClient(
    ELEMENTS
 ========================================= */
 
-const nameInput =
-document.getElementById("name");
+const displayNameInput =
+document.getElementById("displayName");
 
 const usernameInput =
 document.getElementById("username");
-
-const emailInput =
-document.getElementById("email");
 
 const passwordInput =
 document.getElementById("password");
@@ -315,7 +300,7 @@ function showMessage(text,error=false){
 
 
 /* =========================================
-   AVATAR PREVIEW
+   AVATAR
 ========================================= */
 
 avatarInput.addEventListener(
@@ -323,7 +308,7 @@ avatarInput.addEventListener(
   function(){
 
     const file =
-      this.files[0];
+    this.files[0];
 
     if(!file){
       return;
@@ -336,22 +321,24 @@ avatarInput.addEventListener(
         true
       );
 
+      this.value = "";
+
       return;
     }
 
     const reader =
-      new FileReader();
+    new FileReader();
 
     reader.onload =
-      function(event){
+    function(event){
 
-        selectedAvatar =
-          event.target.result;
+      selectedAvatar =
+      event.target.result;
 
-        avatarPreview.innerHTML =
-          `<img src="${selectedAvatar}" alt="پروفایل">`;
+      avatarPreview.innerHTML =
+      `<img src="${selectedAvatar}" alt="پروفایل">`;
 
-      };
+    };
 
     reader.readAsDataURL(file);
 
@@ -360,7 +347,7 @@ avatarInput.addEventListener(
 
 
 /* =========================================
-   NORMALIZE USERNAME
+   USERNAME
 ========================================= */
 
 function normalizeUsername(value){
@@ -374,57 +361,105 @@ function normalizeUsername(value){
 
 
 /* =========================================
+   INTERNAL AUTH EMAIL
+========================================= */
+
+function makeInternalEmail(username){
+
+  return (
+    normalizeUsername(username)
+    .replace(/[^a-z0-9._-]/g,"")
+    +
+    "@la3.internal"
+  );
+
+}
+
+
+/* =========================================
+   CHECK USERNAME
+========================================= */
+
+async function usernameExists(username){
+
+  const {
+    data,
+    error
+  } =
+  await supabaseClient
+    .rpc(
+      "username_exists",
+      {
+        requested_username:username
+      }
+    );
+
+  if(error){
+
+    console.error(
+      "Username check error:",
+      error
+    );
+
+    throw new Error(
+      "بررسی نام کاربری انجام نشد."
+    );
+
+  }
+
+  return data === true;
+
+}
+
+
+/* =========================================
    SAVE PROFILE
 ========================================= */
 
 async function saveProfile(user){
 
-  const name =
-    nameInput.value.trim();
+  const displayName =
+  displayNameInput.value.trim();
 
   const username =
-    normalizeUsername(
-      usernameInput.value
-    );
-
-
-  if(!name || !username){
-
-    throw new Error(
-      "نام و نام کاربری الزامی است."
-    );
-
-  }
+  normalizeUsername(
+    usernameInput.value
+  );
 
 
   const profileData = {
 
     id:user.id,
 
-    name:name,
+    username:username,
 
-    username:username
+    display_name:displayName
 
   };
 
 
-  const { error } =
-    await supabaseClient
-      .from("profiles")
-      .upsert(
-        profileData,
-        {
-          onConflict:"id"
-        }
-      );
+  const {
+    error
+  } =
+  await supabaseClient
+    .from("profiles")
+    .upsert(
+      profileData,
+      {
+        onConflict:"id"
+      }
+    );
 
 
   if(error){
 
-    console.error(error);
+    console.error(
+      "Profile error:",
+      error
+    );
 
     throw new Error(
-      "ذخیره پروفایل انجام نشد."
+      "ذخیره اطلاعات حساب انجام نشد."
     );
 
   }
@@ -432,7 +467,7 @@ async function saveProfile(user){
 
   localStorage.setItem(
     "la3_name",
-    name
+    displayName
   );
 
   localStorage.setItem(
@@ -454,88 +489,131 @@ async function saveProfile(user){
 
 
 /* =========================================
-   LOGIN / SIGN UP
+   LOGIN / CREATE
 ========================================= */
 
-loginButton.addEventListener(
-  "click",
-  async function(){
+async function loginOrCreate(){
 
-    const name =
-      nameInput.value.trim();
+  const displayName =
+  displayNameInput.value.trim();
 
-    const username =
-      normalizeUsername(
-        usernameInput.value
-      );
+  const username =
+  normalizeUsername(
+    usernameInput.value
+  );
 
-    const email =
-      emailInput.value.trim();
-
-    const password =
-      passwordInput.value;
+  const password =
+  passwordInput.value;
 
 
-    if(!name){
+  /* نام */
 
-      showMessage(
-        "نام را وارد کن.",
-        true
-      );
-
-      return;
-    }
-
-
-    if(!username){
-
-      showMessage(
-        "نام کاربری را وارد کن.",
-        true
-      );
-
-      return;
-    }
-
-
-    if(!email){
-
-      showMessage(
-        "ایمیل را وارد کن.",
-        true
-      );
-
-      return;
-    }
-
-
-    if(password.length < 6){
-
-      showMessage(
-        "رمز عبور باید حداقل ۶ کاراکتر باشد.",
-        true
-      );
-
-      return;
-    }
-
-
-    loginButton.disabled = true;
+  if(!displayName){
 
     showMessage(
-      "در حال ورود..."
+      "نام را وارد کن.",
+      true
+    );
+
+    displayNameInput.focus();
+
+    return;
+
+  }
+
+
+  /* نام کاربری */
+
+  if(!username){
+
+    showMessage(
+      "نام کاربری را وارد کن.",
+      true
+    );
+
+    usernameInput.focus();
+
+    return;
+
+  }
+
+
+  if(username.length < 3){
+
+    showMessage(
+      "نام کاربری باید حداقل ۳ کاراکتر باشد.",
+      true
+    );
+
+    usernameInput.focus();
+
+    return;
+
+  }
+
+
+  /* رمز */
+
+  if(password.length < 6){
+
+    showMessage(
+      "رمز عبور باید حداقل ۶ کاراکتر باشد.",
+      true
+    );
+
+    passwordInput.focus();
+
+    return;
+
+  }
+
+
+  loginButton.disabled = true;
+
+  loginButton.textContent =
+  "در حال بررسی...";
+
+  showMessage(
+    "در حال ورود..."
+  );
+
+
+  try{
+
+    /*
+     * ایمیل داخلی فقط برای Supabase Auth است.
+     * کاربر آن را نمی‌بیند.
+     */
+
+    const internalEmail =
+    makeInternalEmail(username);
+
+
+    /*
+     * اول بررسی می‌کنیم این نام کاربری
+     * قبلاً در profiles ثبت شده یا نه.
+     */
+
+    const exists =
+    await usernameExists(
+      username
     );
 
 
-    try{
+    /* =====================================
+       حساب موجود است → ورود
+    ===================================== */
 
-      let {
+    if(exists){
+
+      const {
         data,
         error
       } =
-        await supabaseClient.auth.signInWithPassword({
+      await supabaseClient.auth
+        .signInWithPassword({
 
-          email:email,
+          email:internalEmail,
 
           password:password
 
@@ -544,37 +622,14 @@ loginButton.addEventListener(
 
       if(error){
 
-        const signUp =
-          await supabaseClient.auth.signUp({
+        console.error(
+          "Login error:",
+          error
+        );
 
-            email:email,
-
-            password:password
-
-          });
-
-
-        if(signUp.error){
-
-          throw signUp.error;
-
-        }
-
-
-        data =
-          signUp.data;
-
-
-        if(!data.session){
-
-          showMessage(
-            "حساب ساخته شد. اگر تأیید ایمیل فعال باشد، ایمیل خود را تأیید کن و سپس وارد شو."
-          );
-
-          loginButton.disabled = false;
-
-          return;
-        }
+        throw new Error(
+          "نام کاربری یا رمز عبور اشتباه است."
+        );
 
       }
 
@@ -582,7 +637,7 @@ loginButton.addEventListener(
       if(!data.user){
 
         throw new Error(
-          "کاربر دریافت نشد."
+          "حساب کاربر پیدا نشد."
         );
 
       }
@@ -594,7 +649,7 @@ loginButton.addEventListener(
 
 
       showMessage(
-        "ورود موفق بود؛ در حال انتقال..."
+        "ورود موفق بود؛ در حال ورود به LA3..."
       );
 
 
@@ -602,33 +657,141 @@ loginButton.addEventListener(
         function(){
 
           window.location.href =
-            "index.html";
+          "index.html";
 
         },
         500
       );
 
+
+      return;
+
     }
-    catch(error){
 
-      console.error(error);
 
-      showMessage(
-        error.message ||
-        "خطایی رخ داد.",
-        true
+    /* =====================================
+       حساب وجود ندارد → ساخت حساب
+    ===================================== */
+
+    showMessage(
+      "در حال ساخت حساب..."
+    );
+
+
+    const {
+      data,
+      error
+    } =
+    await supabaseClient.auth
+      .signUp({
+
+        email:internalEmail,
+
+        password:password
+
+      });
+
+
+    if(error){
+
+      console.error(
+        "Signup error:",
+        error
       );
 
-      loginButton.disabled = false;
+      throw new Error(
+        error.message ||
+        "ساخت حساب انجام نشد."
+      );
 
     }
 
+
+    if(!data.user){
+
+      throw new Error(
+        "ساخت حساب انجام نشد."
+      );
+
+    }
+
+
+    /*
+     * اگر Supabase تأیید ایمیل را بخواهد،
+     * چون ایمیل داخلی قابل دریافت توسط کاربر نیست،
+     * ورود نمی‌تواند ادامه پیدا کند.
+     */
+
+    if(!data.session){
+
+      throw new Error(
+        "تأیید ایمیل در Supabase فعال است. برای ورود بدون ایمیل باید Email Confirmation را در تنظیمات Auth غیرفعال کنیم."
+      );
+
+    }
+
+
+    /*
+     * ذخیره پروفایل
+     */
+
+    await saveProfile(
+      data.user
+    );
+
+
+    showMessage(
+      "حساب با موفقیت ساخته شد؛ در حال ورود..."
+    );
+
+
+    setTimeout(
+      function(){
+
+        window.location.href =
+        "index.html";
+
+      },
+      700
+    );
+
   }
+  catch(error){
+
+    console.error(
+      "LA3 AUTH ERROR:",
+      error
+    );
+
+    showMessage(
+      error.message ||
+      "خطایی رخ داد.",
+      true
+    );
+
+    loginButton.disabled =
+    false;
+
+    loginButton.textContent =
+    "ورود / ساخت حساب";
+
+  }
+
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+loginButton.addEventListener(
+  "click",
+  loginOrCreate
 );
 
 
 /* =========================================
-   ENTER KEY
+   ENTER
 ========================================= */
 
 passwordInput.addEventListener(
@@ -639,7 +802,7 @@ passwordInput.addEventListener(
 
       event.preventDefault();
 
-      loginButton.click();
+      loginOrCreate();
 
     }
 
@@ -648,21 +811,34 @@ passwordInput.addEventListener(
 
 
 /* =========================================
-   CHECK EXISTING SESSION
+   EXISTING SESSION
 ========================================= */
 
 async function checkSession(){
 
-  const {
-    data
-  } =
-    await supabaseClient.auth.getSession();
+  try{
+
+    const {
+      data
+    } =
+    await supabaseClient.auth
+      .getSession();
 
 
-  if(data.session){
+    if(data.session){
 
-    window.location.href =
+      window.location.href =
       "index.html";
+
+    }
+
+  }
+  catch(error){
+
+    console.error(
+      "Session error:",
+      error
+    );
 
   }
 
@@ -676,4 +852,3 @@ checkSession();
 </body>
 </html>
 ```
-  
