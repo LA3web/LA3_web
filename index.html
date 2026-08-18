@@ -2,984 +2,319 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LA3</title>
-
 <style>
-*{
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at top,#10233d 0,#050505 42%,#000 100%);
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-}
-
-button{
-  font-family:inherit;
-}
-
-.container{
-  max-width:500px;
-  margin:auto;
-  padding:18px 16px 110px;
-}
-
-/* ---------- Header ---------- */
-
-.header{
-  text-align:center;
-  padding:8px 0 20px;
-}
-
-.logo{
-  font-size:52px;
-  font-weight:900;
-  color:#38bdf8;
-  letter-spacing:3px;
-  text-shadow:0 0 25px #2563eb;
-}
-
-.welcome{
-  color:#8fa3b8;
-  font-size:13px;
-  margin-top:4px;
-}
-
-/* ---------- Cards ---------- */
-
-.card{
-  background:rgba(17,24,39,.94);
-  border:1px solid #1e5fa8;
-  border-radius:25px;
-  padding:18px;
-  margin-top:15px;
-  box-shadow:0 8px 30px rgba(0,0,0,.28);
-}
-
-.card-title{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:12px;
-}
-
-.title{
-  color:#60a5fa;
-  font-size:19px;
-  font-weight:bold;
-}
-
-.open{
-  color:#38bdf8;
-  font-size:12px;
-}
-
-/* ---------- Profile ---------- */
-
-.profile{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.avatar{
-  width:64px;
-  height:64px;
-  border-radius:50%;
-  background:
-    linear-gradient(135deg,#2563eb,#38bdf8);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:25px;
-  overflow:hidden;
-  flex-shrink:0;
-}
-
-.avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.profile h3{
-  margin:0 0 5px;
-  font-size:17px;
-}
-
-.profile p{
-  margin:0;
-  color:#8495a8;
-  font-size:13px;
-}
-
-.tick{
-  color:#38bdf8;
-  font-size:17px;
-}
-
-/* ---------- Official Channel ---------- */
-
-.channel-head{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.channel-avatar{
-  width:52px;
-  height:52px;
-  border-radius:17px;
-  background:#2563eb;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:23px;
-}
-
-.channel-name{
-  font-weight:bold;
-}
-
-.channel-name small{
-  display:block;
-  color:#38bdf8;
-  margin-top:4px;
-}
-
-.post{
-  margin-top:15px;
-  padding:14px;
-  background:#0a111b;
-  border-radius:18px;
-  border:1px solid #1b344e;
-}
-
-.post-text{
-  color:#d7e3ef;
-  line-height:1.9;
-  font-size:14px;
-}
-
-.post-time{
-  color:#627589;
-  font-size:11px;
-  margin-top:8px;
-}
-
-/* ---------- Buttons ---------- */
-
-.action{
-  width:100%;
-  border:0;
-  border-radius:17px;
-  padding:13px;
-  margin-top:12px;
-  background:#1d4ed8;
-  color:#fff;
-  font-size:14px;
-  cursor:pointer;
-}
-
-.action:hover{
-  background:#2563eb;
-}
-
-.secondary{
-  background:#172235;
-  border:1px solid #294765;
-}
-
-.secondary:hover{
-  background:#1e3149;
-}
-
-/* ---------- Grid ---------- */
-
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
-
-.small-card{
-  background:#0b1320;
-  border:1px solid #203a55;
-  border-radius:20px;
-  padding:16px;
-  min-height:120px;
-}
-
-.small-icon{
-  font-size:28px;
-  margin-bottom:10px;
-}
-
-.small-title{
-  font-weight:bold;
-  color:#9ecbff;
-}
-
-.small-text{
-  color:#71859a;
-  font-size:11px;
-  margin-top:7px;
-  line-height:1.6;
-}
-
-/* ---------- Settings ---------- */
-
-.setting{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:13px;
-  background:#0b1320;
-  border-radius:17px;
-  margin-top:9px;
-  cursor:pointer;
-}
-
-.setting-icon{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  background:#173d6a;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.setting-text{
-  flex:1;
-}
-
-.setting-title{
-  font-size:14px;
-}
-
-.setting-sub{
-  color:#65798d;
-  font-size:11px;
-  margin-top:4px;
-}
-
-/* ---------- Bottom Navigation ---------- */
-
-.bottom{
-  position:fixed;
-  z-index:100;
-
-  bottom:12px;
-  left:12px;
-  right:12px;
-
-  max-width:500px;
-  margin:auto;
-
-  background:rgba(12,18,29,.97);
-
-  border:1px solid #2563a5;
-  border-radius:28px;
-
-  display:flex;
-  justify-content:space-around;
-
-  padding:10px 5px;
-
-  box-shadow:0 12px 35px rgba(0,0,0,.5);
-}
-
-.nav-item{
-  flex:1;
-  text-align:center;
-  color:#7189a2;
-  font-size:11px;
-  padding:8px 2px;
-  cursor:pointer;
-  border-radius:18px;
-}
-
-.nav-item.active{
-  color:#38bdf8;
-  background:#102b49;
-}
-
-.nav-icon{
-  display:block;
-  font-size:20px;
-  margin-bottom:3px;
-}
-
-/* ---------- Sections ---------- */
-
-.section{
-  scroll-margin-top:15px;
-}
-
-/* ---------- Mobile ---------- */
-
-@media(max-width:380px){
-
-  .logo{
-    font-size:45px;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .bottom{
-    left:8px;
-    right:8px;
-  }
+*{box-sizing:border-box}
+body{margin:0;background:#050505;color:#fff;font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+.hidden{display:none!important}
+.glow{color:#ff1744;text-shadow:0 0 8px #ff1744,0 0 22px #ff1744}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 50% 30%,#151515,#000 70%)}
+.login-card{width:min(430px,94vw);padding:28px 22px;border:2px solid #00aaff;border-radius:22px;box-shadow:0 0 12px #00aaff,0 0 35px #004dff55;background:#080808}
+.logo{text-align:center;font-size:48px;font-weight:900;letter-spacing:5px;color:#ff1744;text-shadow:0 0 8px #ff1744,0 0 28px #ff1744;margin:0 0 8px}
+.subtitle{text-align:center;color:#aaa;margin-bottom:28px}
+.field{margin:15px 0}
+.field label{display:block;margin-bottom:7px;color:#ddd;font-size:14px}
+.field input{width:100%;padding:14px;border-radius:12px;border:1px solid #00aaff;background:#050505;color:#fff;outline:none;box-shadow:inset 0 0 10px #00aaff22,0 0 8px #00aaff33}
+.field input:focus{box-shadow:0 0 12px #00aaff}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:#ff1744;color:#fff;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 12px #ff1744;margin-top:10px}
+.btn:hover{filter:brightness(1.15)}
+.notice{text-align:center;color:#ff607b;min-height:22px;margin-top:12px;font-size:13px}
+
+.app{min-height:100vh}
+header{position:sticky;top:0;z-index:10;background:#050505ee;border-bottom:1px solid #ff174455;backdrop-filter:blur(10px);padding:14px}
+.header-inner{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:30px;font-weight:900;color:#ff1744;text-shadow:0 0 10px #ff1744}
+.userbox{font-size:13px;color:#bbb}
+.admin-btn{width:auto;padding:9px 14px;margin:0;font-size:13px}
+
+main{max-width:1000px;margin:auto;padding:18px}
+.ad-box{border:1px solid #00aaff;border-radius:18px;overflow:hidden;box-shadow:0 0 18px #00aaff44;background:#080808}
+.ad-slide{display:none;position:relative;height:210px}
+.ad-slide.active{display:block}
+.ad-slide img{width:100%;height:100%;object-fit:cover}
+.ad-caption{position:absolute;bottom:0;right:0;left:0;padding:14px;background:linear-gradient(transparent,#000d);font-weight:bold}
+.dots{text-align:center;padding:9px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin:0 4px}
+.dot.active{background:#00aaff;box-shadow:0 0 8px #00aaff}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.panel{background:#080808;border:1px solid #ff174466;border-radius:18px;padding:16px;box-shadow:0 0 18px #ff174422}
+.panel h2{margin:0 0 15px;color:#00aaff;text-shadow:0 0 8px #00aaff;font-size:20px}
+.compose textarea{width:100%;min-height:85px;resize:vertical;border:1px solid #333;background:#030303;color:#fff;border-radius:12px;padding:12px;outline:none}
+.compose-actions{display:flex;gap:8px;margin-top:8px}
+.small-btn{padding:10px 13px;border-radius:10px;border:1px solid #00aaff;background:#071019;color:#fff;cursor:pointer}
+.feed{max-height:440px;overflow:auto;margin-top:12px}
+.item{border-top:1px solid #222;padding:13px 4px}
+.item:first-child{border-top:0}
+.meta{font-size:12px;color:#888;margin-bottom:7px}
+.verified{color:#00aaff;text-shadow:0 0 7px #00aaff}
+.message{white-space:pre-wrap;line-height:1.8}
+.empty{text-align:center;color:#666;padding:25px}
+
+.admin-page{padding:18px}
+.admin-panel{max-width:1000px;margin:auto;border:1px solid #00aaff;border-radius:18px;padding:18px;box-shadow:0 0 20px #00aaff33}
+.admin-list{margin-top:15px}
+.user-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #222}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.danger{border-color:#ff1744;background:#16050a}
+.green{border-color:#00e676;background:#04150c}
+.back{margin-bottom:15px}
+
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}
+ .header-inner{flex-wrap:wrap}
+ .brand{font-size:25px}
+ .ad-slide{height:170px}
 }
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-  <!-- HEADER -->
-  <header class="header">
+<section id="loginPage" class="login-page">
+  <div class="login-card">
     <div class="logo">LA3</div>
-    <div class="welcome">
-      شبکه اجتماعی LA3
-    </div>
-  </header>
+    <div class="subtitle">به سامانه LA3 خوش آمدید</div>
 
-
-  <!-- USER PROFILE -->
-  <section class="card section" id="profile">
-
-    <div class="profile">
-
-      <div class="avatar" id="userAvatar">
-        👤
-      </div>
-
-      <div>
-
-        <h3>
-          <span id="userName">
-            کاربر LA3
-          </span>
-
-          <span class="tick" id="userTick">
-            <!-- تیک در صورت تأیید نمایش داده می‌شود -->
-          </span>
-        </h3>
-
-        <p id="userUsername">
-          @username
-        </p>
-
-      </div>
-
+    <div class="field">
+      <label for="name">نام خود را وارد کنید</label>
+      <input id="name" type="text" maxlength="40" placeholder="نام شما">
     </div>
 
-  </section>
-
-
-  <!-- OFFICIAL CHANNEL -->
-  <section class="card section" id="official">
-
-    <div class="card-title">
-
-      <div class="title">
-        📢 کانال رسمی
-      </div>
-
-      <div class="open">
-        رسمی ✓
-      </div>
-
+    <div class="field">
+      <label for="username">نام کاربری</label>
+      <input id="username" type="text" maxlength="30" placeholder="@username">
     </div>
 
-
-    <div class="channel-head">
-
-      <div class="channel-avatar">
-        📢
-      </div>
-
-      <div>
-
-        <div class="channel-name">
-          کانال رسمی LA3
-          <span class="tick">✔</span>
-        </div>
-
-        <small>
-          @LA3Official
-        </small>
-
-      </div>
-
+    <div class="field" id="ownerPasswordBox">
+      <label for="ownerPassword">رمز مالک — در نسخه نهایی سمت سرور بررسی می‌شود</label>
+      <input id="ownerPassword" type="password" maxlength="80" placeholder="رمز مالک">
     </div>
 
+    <button class="btn" onclick="registerUser()">ثبت</button>
+    <div id="loginNotice" class="notice"></div>
+  </div>
+</section>
 
-    <div class="post">
+<section id="app" class="app hidden">
+<header>
+  <div class="header-inner">
+    <div class="brand">LA3</div>
+    <div class="userbox" id="currentUser"></div>
+    <button id="adminButton" class="btn admin-btn hidden" onclick="showAdmin()">مدیریت</button>
+  </div>
+</header>
 
-      <div class="post-text">
-        به کانال رسمی LA3 خوش آمدید 🌐
-        <br>
-        اخبار و اطلاعیه‌های رسمی در اینجا منتشر می‌شوند.
-      </div>
-
-      <div class="post-time">
-        آخرین پیام
-      </div>
-
+<main>
+  <div class="ad-box">
+    <div class="ad-slide active">
+      <img src="https://picsum.photos/1200/500?random=31" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۱ — تصویر تبلیغاتی خودت را اینجا قرار بده</div>
     </div>
-
-
-    <button
-      class="action"
-      onclick="openOfficialChannel()"
-    >
-      ورود به کانال رسمی
-    </button>
-
-  </section>
-
-
-  <!-- MAIN FEATURES -->
-  <section class="card section" id="features">
-
-    <div class="card-title">
-
-      <div class="title">
-        امکانات LA3
-      </div>
-
+    <div class="ad-slide">
+      <img src="https://picsum.photos/1200/500?random=32" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۲</div>
     </div>
-
-
-    <div class="grid">
-
-      <!-- Tweet -->
-
-      <div
-        class="small-card"
-        onclick="openTweets()"
-        style="cursor:pointer"
-      >
-
-        <div class="small-icon">
-          📝
-        </div>
-
-        <div class="small-title">
-          Tweet
-        </div>
-
-        <div class="small-text">
-          توییت‌های منتشرشده توسط مالک
-        </div>
-
-      </div>
-
-
-      <!-- LAC -->
-
-      <div
-        class="small-card"
-        onclick="openLAC()"
-        style="cursor:pointer"
-      >
-
-        <div class="small-icon">
-          📺
-        </div>
-
-        <div class="small-title">
-          LAC
-        </div>
-
-        <div class="small-text">
-          کانال‌های ایجادشده در LA3
-        </div>
-
-      </div>
-
-
-      <!-- Chat -->
-
-      <div
-        class="small-card"
-        onclick="openChat()"
-        style="cursor:pointer"
-      >
-
-        <div class="small-icon">
-          💬
-        </div>
-
-        <div class="small-title">
-          چت‌روم
-        </div>
-
-        <div class="small-text">
-          گفت‌وگوی کاربران با یکدیگر
-        </div>
-
-      </div>
-
-
-      <!-- Ads -->
-
-      <div
-        class="small-card"
-        onclick="openAds()"
-        style="cursor:pointer"
-      >
-
-        <div class="small-icon">
-          📢
-        </div>
-
-        <div class="small-title">
-          تبلیغات
-        </div>
-
-        <div class="small-text">
-          مشاهده تبلیغات و بنرها
-        </div>
-
-      </div>
-
+    <div class="ad-slide">
+      <img src="https://picsum.photos/1200/500?random=33" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۳</div>
     </div>
-
-  </section>
-
-
-  <!-- SETTINGS -->
-  <section class="card section" id="settings">
-
-    <div class="card-title">
-
-      <div class="title">
-        ⚙️ تنظیمات
-      </div>
-
+    <div class="dots">
+      <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
     </div>
-
-
-    <div
-      class="setting"
-      onclick="openProfile()"
-    >
-
-      <div class="setting-icon">
-        👤
-      </div>
-
-      <div class="setting-text">
-
-        <div class="setting-title">
-          پروفایل من
-        </div>
-
-        <div class="setting-sub">
-          نام، نام کاربری و عکس پروفایل
-        </div>
-
-      </div>
-
-      <div>
-        ›
-      </div>
-
-    </div>
-
-
-    <div
-      class="setting"
-      onclick="openOfficialChannel()"
-    >
-
-      <div class="setting-icon">
-        📢
-      </div>
-
-      <div class="setting-text">
-
-        <div class="setting-title">
-          کانال رسمی
-        </div>
-
-        <div class="setting-sub">
-          اطلاعیه‌های رسمی LA3
-        </div>
-
-      </div>
-
-      <div>
-        ›
-      </div>
-
-    </div>
-
-
-    <div
-      class="setting"
-      onclick="openLAC()"
-    >
-
-      <div class="setting-icon">
-        📺
-      </div>
-
-      <div class="setting-text">
-
-        <div class="setting-title">
-          کانال‌های LAC
-        </div>
-
-        <div class="setting-sub">
-          کانال‌های ایجادشده توسط مالک
-        </div>
-
-      </div>
-
-      <div>
-        ›
-      </div>
-
-    </div>
-
-
-    <div
-      class="setting"
-      onclick="openAds()"
-    >
-
-      <div class="setting-icon">
-        📣
-      </div>
-
-      <div class="setting-text">
-
-        <div class="setting-title">
-          تبلیغات
-        </div>
-
-        <div class="setting-sub">
-          مدیریت و مشاهده تبلیغات
-        </div>
-
-      </div>
-
-      <div>
-        ›
-      </div>
-
-    </div>
-
-  </section>
-
-</div>
-
-
-<!-- BOTTOM NAVIGATION -->
-
-<nav class="bottom">
-
-  <div
-    class="nav-item active"
-    onclick="goHome(this)"
-  >
-    <span class="nav-icon">🏠</span>
-    خانه
   </div>
 
+  <div class="grid">
+    <section class="panel">
+      <h2>🐦 توییت‌ها</h2>
+      <div class="compose">
+        <textarea id="tweetInput" placeholder="چه خبر؟"></textarea>
+        <div class="compose-actions">
+          <button class="small-btn" onclick="addTweet()">ارسال</button>
+          <button class="small-btn" onclick="fakeImageTweet()">📷 عکس</button>
+        </div>
+      </div>
+      <div id="tweetFeed" class="feed"></div>
+    </section>
 
-  <div
-    class="nav-item"
-    onclick="openTweets(this)"
-  >
-    <span class="nav-icon">📝</span>
-    Tweet
+    <section class="panel">
+      <h2>💬 چتروم</h2>
+      <div class="compose">
+        <textarea id="chatInput" placeholder="پیام خود را بنویسید..."></textarea>
+        <div class="compose-actions">
+          <button class="small-btn" onclick="addChat()">ارسال پیام</button>
+        </div>
+      </div>
+      <div id="chatFeed" class="feed"></div>
+    </section>
   </div>
+</main>
+</section>
 
-
-  <div
-    class="nav-item"
-    onclick="openLAC(this)"
-  >
-    <span class="nav-icon">📺</span>
-    LAC
+<section id="adminPage" class="admin-page hidden">
+  <div class="admin-panel">
+    <button class="small-btn back" onclick="backToApp()">← بازگشت</button>
+    <h2 class="glow">پنل مدیریت LA3</h2>
+    <p style="color:#aaa">این بخش در نسخه آزمایشی است. در مرحله Supabase، اطلاعات واقعی کاربران اینجا نمایش داده خواهد شد.</p>
+    <div id="adminUsers" class="admin-list"></div>
   </div>
-
-
-  <div
-    class="nav-item"
-    onclick="openChat(this)"
-  >
-    <span class="nav-icon">💬</span>
-    چت
-  </div>
-
-
-  <div
-    class="nav-item"
-    onclick="openSettings(this)"
-  >
-    <span class="nav-icon">⚙️</span>
-    تنظیمات
-  </div>
-
-</nav>
-
+</section>
 
 <script>
+const OWNER_PASSWORD = ""; // عمداً خالی است؛ رمز واقعی را در HTML قرار نده.
+let currentUser = null;
 
-/*
-========================================
-اطلاعات کاربر
-========================================
-*/
+let demoUsers = [
+  {name:"کاربر نمونه", username:"sample", verified:true, banned:false},
+  {name:"علی", username:"ali", verified:false, banned:false}
+];
 
-function loadUser(){
+let tweets = [
+  {name:"کاربر نمونه",username:"sample",verified:true,text:"به LA3 خوش آمدید! 👋"}
+];
 
-  const name =
-    localStorage.getItem("la3_name");
+let chats = [
+  {name:"کاربر نمونه",username:"sample",verified:true,text:"سلام به همه 🌹"}
+];
 
-  const username =
-    localStorage.getItem("la3_username");
+function clean(s){
+  const d=document.createElement("div");
+  d.textContent=s;
+  return d.innerHTML;
+}
 
-  const avatar =
-    localStorage.getItem("la3_avatar");
+function registerUser(){
+  const name=document.getElementById("name").value.trim();
+  const username=document.getElementById("username").value.trim().replace(/^@/,"");
+  const password=document.getElementById("ownerPassword").value;
 
-
-  if(name){
-
-    document.getElementById(
-      "userName"
-    ).textContent = name;
-
+  if(!name || !username){
+    document.getElementById("loginNotice").textContent="لطفاً نام و نام کاربری را وارد کنید.";
+    return;
   }
 
+  // فقط برای تست رابط کاربری؛ احراز مالک واقعی بعداً در Supabase انجام می‌شود.
+  const isOwner = OWNER_PASSWORD !== "" && password === OWNER_PASSWORD;
 
-  if(username){
+  currentUser={name,username,verified:isOwner,isOwner};
+  const existing=demoUsers.find(u=>u.username.toLowerCase()===username.toLowerCase());
 
-    document.getElementById(
-      "userUsername"
-    ).textContent =
-      "@" + username.replace(/^@/,"");
-
+  if(existing && existing.banned){
+    document.getElementById("loginNotice").textContent="این کاربر مسدود شده است.";
+    return;
   }
 
+  if(!existing) demoUsers.push({name,username,verified:isOwner,banned:false});
 
-  if(avatar){
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("currentUser").textContent="@"+username+" — "+name;
+  document.getElementById("adminButton").classList.toggle("hidden",!isOwner);
 
-    const box =
-      document.getElementById(
-        "userAvatar"
-      );
-
-    box.innerHTML =
-      `<img src="${avatar}" alt="پروفایل">`;
-
-  }
-
+  renderTweets();
+  renderChats();
 }
 
-
-/*
-========================================
-حرکت به بخش
-========================================
-*/
-
-function scrollToSection(id){
-
-  const section =
-    document.getElementById(id);
-
-  if(section){
-
-    section.scrollIntoView({
-      behavior:"smooth"
-    });
-
-  }
-
+function addTweet(){
+  if(!currentUser)return;
+  const input=document.getElementById("tweetInput");
+  const text=input.value.trim();
+  if(!text)return;
+  tweets.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+  input.value="";
+  renderTweets();
 }
 
-
-/*
-========================================
-خانه
-========================================
-*/
-
-function goHome(item){
-
-  setActive(item);
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+function fakeImageTweet(){
+  alert("آپلود عکس در مرحله اتصال به Supabase Storage فعال می‌شود.");
 }
 
-
-/*
-========================================
-تنظیمات
-========================================
-*/
-
-function openSettings(item){
-
-  setActive(item);
-
-  scrollToSection("settings");
-
+function addChat(){
+  if(!currentUser)return;
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text)return;
+  chats.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+  input.value="";
+  renderChats();
 }
 
-
-/*
-========================================
-پروفایل
-========================================
-*/
-
-function openProfile(){
-
-  scrollToSection("profile");
-
+function renderTweets(){
+  const feed=document.getElementById("tweetFeed");
+  if(!tweets.length){feed.innerHTML='<div class="empty">هنوز توییتی وجود ندارد.</div>';return;}
+  feed.innerHTML=tweets.map(t=>`
+    <div class="item">
+      <div class="meta"><b>${clean(t.name)}</b> @${clean(t.username)}
+      ${t.verified?'<span class="verified"> ✓ تیک آبی</span>':''}</div>
+      <div class="message">${clean(t.text)}</div>
+    </div>`).join("");
+  feed.scrollTop=feed.scrollHeight;
 }
 
-
-/*
-========================================
-کانال رسمی
-========================================
-*/
-
-function openOfficialChannel(){
-
-  alert(
-    "کانال رسمی LA3 در مرحله بعد به صورت کامل متصل می‌شود."
-  );
-
+function renderChats(){
+  const feed=document.getElementById("chatFeed");
+  if(!chats.length){feed.innerHTML='<div class="empty">هنوز پیامی وجود ندارد.</div>';return;}
+  feed.innerHTML=chats.map(t=>`
+    <div class="item">
+      <div class="meta"><b>${clean(t.name)}</b> @${clean(t.username)}
+      ${t.verified?'<span class="verified"> ✓</span>':''}</div>
+      <div class="message">${clean(t.text)}</div>
+    </div>`).join("");
+  feed.scrollTop=feed.scrollHeight;
 }
 
-
-/*
-========================================
-Tweet
-========================================
-*/
-
-function openTweets(item){
-
-  setActive(item);
-
-  alert(
-    "بخش Tweet در مرحله بعد به Supabase متصل می‌شود."
-  );
-
+function showAdmin(){
+  if(!currentUser?.isOwner)return;
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("adminPage").classList.remove("hidden");
+  renderAdmin();
 }
 
-
-/*
-========================================
-LAC
-========================================
-*/
-
-function openLAC(item){
-
-  setActive(item);
-
-  window.location.href =
-    "lac.html";
-
+function backToApp(){
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 }
 
-
-/*
-========================================
-چت
-========================================
-*/
-
-function openChat(item){
-
-  setActive(item);
-
-  alert(
-    "چت‌روم در مرحله بعد به صورت زنده فعال می‌شود."
-  );
-
+function renderAdmin(){
+  document.getElementById("adminUsers").innerHTML=demoUsers.map((u,i)=>`
+    <div class="user-row">
+      <div>
+        <b>${clean(u.name)}</b> @${clean(u.username)}
+        ${u.verified?'<span class="verified"> ✓</span>':''}
+        ${u.banned?'<span style="color:#ff1744"> — مسدود</span>':''}
+      </div>
+      <div class="row-actions">
+        <button class="small-btn" onclick="toggleVerified(${i})">${u.verified?'برداشتن تیک':'تیک آبی'}</button>
+        <button class="small-btn ${u.banned?'green':'danger'}" onclick="toggleBan(${i})">${u.banned?'برگرداندن':'حذف کاربر'}</button>
+      </div>
+    </div>`).join("");
 }
 
-
-/*
-========================================
-تبلیغات
-========================================
-*/
-
-function openAds(){
-
-  alert(
-    "بخش تبلیغات در مرحله بعد به Supabase متصل می‌شود."
-  );
-
+function toggleVerified(i){
+  demoUsers[i].verified=!demoUsers[i].verified;
+  renderAdmin();
 }
 
-
-/*
-========================================
-فعال کردن دکمه پایین
-========================================
-*/
-
-function setActive(item){
-
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(
-      element =>
-        element.classList.remove("active")
-    );
-
-
-  if(item){
-
-    item.classList.add("active");
-
-  }
-
+function toggleBan(i){
+  demoUsers[i].banned=!demoUsers[i].banned;
+  renderAdmin();
 }
 
+let slide=0;
+setInterval(()=>{
+  const slides=document.querySelectorAll(".ad-slide");
+  const dots=document.querySelectorAll(".dot");
+  if(!slides.length)return;
+  slides[slide].classList.remove("active");
+  dots[slide].classList.remove("active");
+  slide=(slide+1)%slides.length;
+  slides[slide].classList.add("active");
+  dots[slide].classList.add("active");
+},4000);
 
-/*
-========================================
-شروع
-========================================
-*/
-
-loadUser();
-
+renderTweets();
+renderChats();
 </script>
-
 </body>
-  </html>
+      </html>
