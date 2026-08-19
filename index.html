@@ -29,8 +29,24 @@ main{max-width:1000px;margin:auto;padding:18px}.ad{height:200px;border:1px solid
 <header><div class="head"><div class="brand">LA3</div><div id="user"></div></div></header>
 <main><div id="ads" class="ad"></div><div class="grid">
 <section class="panel"><h2>🐦 توییت‌ها</h2><textarea id="tweetText" placeholder="چه خبر؟"></textarea><div class="actions"><button id="tweetBtn" class="btn small">ارسال</button></div><div id="tweets" class="feed"></div></section>
-<section class="panel"><h2>💬 چتروم</h2><textarea id="chatText" placeholder="پیام خود را بنویسید..."></textarea><div class="actions"><button id="chatBtn" class="btn small">ارسال</button></div><div id="chat" class="feed"></div></section>
+<section class="panel">
+<h2>💬 چتروم</h2>
+<p style="color:#aaa;line-height:1.8">برای ورود به چتروم و گفتگو با کاربران، روی دکمه زیر بزنید.</p>
+<button class="btn full" onclick="openChatroom()">ورود به چتروم</button>
+</section>
 </div></main></section>
+
+<section id="chatroomPage" class="hidden" style="min-height:100vh;background:#030303">
+<header><div class="head"><button class="btn small" onclick="closeChatroom()">← بازگشت</button><div class="brand">LA3 CHAT</div><div></div></div></header>
+<main>
+<div class="panel" style="max-width:850px;margin:auto">
+<h2>💬 چتروم LA3</h2>
+<div id="chat" class="feed" style="height:55vh;max-height:none"></div>
+<textarea id="chatText" placeholder="پیام خود را بنویسید..."></textarea>
+<div class="actions"><button id="chatBtn" class="btn small">ارسال پیام</button></div>
+</div>
+</main>
+</section>
 
 <script>
 const URL="https://ibqhyqzolkzzpziocfvp.supabase.co";
@@ -74,7 +90,24 @@ async function loadAll(){
  renderTweets(tw.data||[]);renderChat(ch.data||[]);renderAds(ad.data||[]);
 }
 document.getElementById("tweetBtn").onclick=async()=>{let t=document.getElementById("tweetText"),v=t.value.trim();if(!v)return;let r=await db.from("tweets").insert({author_id:me.id,content:v});if(r.error)alert(r.error.message);else t.value=""};
-document.getElementById("chatBtn").onclick=async()=>{let t=document.getElementById("chatText"),v=t.value.trim();if(!v)return;let r=await db.from("chat_messages").insert({author_id:me.id,content:v});if(r.error)alert(r.error.message);else t.value=""};
+document.getElementById("chatBtn").onclick=async()=>{
+ let t=document.getElementById("chatText"),v=t.value.trim();if(!v)return;
+ let r=await db.from("chat_messages").insert({author_id:me.id,content:v});
+ if(r.error)alert(r.error.message);else{t.value="";renderChatroom()}
+};
+function openChatroom(){
+ document.getElementById("app").classList.add("hidden");
+ document.getElementById("chatroomPage").classList.remove("hidden");
+ renderChatroom();
+}
+function closeChatroom(){
+ document.getElementById("chatroomPage").classList.add("hidden");
+ document.getElementById("app").classList.remove("hidden");
+}
+function renderChatroom(){
+ const el=document.getElementById("chat");
+ db.from("chat_messages").select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)").order("created_at",{ascending:true}).then(r=>renderChat(r.data||[]));
+}
 function subscribe(){db.channel("la3-live").on("postgres_changes",{event:"*",schema:"public",table:"tweets"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"ads"},loadAll).subscribe()}
 </script>
 </body></html>
