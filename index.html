@@ -139,16 +139,27 @@ main{max-width:1000px;margin:auto;padding:18px}
 
     <section class="panel">
       <h2>💬 چتروم</h2>
-      <div class="compose">
-        <textarea id="chatInput" placeholder="پیام خود را بنویسید..."></textarea>
-        <div class="compose-actions">
-          <button class="small-btn" onclick="addChat()">ارسال پیام</button>
-        </div>
+      <div style="color:#aaa;line-height:1.9;margin-bottom:12px">
+        برای گفتگو با کاربران وارد صفحه اختصاصی چتروم شوید.
       </div>
-      <div id="chatFeed" class="feed"></div>
+      <button class="btn" onclick="openChatroom()">ورود به چتروم</button>
     </section>
   </div>
 </main>
+</section>
+
+<section id="chatroomPage" class="admin-page hidden">
+  <div class="admin-panel" style="max-width:850px">
+    <button class="small-btn back" onclick="closeChatroom()">← بازگشت</button>
+    <h2 class="glow">💬 چتروم LA3</h2>
+    <div id="chatFeed" class="feed" style="max-height:55vh;margin-bottom:14px"></div>
+    <div class="compose">
+      <textarea id="chatInput" placeholder="پیام خود را بنویسید..."></textarea>
+      <div class="compose-actions">
+        <button class="small-btn" onclick="addChat()">ارسال پیام</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="adminPage" class="admin-page hidden">
@@ -262,6 +273,18 @@ function renderChats(){
       <div class="message">${clean(t.text)}</div>
     </div>`).join("");
   feed.scrollTop=feed.scrollHeight;
+}
+
+function openChatroom(){
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("chatroomPage").classList.remove("hidden");
+  renderChats();
+}
+
+function closeChatroom(){
+  document.getElementById("chatroomPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
 }
 
 function showAdmin(){
