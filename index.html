@@ -1,113 +1,320 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LA3</title>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#030303;color:#fff;font-family:Tahoma,Arial,sans-serif}.hidden{display:none!important}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle,#171717,#000 70%)}
-.card{width:min(430px,94vw);padding:25px;border:2px solid #08f;border-radius:22px;box-shadow:0 0 15px #08f,0 0 35px #08f5;background:#070707}
-.logo{font-size:48px;text-align:center;font-weight:900;letter-spacing:5px;color:#f14;text-shadow:0 0 10px #f14,0 0 28px #f14}.sub{text-align:center;color:#aaa;margin:8px 0 25px}
-label{display:block;margin:12px 0 7px;font-size:14px}input,textarea{width:100%;padding:13px;border:1px solid #08f;border-radius:11px;background:#020202;color:#fff;outline:none}textarea{min-height:80px;resize:vertical}
-.btn{border:0;border-radius:11px;padding:12px 16px;background:#f14;color:#fff;font-weight:bold;cursor:pointer;box-shadow:0 0 12px #f14}.full{width:100%;margin-top:15px}.notice{text-align:center;color:#ff6580;min-height:22px;margin-top:10px;font-size:13px}
-header{position:sticky;top:0;z-index:5;background:#050505ee;border-bottom:1px solid #f144;padding:12px}.head{max-width:1000px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px}.brand{font-size:30px;color:#f14;font-weight:900;text-shadow:0 0 10px #f14}
-main{max-width:1000px;margin:auto;padding:18px}.ad{height:200px;border:1px solid #08f;border-radius:17px;overflow:hidden;box-shadow:0 0 18px #08f5}.slide{height:100%;display:none;position:relative}.slide.active{display:block}.slide img{width:100%;height:100%;object-fit:cover}.caption{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(transparent,#000)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}.panel{border:1px solid #f146;border-radius:17px;background:#080808;padding:15px}.panel h2{color:#08f;text-shadow:0 0 8px #08f}.actions{margin-top:8px}.small{box-shadow:none;border:1px solid #08f;background:#071019}.feed{max-height:430px;overflow:auto;margin-top:10px}.item{padding:12px 4px;border-top:1px solid #222}.meta{font-size:12px;color:#999;margin-bottom:6px}.verified{color:#08f;text-shadow:0 0 7px #08f}.message{white-space:pre-wrap;line-height:1.8}.item img{max-width:100%;border-radius:10px;margin-top:8px}
-@media(max-width:700px){.grid{grid-template-columns:1fr}.ad{height:170px}.brand{font-size:25px}}
+*{box-sizing:border-box}
+body{margin:0;background:#050505;color:#fff;font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+.hidden{display:none!important}
+.glow{color:#ff1744;text-shadow:0 0 8px #ff1744,0 0 22px #ff1744}
+.login-page{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(circle at 50% 30%,#151515,#000 70%)}
+.login-card{width:min(430px,94vw);padding:28px 22px;border:2px solid #00aaff;border-radius:22px;box-shadow:0 0 12px #00aaff,0 0 35px #004dff55;background:#080808}
+.logo{text-align:center;font-size:48px;font-weight:900;letter-spacing:5px;color:#ff1744;text-shadow:0 0 8px #ff1744,0 0 28px #ff1744;margin:0 0 8px}
+.subtitle{text-align:center;color:#aaa;margin-bottom:28px}
+.field{margin:15px 0}
+.field label{display:block;margin-bottom:7px;color:#ddd;font-size:14px}
+.field input{width:100%;padding:14px;border-radius:12px;border:1px solid #00aaff;background:#050505;color:#fff;outline:none;box-shadow:inset 0 0 10px #00aaff22,0 0 8px #00aaff33}
+.field input:focus{box-shadow:0 0 12px #00aaff}
+.btn{width:100%;padding:14px;border:0;border-radius:12px;background:#ff1744;color:#fff;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 0 12px #ff1744;margin-top:10px}
+.btn:hover{filter:brightness(1.15)}
+.notice{text-align:center;color:#ff607b;min-height:22px;margin-top:12px;font-size:13px}
+
+.app{min-height:100vh}
+header{position:sticky;top:0;z-index:10;background:#050505ee;border-bottom:1px solid #ff174455;backdrop-filter:blur(10px);padding:14px}
+.header-inner{max-width:1000px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-size:30px;font-weight:900;color:#ff1744;text-shadow:0 0 10px #ff1744}
+.userbox{font-size:13px;color:#bbb}
+.admin-btn{width:auto;padding:9px 14px;margin:0;font-size:13px}
+
+main{max-width:1000px;margin:auto;padding:18px}
+.ad-box{border:1px solid #00aaff;border-radius:18px;overflow:hidden;box-shadow:0 0 18px #00aaff44;background:#080808}
+.ad-slide{display:none;position:relative;height:210px}
+.ad-slide.active{display:block}
+.ad-slide img{width:100%;height:100%;object-fit:cover}
+.ad-caption{position:absolute;bottom:0;right:0;left:0;padding:14px;background:linear-gradient(transparent,#000d);font-weight:bold}
+.dots{text-align:center;padding:9px}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#555;margin:0 4px}
+.dot.active{background:#00aaff;box-shadow:0 0 8px #00aaff}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.panel{background:#080808;border:1px solid #ff174466;border-radius:18px;padding:16px;box-shadow:0 0 18px #ff174422}
+.panel h2{margin:0 0 15px;color:#00aaff;text-shadow:0 0 8px #00aaff;font-size:20px}
+.compose textarea{width:100%;min-height:85px;resize:vertical;border:1px solid #333;background:#030303;color:#fff;border-radius:12px;padding:12px;outline:none}
+.compose-actions{display:flex;gap:8px;margin-top:8px}
+.small-btn{padding:10px 13px;border-radius:10px;border:1px solid #00aaff;background:#071019;color:#fff;cursor:pointer}
+.feed{max-height:440px;overflow:auto;margin-top:12px}
+.item{border-top:1px solid #222;padding:13px 4px}
+.item:first-child{border-top:0}
+.meta{font-size:12px;color:#888;margin-bottom:7px}
+.verified{color:#00aaff;text-shadow:0 0 7px #00aaff}
+.message{white-space:pre-wrap;line-height:1.8}
+.empty{text-align:center;color:#666;padding:25px}
+
+.admin-page{padding:18px}
+.admin-panel{max-width:1000px;margin:auto;border:1px solid #00aaff;border-radius:18px;padding:18px;box-shadow:0 0 20px #00aaff33}
+.admin-list{margin-top:15px}
+.user-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px;border-bottom:1px solid #222}
+.row-actions{display:flex;gap:6px;flex-wrap:wrap}
+.danger{border-color:#ff1744;background:#16050a}
+.green{border-color:#00e676;background:#04150c}
+.back{margin-bottom:15px}
+
+@media(max-width:700px){
+ .grid{grid-template-columns:1fr}
+ .header-inner{flex-wrap:wrap}
+ .brand{font-size:25px}
+ .ad-slide{height:170px}
+}
 </style>
 </head>
 <body>
-<section id="login" class="login">
-<div class="card"><div class="logo">LA3</div><div class="sub">ورود به سامانه</div>
-<label>نام خود را وارد کنید</label><input id="name" maxlength="40" placeholder="نام شما">
-<label>نام کاربری</label><input id="username" maxlength="30" placeholder="@username">
-<button id="register" class="btn full">ثبت</button><div id="notice" class="notice"></div>
-</div></section>
 
-<section id="app" class="hidden">
-<header><div class="head"><div class="brand">LA3</div><div id="user"></div></div></header>
-<main><div id="ads" class="ad"></div><div class="grid">
-<section class="panel"><h2>🐦 توییت‌ها</h2><textarea id="tweetText" placeholder="چه خبر؟"></textarea><div class="actions"><button id="tweetBtn" class="btn small">ارسال</button></div><div id="tweets" class="feed"></div></section>
-<section class="panel">
-<h2>💬 چتروم</h2>
-<p style="color:#aaa;line-height:1.8">برای ورود به چتروم و گفتگو با کاربران، روی دکمه زیر بزنید.</p>
-<button class="btn full" onclick="openChatroom()">ورود به چتروم</button>
+<section id="loginPage" class="login-page">
+  <div class="login-card">
+    <div class="logo">LA3</div>
+    <div class="subtitle">به سامانه LA3 خوش آمدید</div>
+
+    <div class="field">
+      <label for="name">نام خود را وارد کنید</label>
+      <input id="name" type="text" maxlength="40" placeholder="نام شما">
+    </div>
+
+    <div class="field">
+      <label for="username">نام کاربری</label>
+      <input id="username" type="text" maxlength="30" placeholder="@username">
+    </div>
+
+    <div class="field" id="ownerPasswordBox">
+      <label for="ownerPassword">رمز مالک — در نسخه نهایی سمت سرور بررسی می‌شود</label>
+      <input id="ownerPassword" type="password" maxlength="80" placeholder="رمز مالک">
+    </div>
+
+    <button class="btn" onclick="registerUser()">ثبت</button>
+    <div id="loginNotice" class="notice"></div>
+  </div>
 </section>
-</div></main></section>
 
-<section id="chatroomPage" class="hidden" style="min-height:100vh;background:#030303">
-<header><div class="head"><button class="btn small" onclick="closeChatroom()">← بازگشت</button><div class="brand">LA3 CHAT</div><div></div></div></header>
+<section id="app" class="app hidden">
+<header>
+  <div class="header-inner">
+    <div class="brand">LA3</div>
+    <div class="userbox" id="currentUser"></div>
+    <button id="adminButton" class="btn admin-btn hidden" onclick="showAdmin()">مدیریت</button>
+  </div>
+</header>
+
 <main>
-<div class="panel" style="max-width:850px;margin:auto">
-<h2>💬 چتروم LA3</h2>
-<div id="chat" class="feed" style="height:55vh;max-height:none"></div>
-<textarea id="chatText" placeholder="پیام خود را بنویسید..."></textarea>
-<div class="actions"><button id="chatBtn" class="btn small">ارسال پیام</button></div>
-</div>
+  <div class="ad-box">
+    <div class="ad-slide active">
+      <img src="https://picsum.photos/1200/500?random=31" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۱ — تصویر تبلیغاتی خودت را اینجا قرار بده</div>
+    </div>
+    <div class="ad-slide">
+      <img src="https://picsum.photos/1200/500?random=32" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۲</div>
+    </div>
+    <div class="ad-slide">
+      <img src="https://picsum.photos/1200/500?random=33" alt="تبلیغ">
+      <div class="ad-caption">تبلیغ شماره ۳</div>
+    </div>
+    <div class="dots">
+      <span class="dot active"></span><span class="dot"></span><span class="dot"></span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <section class="panel">
+      <h2>🐦 توییت‌ها</h2>
+      <div class="compose">
+        <textarea id="tweetInput" placeholder="چه خبر؟"></textarea>
+        <div class="compose-actions">
+          <button class="small-btn" onclick="addTweet()">ارسال</button>
+          <button class="small-btn" onclick="fakeImageTweet()">📷 عکس</button>
+        </div>
+      </div>
+      <div id="tweetFeed" class="feed"></div>
+    </section>
+
+    <section class="panel">
+      <h2>💬 چتروم</h2>
+      <div class="compose">
+        <textarea id="chatInput" placeholder="پیام خود را بنویسید..."></textarea>
+        <div class="compose-actions">
+          <button class="small-btn" onclick="addChat()">ارسال پیام</button>
+        </div>
+      </div>
+      <div id="chatFeed" class="feed"></div>
+    </section>
+  </div>
 </main>
 </section>
 
+<section id="adminPage" class="admin-page hidden">
+  <div class="admin-panel">
+    <button class="small-btn back" onclick="backToApp()">← بازگشت</button>
+    <h2 class="glow">پنل مدیریت LA3</h2>
+    <p style="color:#aaa">این بخش در نسخه آزمایشی است. در مرحله Supabase، اطلاعات واقعی کاربران اینجا نمایش داده خواهد شد.</p>
+    <div id="adminUsers" class="admin-list"></div>
+  </div>
+</section>
+
 <script>
-const URL="https://ibqhyqzolkzzpziocfvp.supabase.co";
-const KEY="sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
-const db=supabase.createClient(URL,KEY);let me;
-const esc=s=>{let d=document.createElement("div");d.textContent=s??"";return d.innerHTML};
+const OWNER_PASSWORD = ""; // عمداً خالی است؛ رمز واقعی را در HTML قرار نده.
+let currentUser = null;
 
-async function auth(){
- let {data:{session}}=await db.auth.getSession();
- if(!session){let r=await db.auth.signInAnonymously();if(r.error)throw r.error;session=r.data.session}
- return session.user
-}
-async function register(){
- try{
-  const name=document.getElementById("name").value.trim(), username=document.getElementById("username").value.trim().replace(/^@/,"").toLowerCase();
-  if(!name||!username)throw Error("نام و نام کاربری را وارد کنید.");
-  document.getElementById("notice").textContent="در حال اتصال...";
-  me=await auth();
-  let {data:p}=await db.from("profiles").select("*").eq("id",me.id).maybeSingle();
-  if(p?.is_banned)throw Error("این کاربر مسدود شده است.");
-  let r=await db.from("profiles").upsert({id:me.id,username,display_name:name},{onConflict:"id"});
-  if(r.error)throw r.error;
-  let q=await db.from("profiles").select("*").eq("id",me.id).single();if(q.error)throw q.error;p=q.data;me.profile=p;
-  document.getElementById("login").classList.add("hidden");document.getElementById("app").classList.remove("hidden");
-  document.getElementById("user").textContent="@"+p.username+" — "+p.display_name;
-  await loadAll();subscribe();
- }catch(e){document.getElementById("notice").textContent=e.message||"خطا در اتصال"}
-}
-document.getElementById("register").onclick=register;
+let demoUsers = [
+  {name:"کاربر نمونه", username:"sample", verified:true, banned:false},
+  {name:"علی", username:"ali", verified:false, banned:false}
+];
 
-function person(p){return "<b>"+esc(p?.display_name||"کاربر")+"</b> @"+esc(p?.username||"")+(p?.is_verified?'<span class="verified"> ✓</span>':"")}
-function renderTweets(a){document.getElementById("tweets").innerHTML=a.length?a.map(x=>'<div class="item"><div class="meta">'+person(x.profiles)+'</div><div class="message">'+esc(x.content)+'</div>'+(x.image_url?'<img src="'+esc(x.image_url)+'">':"")+"</div>").join(""):'<div class="meta">هنوز توییتی وجود ندارد.</div>';document.getElementById("tweets").scrollTop=999999}
-function renderChat(a){document.getElementById("chat").innerHTML=a.length?a.map(x=>'<div class="item"><div class="meta">'+person(x.profiles)+'</div><div class="message">'+esc(x.content)+'</div></div>').join(""):'<div class="meta">هنوز پیامی وجود ندارد.</div>';document.getElementById("chat").scrollTop=999999}
-function renderAds(a){let e=document.getElementById("ads");if(!a.length){e.innerHTML='<div class="slide active"><div class="caption">تبلیغی ثبت نشده است.</div></div>';return}e.innerHTML=a.map((x,i)=>'<div class="slide '+(i?'':'active')+'">'+(x.image_url?'<img src="'+esc(x.image_url)+'">':"")+'<div class="caption">'+esc(x.title||"")+"</div></div>").join("");let i=0;setInterval(()=>{let s=e.querySelectorAll(".slide");if(s.length<2)return;s[i].classList.remove("active");i=(i+1)%s.length;s[i].classList.add("active")},4000)}
-async function loadAll(){
- let [tw,ch,ad]=await Promise.all([
-  db.from("tweets").select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)").order("created_at",{ascending:true}),
-  db.from("chat_messages").select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)").order("created_at",{ascending:true}),
-  db.from("ads").select("*").eq("is_active",true).order("created_at",{ascending:false})
- ]);
- renderTweets(tw.data||[]);renderChat(ch.data||[]);renderAds(ad.data||[]);
+let tweets = [
+  {name:"کاربر نمونه",username:"sample",verified:true,text:"به LA3 خوش آمدید! 👋"}
+];
+
+let chats = [
+  {name:"کاربر نمونه",username:"sample",verified:true,text:"سلام به همه 🌹"}
+];
+
+function clean(s){
+  const d=document.createElement("div");
+  d.textContent=s;
+  return d.innerHTML;
 }
-document.getElementById("tweetBtn").onclick=async()=>{let t=document.getElementById("tweetText"),v=t.value.trim();if(!v)return;let r=await db.from("tweets").insert({author_id:me.id,content:v});if(r.error)alert(r.error.message);else t.value=""};
-document.getElementById("chatBtn").onclick=async()=>{
- let t=document.getElementById("chatText"),v=t.value.trim();if(!v)return;
- let r=await db.from("chat_messages").insert({author_id:me.id,content:v});
- if(r.error)alert(r.error.message);else{t.value="";renderChatroom()}
-};
-function openChatroom(){
- document.getElementById("app").classList.add("hidden");
- document.getElementById("chatroomPage").classList.remove("hidden");
- renderChatroom();
+
+function registerUser(){
+  const name=document.getElementById("name").value.trim();
+  const username=document.getElementById("username").value.trim().replace(/^@/,"");
+  const password=document.getElementById("ownerPassword").value;
+
+  if(!name || !username){
+    document.getElementById("loginNotice").textContent="لطفاً نام و نام کاربری را وارد کنید.";
+    return;
+  }
+
+  // فقط برای تست رابط کاربری؛ احراز مالک واقعی بعداً در Supabase انجام می‌شود.
+  const isOwner = OWNER_PASSWORD !== "" && password === OWNER_PASSWORD;
+
+  currentUser={name,username,verified:isOwner,isOwner};
+  const existing=demoUsers.find(u=>u.username.toLowerCase()===username.toLowerCase());
+
+  if(existing && existing.banned){
+    document.getElementById("loginNotice").textContent="این کاربر مسدود شده است.";
+    return;
+  }
+
+  if(!existing) demoUsers.push({name,username,verified:isOwner,banned:false});
+
+  document.getElementById("loginPage").classList.add("hidden");
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  document.getElementById("currentUser").textContent="@"+username+" — "+name;
+  document.getElementById("adminButton").classList.toggle("hidden",!isOwner);
+
+  renderTweets();
+  renderChats();
 }
-function closeChatroom(){
- document.getElementById("chatroomPage").classList.add("hidden");
- document.getElementById("app").classList.remove("hidden");
+
+function addTweet(){
+  if(!currentUser)return;
+  const input=document.getElementById("tweetInput");
+  const text=input.value.trim();
+  if(!text)return;
+  tweets.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+  input.value="";
+  renderTweets();
 }
-function renderChatroom(){
- const el=document.getElementById("chat");
- db.from("chat_messages").select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)").order("created_at",{ascending:true}).then(r=>renderChat(r.data||[]));
+
+function fakeImageTweet(){
+  alert("آپلود عکس در مرحله اتصال به Supabase Storage فعال می‌شود.");
 }
-function subscribe(){db.channel("la3-live").on("postgres_changes",{event:"*",schema:"public",table:"tweets"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},loadAll).on("postgres_changes",{event:"*",schema:"public",table:"ads"},loadAll).subscribe()}
+
+function addChat(){
+  if(!currentUser)return;
+  const input=document.getElementById("chatInput");
+  const text=input.value.trim();
+  if(!text)return;
+  chats.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+  input.value="";
+  renderChats();
+}
+
+function renderTweets(){
+  const feed=document.getElementById("tweetFeed");
+  if(!tweets.length){feed.innerHTML='<div class="empty">هنوز توییتی وجود ندارد.</div>';return;}
+  feed.innerHTML=tweets.map(t=>`
+    <div class="item">
+      <div class="meta"><b>${clean(t.name)}</b> @${clean(t.username)}
+      ${t.verified?'<span class="verified"> ✓ تیک آبی</span>':''}</div>
+      <div class="message">${clean(t.text)}</div>
+    </div>`).join("");
+  feed.scrollTop=feed.scrollHeight;
+}
+
+function renderChats(){
+  const feed=document.getElementById("chatFeed");
+  if(!chats.length){feed.innerHTML='<div class="empty">هنوز پیامی وجود ندارد.</div>';return;}
+  feed.innerHTML=chats.map(t=>`
+    <div class="item">
+      <div class="meta"><b>${clean(t.name)}</b> @${clean(t.username)}
+      ${t.verified?'<span class="verified"> ✓</span>':''}</div>
+      <div class="message">${clean(t.text)}</div>
+    </div>`).join("");
+  feed.scrollTop=feed.scrollHeight;
+}
+
+function showAdmin(){
+  if(!currentUser?.isOwner)return;
+  document.getElementById("app").classList.add("hidden");
+  document.getElementById("adminPage").classList.remove("hidden");
+  renderAdmin();
+}
+
+function backToApp(){
+  document.getElementById("adminPage").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+}
+
+function renderAdmin(){
+  document.getElementById("adminUsers").innerHTML=demoUsers.map((u,i)=>`
+    <div class="user-row">
+      <div>
+        <b>${clean(u.name)}</b> @${clean(u.username)}
+        ${u.verified?'<span class="verified"> ✓</span>':''}
+        ${u.banned?'<span style="color:#ff1744"> — مسدود</span>':''}
+      </div>
+      <div class="row-actions">
+        <button class="small-btn" onclick="toggleVerified(${i})">${u.verified?'برداشتن تیک':'تیک آبی'}</button>
+        <button class="small-btn ${u.banned?'green':'danger'}" onclick="toggleBan(${i})">${u.banned?'برگرداندن':'حذف کاربر'}</button>
+      </div>
+    </div>`).join("");
+}
+
+function toggleVerified(i){
+  demoUsers[i].verified=!demoUsers[i].verified;
+  renderAdmin();
+}
+
+function toggleBan(i){
+  demoUsers[i].banned=!demoUsers[i].banned;
+  renderAdmin();
+}
+
+let slide=0;
+setInterval(()=>{
+  const slides=document.querySelectorAll(".ad-slide");
+  const dots=document.querySelectorAll(".dot");
+  if(!slides.length)return;
+  slides[slide].classList.remove("active");
+  dots[slide].classList.remove("active");
+  slide=(slide+1)%slides.length;
+  slides[slide].classList.add("active");
+  dots[slide].classList.add("active");
+},4000);
+
+renderTweets();
+renderChats();
 </script>
-</body></html>
+</body>
+ </html>
