@@ -171,7 +171,12 @@ main{max-width:1000px;margin:auto;padding:18px}
   </div>
 </section>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+const SUPABASE_URL = "https://ibqhyqzolkzzpziocfvp.supabase.co";
+const SUPABASE_KEY = "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
 const OWNER_PASSWORD = ""; // عمداً خالی است؛ رمز واقعی را در HTML قرار نده.
 let currentUser = null;
 
@@ -194,61 +199,157 @@ function clean(s){
   return d.innerHTML;
 }
 
-function registerUser(){
+async function registerUser(){
   const name=document.getElementById("name").value.trim();
-  const username=document.getElementById("username").value.trim().replace(/^@/,"");
-  const password=document.getElementById("ownerPassword").value;
+  const username=document.getElementById("username").value.trim().replace(/^@/,"").toLowerCase();
+  const notice=document.getElementById("loginNotice");
 
   if(!name || !username){
-    document.getElementById("loginNotice").textContent="لطفاً نام و نام کاربری را وارد کنید.";
+    notice.textContent="لطفاً نام و نام کاربری را وارد کنید.";
     return;
   }
 
-  // فقط برای تست رابط کاربری؛ احراز مالک واقعی بعداً در Supabase انجام می‌شود.
-  const isOwner = OWNER_PASSWORD !== "" && password === OWNER_PASSWORD;
+  notice.textContent="در حال اتصال...";
 
-  currentUser={name,username,verified:isOwner,isOwner};
-  const existing=demoUsers.find(u=>u.username.toLowerCase()===username.toLowerCase());
+  try{
+    let {data:{session}}=await sb.auth.getSession();
+    if(!session){
+      const r=await sb.auth.signInAnonymously();
+      if(r.error) throw r.error;
+      session=r.data.session;
+    }
 
-  if(existing && existing.banned){
-    document.getElementById("loginNotice").textContent="این کاربر مسدود شده است.";
-    return;
+    const uid=session.user.id;
+    const existing=await sb.from("profiles").select("*").eq("id",uid).maybeSingle();
+    if(existing.error) throw existing.error;
+
+    if(existing.data?.is_banned){
+      notice.textContent="این کاربر مسدود شده است.";
+      return;
+    }
+
+    let profile=existing.data;
+
+    if(profile){
+      if(profile.username!==username || profile.display_name!==name){
+        const r=await sb.from("profiles").update({
+          username:username,
+          display_name:name
+        }).eq("id",uid);
+        if(r.error) throw r.error;
+        profile={...profile,username,display_name:name};
+      }
+    }else{
+      const r=await sb.from("profiles").insert({
+        id:uid,
+        username:username,
+        display_name:name
+      }).select("*").single();
+      if(r.error) throw r.error;
+      profile=r.data;
+    }
+
+    currentUser={
+      id:uid,
+      name:profile.display_name,
+      username:profile.username,
+      verified:!!profile.is_verified,
+      isOwner:!!profile.is_owner
+    };
+
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("adminPage").classList.add("hidden");
+    document.getElementById("chatroomPage").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+    document.getElementById("currentUser").textContent="@"+profile.username+" — "+profile.display_name;
+    document.getElementById("adminButton").classList.toggle("hidden",!profile.is_owner);
+
+    await loadTweetsFromDB();
+    await loadChatsFromDB();
+    subscribeRealtime();
+  }catch(e){
+    console.error(e);
+    notice.textContent=e.message||"خطا در اتصال به Supabase.";
   }
+}
 
-  if(!existing) demoUsers.push({name,username,verified:isOwner,banned:false});
+async function loadTweetsFromDB(){
+  const r=await sb.from("tweets")
+    .select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)")
+    .order("created_at",{ascending:true});
+  if(r.error){console.error(r.error);return;}
 
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("adminPage").classList.add("hidden");
-  document.getElementById("app").classList.remove("hidden");
-  document.getElementById("currentUser").textContent="@"+username+" — "+name;
-  document.getElementById("adminButton").classList.toggle("hidden",!isOwner);
-
+  tweets=(r.data||[]).map(x=>({
+    id:x.id,author_id:x.author_id,
+    name:x.profiles?.display_name||"کاربر",
+    username:x.profiles?.username||"",
+    verified:!!x.profiles?.is_verified,
+    text:x.content||""
+  }));
   renderTweets();
+}
+
+async function loadChatsFromDB(){
+  const r=await sb.from("chat_messages")
+    .select("id,author_id,content,image_url,created_at,profiles(username,display_name,is_verified)")
+    .order("created_at",{ascending:true});
+  if(r.error){console.error(r.error);return;}
+
+  chats=(r.data||[]).map(x=>({
+    id:x.id,author_id:x.author_id,
+    name:x.profiles?.display_name||"کاربر",
+    username:x.profiles?.username||"",
+    verified:!!x.profiles?.is_verified,
+    text:x.content||""
+  }));
   renderChats();
 }
 
-function addTweet(){
+function subscribeRealtime(){
+  sb.channel("la3-live")
+    .on("postgres_changes",{event:"*",schema:"public",table:"tweets"},()=>loadTweetsFromDB())
+    .on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},()=>loadChatsFromDB())
+    .subscribe();
+}
+
+async function addTweet(){
   if(!currentUser)return;
   const input=document.getElementById("tweetInput");
   const text=input.value.trim();
   if(!text)return;
-  tweets.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+
+  const r=await sb.from("tweets").insert({
+    author_id:currentUser.id,
+    content:text
+  });
+  if(r.error){
+    alert("ارسال توییت انجام نشد: "+r.error.message);
+    return;
+  }
   input.value="";
-  renderTweets();
+  await loadTweetsFromDB();
 }
 
 function fakeImageTweet(){
   alert("آپلود عکس در مرحله اتصال به Supabase Storage فعال می‌شود.");
 }
 
-function addChat(){
+async function addChat(){
   if(!currentUser)return;
   const input=document.getElementById("chatInput");
   const text=input.value.trim();
   if(!text)return;
-  chats.push({name:currentUser.name,username:currentUser.username,verified:currentUser.verified,text});
+
+  const r=await sb.from("chat_messages").insert({
+    author_id:currentUser.id,
+    content:text
+  });
+  if(r.error){
+    alert("ارسال پیام انجام نشد: "+r.error.message);
+    return;
+  }
   input.value="";
-  renderChats();
+  await loadChatsFromDB();
 }
 
 function renderTweets(){
@@ -336,8 +437,6 @@ setInterval(()=>{
   dots[slide].classList.add("active");
 },4000);
 
-renderTweets();
-renderChats();
 </script>
 </body>
- </html>
+       </html>
