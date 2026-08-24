@@ -6,406 +6,356 @@
 <title>LA3</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-  margin:0;
-  background:#050505;
-  color:#fff;
-  font-family:Tahoma,Arial,sans-serif;
-  min-height:100vh;
+    margin:0;
+    background:#050505;
+    color:#fff;
+    font-family:Tahoma,Arial,sans-serif;
+    min-height:100vh
 }
 
-.hidden{
-  display:none !important;
-}
+.hidden{display:none!important}
 
 .glow{
-  color:#ff1744;
-  text-shadow:0 0 8px #ff1744,0 0 22px #ff1744;
+    color:#ff1744;
+    text-shadow:0 0 8px #ff1744,0 0 22px #ff1744
 }
 
-/* LOGIN */
-
 .login-page{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:radial-gradient(circle at 50% 30%,#151515,#000 70%);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    background:radial-gradient(circle at 50% 30%,#151515,#000 70%)
 }
 
 .login-card{
-  width:min(430px,94vw);
-  padding:28px 22px;
-  border:2px solid #00aaff;
-  border-radius:22px;
-  box-shadow:0 0 12px #00aaff,0 0 35px #004dff55;
-  background:#080808;
+    width:min(430px,94vw);
+    padding:28px 22px;
+    border:2px solid #00aaff;
+    border-radius:22px;
+    box-shadow:0 0 12px #00aaff,0 0 35px #004dff55;
+    background:#080808
 }
 
 .logo{
-  text-align:center;
-  font-size:48px;
-  font-weight:900;
-  letter-spacing:5px;
-  color:#ff1744;
-  text-shadow:0 0 8px #ff1744,0 0 28px #ff1744;
-  margin:0 0 8px;
+    text-align:center;
+    font-size:48px;
+    font-weight:900;
+    letter-spacing:5px;
+    color:#ff1744;
+    text-shadow:0 0 8px #ff1744,0 0 28px #ff1744;
+    margin:0 0 8px
 }
 
 .subtitle{
-  text-align:center;
-  color:#aaa;
-  margin-bottom:28px;
+    text-align:center;
+    color:#aaa;
+    margin-bottom:28px
 }
 
-.field{
-  margin:15px 0;
-}
+.field{margin:15px 0}
 
 .field label{
-  display:block;
-  margin-bottom:7px;
-  color:#ddd;
-  font-size:14px;
+    display:block;
+    margin-bottom:7px;
+    color:#ddd;
+    font-size:14px
 }
 
-.field input{
-  width:100%;
-  padding:14px;
-  border-radius:12px;
-  border:1px solid #00aaff;
-  background:#050505;
-  color:#fff;
-  outline:none;
-  box-shadow:inset 0 0 10px #00aaff22,0 0 8px #00aaff33;
+.field input,
+textarea{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid #00aaff;
+    background:#050505;
+    color:#fff;
+    outline:none;
+    font-family:inherit
 }
 
-.field input:focus{
-  box-shadow:0 0 12px #00aaff;
+.field input:focus,
+textarea:focus{
+    box-shadow:0 0 12px #00aaff
 }
 
 .btn{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:12px;
-  background:#ff1744;
-  color:#fff;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
-  box-shadow:0 0 12px #ff1744;
-  margin-top:10px;
+    width:100%;
+    padding:14px;
+    border:0;
+    border-radius:12px;
+    background:#ff1744;
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 0 12px #ff1744;
+    margin-top:10px
 }
 
-.btn:hover{
-  filter:brightness(1.15);
-}
+.btn:hover{filter:brightness(1.15)}
 
 .notice{
-  text-align:center;
-  color:#ff607b;
-  min-height:22px;
-  margin-top:12px;
-  font-size:13px;
+    text-align:center;
+    color:#ff607b;
+    min-height:22px;
+    margin-top:12px;
+    font-size:13px
 }
 
-/* HEADER */
-
-.app{
-  min-height:100vh;
-}
+.app{min-height:100vh}
 
 header{
-  position:sticky;
-  top:0;
-  z-index:10;
-  background:#050505ee;
-  border-bottom:1px solid #ff174455;
-  backdrop-filter:blur(10px);
-  padding:14px;
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:#050505ee;
+    border-bottom:1px solid #ff174455;
+    backdrop-filter:blur(10px);
+    padding:14px
 }
 
 .header-inner{
-  max-width:1000px;
-  margin:auto;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+    max-width:1000px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px
 }
 
 .brand{
-  font-size:30px;
-  font-weight:900;
-  color:#ff1744;
-  text-shadow:0 0 10px #ff1744;
+    font-size:30px;
+    font-weight:900;
+    color:#ff1744;
+    text-shadow:0 0 10px #ff1744
 }
 
 .userbox{
-  font-size:13px;
-  color:#bbb;
+    font-size:13px;
+    color:#bbb;
+    flex:1;
+    text-align:center
 }
 
 .admin-btn{
-  width:auto;
-  padding:9px 14px;
-  margin:0;
-  font-size:13px;
+    width:auto;
+    padding:9px 14px;
+    margin:0;
+    font-size:13px
 }
-
-/* MAIN */
 
 main{
-  max-width:1000px;
-  margin:auto;
-  padding:18px;
+    max-width:1000px;
+    margin:auto;
+    padding:18px
 }
 
-/* ADS */
-
 .ad-box{
-  border:1px solid #00aaff;
-  border-radius:18px;
-  overflow:hidden;
-  box-shadow:0 0 18px #00aaff44;
-  background:#080808;
+    border:1px solid #00aaff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 0 18px #00aaff44;
+    background:#080808
 }
 
 .ad-slide{
-  display:none;
-  position:relative;
-  height:210px;
+    display:none;
+    position:relative;
+    height:210px
 }
 
-.ad-slide.active{
-  display:block;
-}
+.ad-slide.active{display:block}
 
 .ad-slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+    width:100%;
+    height:100%;
+    object-fit:cover
 }
 
 .ad-caption{
-  position:absolute;
-  bottom:0;
-  right:0;
-  left:0;
-  padding:14px;
-  background:linear-gradient(transparent,#000d);
-  font-weight:bold;
+    position:absolute;
+    bottom:0;
+    right:0;
+    left:0;
+    padding:14px;
+    background:linear-gradient(transparent,#000d);
+    font-weight:bold
 }
 
 .dots{
-  text-align:center;
-  padding:9px;
+    text-align:center;
+    padding:9px
 }
 
 .dot{
-  display:inline-block;
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:#555;
-  margin:0 4px;
+    display:inline-block;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#555;
+    margin:0 4px
 }
 
 .dot.active{
-  background:#00aaff;
-  box-shadow:0 0 8px #00aaff;
+    background:#00aaff;
+    box-shadow:0 0 8px #00aaff
 }
 
-/* PANELS */
-
 .grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:18px;
-  margin-top:18px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:18px
 }
 
 .panel{
-  background:#080808;
-  border:1px solid #ff174466;
-  border-radius:18px;
-  padding:16px;
-  box-shadow:0 0 18px #ff174422;
+    background:#080808;
+    border:1px solid #ff174466;
+    border-radius:18px;
+    padding:16px;
+    box-shadow:0 0 18px #ff174422
 }
 
 .panel h2{
-  margin:0 0 15px;
-  color:#00aaff;
-  text-shadow:0 0 8px #00aaff;
-  font-size:20px;
+    margin:0 0 15px;
+    color:#00aaff;
+    text-shadow:0 0 8px #00aaff;
+    font-size:20px
 }
 
 .compose textarea{
-  width:100%;
-  min-height:85px;
-  resize:vertical;
-  border:1px solid #333;
-  background:#030303;
-  color:#fff;
-  border-radius:12px;
-  padding:12px;
-  outline:none;
+    min-height:85px;
+    resize:vertical
 }
 
 .compose-actions{
-  display:flex;
-  gap:8px;
-  margin-top:8px;
+    display:flex;
+    gap:8px;
+    margin-top:8px
 }
 
 .small-btn{
-  padding:10px 13px;
-  border-radius:10px;
-  border:1px solid #00aaff;
-  background:#071019;
-  color:#fff;
-  cursor:pointer;
+    padding:10px 13px;
+    border-radius:10px;
+    border:1px solid #00aaff;
+    background:#071019;
+    color:#fff;
+    cursor:pointer;
+    font-family:inherit
 }
 
 .small-btn:hover{
-  background:#0b2230;
+    box-shadow:0 0 10px #00aaff55
 }
 
 .feed{
-  max-height:440px;
-  overflow:auto;
-  margin-top:12px;
+    max-height:440px;
+    overflow:auto;
+    margin-top:12px
 }
 
 .item{
-  border-top:1px solid #222;
-  padding:13px 4px;
+    border-top:1px solid #222;
+    padding:13px 4px
 }
 
-.item:first-child{
-  border-top:0;
-}
+.item:first-child{border-top:0}
 
 .meta{
-  font-size:12px;
-  color:#888;
-  margin-bottom:7px;
+    font-size:12px;
+    color:#888;
+    margin-bottom:7px
 }
 
 .verified{
-  color:#00aaff;
-  text-shadow:0 0 7px #00aaff;
+    color:#00aaff;
+    text-shadow:0 0 7px #00aaff
 }
 
 .message{
-  white-space:pre-wrap;
-  line-height:1.8;
-}
-
-.item-image{
-  display:block;
-  max-width:100%;
-  max-height:350px;
-  margin-top:10px;
-  border-radius:12px;
-  border:1px solid #333;
+    white-space:pre-wrap;
+    line-height:1.8
 }
 
 .empty{
-  text-align:center;
-  color:#666;
-  padding:25px;
+    text-align:center;
+    color:#666;
+    padding:25px
 }
 
-/* PAGES */
-
 .admin-page{
-  min-height:100vh;
-  padding:18px;
-  background:#050505;
+    padding:18px;
+    min-height:100vh
 }
 
 .admin-panel{
-  max-width:1000px;
-  margin:auto;
-  border:1px solid #00aaff;
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 0 20px #00aaff33;
+    max-width:1000px;
+    margin:auto;
+    border:1px solid #00aaff;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 0 20px #00aaff33;
+    background:#080808
 }
 
-.admin-list{
-  margin-top:15px;
-}
+.admin-list{margin-top:15px}
 
 .user-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:12px;
-  border-bottom:1px solid #222;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px;
+    border-bottom:1px solid #222
 }
 
 .row-actions{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap
 }
 
 .danger{
-  border-color:#ff1744;
-  background:#16050a;
+    border-color:#ff1744;
+    background:#16050a
 }
 
 .green{
-  border-color:#00e676;
-  background:#04150c;
+    border-color:#00e676;
+    background:#04150c
 }
 
-.back{
-  margin-bottom:15px;
+.back{margin-bottom:15px}
+
+.status{
+    text-align:center;
+    color:#888;
+    margin-top:8px;
+    font-size:12px
 }
 
-.chat-info{
-  color:#aaa;
-  line-height:1.9;
-  margin-bottom:12px;
-}
-
-#imageInput{
-  display:none;
+.file-name{
+    color:#aaa;
+    font-size:12px;
+    margin-top:5px;
+    overflow:hidden;
+    text-overflow:ellipsis
 }
 
 @media(max-width:700px){
-
-  .grid{
-    grid-template-columns:1fr;
-  }
-
-  .header-inner{
-    flex-wrap:wrap;
-  }
-
-  .brand{
-    font-size:25px;
-  }
-
-  .ad-slide{
-    height:170px;
-  }
-
-  .user-row{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
+    .grid{grid-template-columns:1fr}
+    .header-inner{flex-wrap:wrap}
+    .brand{font-size:25px}
+    .ad-slide{height:170px}
+    .userbox{
+        order:3;
+        flex-basis:100%
+    }
 }
 </style>
 </head>
@@ -413,864 +363,741 @@ main{
 <body>
 
 <!-- LOGIN -->
-
 <section id="loginPage" class="login-page">
-
-  <div class="login-card">
+<div class="login-card">
 
     <div class="logo">LA3</div>
+    <div class="subtitle">به سامانه LA3 خوش آمدید</div>
 
-    <div class="subtitle">
-      به سامانه LA3 خوش آمدید
+    <div class="field">
+        <label for="name">نام خود را وارد کنید</label>
+        <input id="name" type="text" maxlength="40" placeholder="نام شما">
     </div>
 
     <div class="field">
-
-      <label for="name">
-        نام خود را وارد کنید
-      </label>
-
-      <input
-        id="name"
-        type="text"
-        maxlength="40"
-        placeholder="نام شما"
-      >
-
+        <label for="username">نام کاربری</label>
+        <input id="username" type="text" maxlength="30" placeholder="@username">
     </div>
 
-    <div class="field">
-
-      <label for="username">
-        نام کاربری
-      </label>
-
-      <input
-        id="username"
-        type="text"
-        maxlength="30"
-        placeholder="@username"
-      >
-
-    </div>
-
-    <div class="field">
-
-      <label for="ownerPassword">
-        رمز مالک
-      </label>
-
-      <input
-        id="ownerPassword"
-        type="password"
-        maxlength="80"
-        placeholder="در صورت مالک بودن وارد کنید"
-      >
-
-    </div>
-
-    <button
-      id="registerButton"
-      class="btn"
-      type="button"
-      onclick="registerUser()"
-    >
-      ثبت
+    <button id="registerBtn" class="btn" type="button">
+        ثبت
     </button>
 
     <div id="loginNotice" class="notice"></div>
 
-  </div>
-
+</div>
 </section>
 
 
-<!-- MAIN APP -->
-
+<!-- APP -->
 <section id="app" class="app hidden">
 
-  <header>
+<header>
+<div class="header-inner">
 
-    <div class="header-inner">
+    <div class="brand">LA3</div>
 
-      <div class="brand">
-        LA3
-      </div>
+    <div class="userbox" id="currentUser"></div>
 
-      <div
-        class="userbox"
-        id="currentUser"
-      ></div>
-
-      <button
-        id="adminButton"
-        class="btn admin-btn hidden"
-        type="button"
-        onclick="showAdmin()"
-      >
+    <button id="adminButton"
+            class="btn admin-btn hidden"
+            type="button">
         مدیریت
-      </button>
+    </button>
 
+</div>
+</header>
+
+<main>
+
+<!-- ADS -->
+<div class="ad-box">
+
+    <div class="ad-slide active">
+        <img src="https://picsum.photos/1200/500?random=31" alt="تبلیغ">
+        <div class="ad-caption">
+            تبلیغ شماره ۱
+        </div>
     </div>
 
-  </header>
-
-
-  <main>
-
-    <!-- ADS -->
-
-    <div class="ad-box">
-
-      <div class="ad-slide active">
-
-        <img
-          src="https://picsum.photos/1200/500?random=31"
-          alt="تبلیغ"
-        >
-
+    <div class="ad-slide">
+        <img src="https://picsum.photos/1200/500?random=32" alt="تبلیغ">
         <div class="ad-caption">
-          تبلیغ شماره ۱
+            تبلیغ شماره ۲
         </div>
+    </div>
 
-      </div>
-
-
-      <div class="ad-slide">
-
-        <img
-          src="https://picsum.photos/1200/500?random=32"
-          alt="تبلیغ"
-        >
-
+    <div class="ad-slide">
+        <img src="https://picsum.photos/1200/500?random=33" alt="تبلیغ">
         <div class="ad-caption">
-          تبلیغ شماره ۲
+            تبلیغ شماره ۳
         </div>
+    </div>
 
-      </div>
-
-
-      <div class="ad-slide">
-
-        <img
-          src="https://picsum.photos/1200/500?random=33"
-          alt="تبلیغ"
-        >
-
-        <div class="ad-caption">
-          تبلیغ شماره ۳
-        </div>
-
-      </div>
-
-
-      <div class="dots">
-
+    <div class="dots">
         <span class="dot active"></span>
         <span class="dot"></span>
         <span class="dot"></span>
-
-      </div>
-
     </div>
 
-
-    <!-- TWEETS + CHATROOM -->
-
-    <div class="grid">
-
-      <!-- TWEETS -->
-
-      <section class="panel">
-
-        <h2>
-          🐦 توییت‌ها
-        </h2>
-
-        <div class="compose">
-
-          <textarea
-            id="tweetInput"
-            placeholder="چه خبر؟"
-          ></textarea>
-
-          <div class="compose-actions">
-
-            <button
-              class="small-btn"
-              type="button"
-              onclick="addTweet()"
-            >
-              ارسال
-            </button>
-
-            <button
-              class="small-btn"
-              type="button"
-              onclick="selectTweetImage()"
-            >
-              📷 عکس
-            </button>
-
-            <input
-              id="imageInput"
-              type="file"
-              accept="image/*"
-              onchange="handleTweetImage(event)"
-            >
-
-          </div>
-
-          <div
-            id="selectedImageName"
-            style="color:#777;font-size:12px;margin-top:8px"
-          ></div>
-
-        </div>
-
-        <div
-          id="tweetFeed"
-          class="feed"
-        ></div>
-
-      </section>
+</div>
 
 
-      <!-- CHATROOM -->
+<div class="grid">
 
-      <section class="panel">
+<!-- TWEETS -->
+<section class="panel">
 
-        <h2>
-          💬 چتروم
-        </h2>
-
-        <div class="chat-info">
-          برای گفتگو با کاربران وارد صفحه اختصاصی چتروم شوید.
-        </div>
-
-        <button
-          class="btn"
-          type="button"
-          onclick="openChatroom()"
-        >
-          ورود به چتروم
-        </button>
-
-      </section>
-
-    </div>
-
-  </main>
-
-</section>
-
-
-<!-- CHATROOM PAGE -->
-
-<section
-  id="chatroomPage"
-  class="admin-page hidden"
->
-
-  <div
-    class="admin-panel"
-    style="max-width:850px"
-  >
-
-    <button
-      class="small-btn back"
-      type="button"
-      onclick="closeChatroom()"
-    >
-      ← بازگشت
-    </button>
-
-    <h2 class="glow">
-      💬 چتروم LA3
-    </h2>
-
-    <div
-      id="chatFeed"
-      class="feed"
-      style="max-height:55vh;margin-bottom:14px"
-    ></div>
+    <h2>🐦 توییت‌ها</h2>
 
     <div class="compose">
 
-      <textarea
-        id="chatInput"
-        placeholder="پیام خود را بنویسید..."
-      ></textarea>
+        <textarea
+            id="tweetInput"
+            placeholder="چه خبر؟">
+        </textarea>
 
-      <div class="compose-actions">
+        <div class="compose-actions">
 
-        <button
-          class="small-btn"
-          type="button"
-          onclick="addChat()"
-        >
-          ارسال پیام
-        </button>
+            <button
+                id="tweetSendBtn"
+                class="small-btn"
+                type="button">
+                ارسال
+            </button>
 
-      </div>
+            <button
+                id="tweetImageBtn"
+                class="small-btn"
+                type="button">
+                📷 عکس
+            </button>
+
+            <input
+                id="tweetImageInput"
+                type="file"
+                accept="image/*"
+                hidden>
+
+        </div>
+
+        <div id="tweetFileName" class="file-name"></div>
 
     </div>
 
-  </div>
+    <div id="tweetFeed" class="feed"></div>
 
 </section>
 
 
-<!-- ADMIN PAGE -->
+<!-- CHAT -->
+<section class="panel">
 
-<section
-  id="adminPage"
-  class="admin-page hidden"
->
+    <h2>💬 چتروم</h2>
 
-  <div class="admin-panel">
+    <div style="color:#aaa;line-height:1.9;margin-bottom:12px">
+        برای گفتگو با کاربران وارد صفحه اختصاصی چتروم شوید.
+    </div>
 
     <button
-      class="small-btn back"
-      type="button"
-      onclick="backToApp()"
-    >
-      ← بازگشت
+        id="openChatBtn"
+        class="btn"
+        type="button">
+        ورود به چتروم
     </button>
 
-    <h2 class="glow">
-      پنل مدیریت LA3
-    </h2>
+</section>
 
-    <p style="color:#aaa">
-      مدیریت کاربران
-    </p>
+</div>
+</main>
+</section>
+
+
+<!-- CHATROOM -->
+<section id="chatroomPage" class="admin-page hidden">
+
+<div class="admin-panel" style="max-width:850px">
+
+    <button
+        id="closeChatBtn"
+        class="small-btn back"
+        type="button">
+        ← بازگشت
+    </button>
+
+    <h2 class="glow">💬 چتروم LA3</h2>
 
     <div
-      id="adminUsers"
-      class="admin-list"
-    ></div>
+        id="chatFeed"
+        class="feed"
+        style="max-height:55vh;margin-bottom:14px">
+    </div>
 
-  </div>
+    <div class="compose">
 
+        <textarea
+            id="chatInput"
+            placeholder="پیام خود را بنویسید...">
+        </textarea>
+
+        <div class="compose-actions">
+
+            <button
+                id="chatSendBtn"
+                class="small-btn"
+                type="button">
+                ارسال پیام
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+<!-- ADMIN -->
+<section id="adminPage" class="admin-page hidden">
+
+<div class="admin-panel">
+
+    <button
+        id="backAdminBtn"
+        class="small-btn back"
+        type="button">
+        ← بازگشت
+    </button>
+
+    <h2 class="glow">پنل مدیریت LA3</h2>
+
+    <p style="color:#aaa">
+        مدیریت کاربران
+    </p>
+
+    <div id="adminUsers" class="admin-list"></div>
+
+</div>
 </section>
 
 
 <!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =========================
+/* ==============================
    SUPABASE
-========================= */
+============================== */
 
 const SUPABASE_URL =
-  "https://ibqhyqzolkzzpziocfvp.supabase.co";
+"https://ibqhyqzolkzzpziocfvp.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
+"sb_publishable_vOId9lF-lt6wa4NdOdzDXg_ZRRelWUh";
 
 const sb =
-  window.supabase.createClient(
+window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
-  );
+);
 
 
-/* =========================
-   VARIABLES
-========================= */
+/* ==============================
+   GLOBAL
+============================== */
 
 let currentUser = null;
-
 let tweets = [];
-
 let chats = [];
-
-let selectedTweetImage = null;
-
 let realtimeChannel = null;
 
 
-/* =========================
-   SECURITY / CLEAN
-========================= */
+/* ==============================
+   ELEMENTS
+============================== */
 
-function clean(value){
+const loginPage =
+document.getElementById("loginPage");
 
-  const div =
+const app =
+document.getElementById("app");
+
+const chatroomPage =
+document.getElementById("chatroomPage");
+
+const adminPage =
+document.getElementById("adminPage");
+
+const loginNotice =
+document.getElementById("loginNotice");
+
+
+/* ==============================
+   CLEAN
+============================== */
+
+function clean(text){
+
+    const div =
     document.createElement("div");
 
-  div.textContent =
-    value ?? "";
+    div.textContent =
+    String(text ?? "");
 
-  return div.innerHTML;
+    return div.innerHTML;
 }
 
 
-/* =========================
+/* ==============================
    LOGIN
-========================= */
+============================== */
 
 async function registerUser(){
 
-  const name =
-    document
-      .getElementById("name")
-      .value
-      .trim();
+    const name =
+    document.getElementById("name")
+    .value
+    .trim();
 
-  const username =
-    document
-      .getElementById("username")
-      .value
-      .trim()
-      .replace(/^@/,"")
-      .toLowerCase();
+    const username =
+    document.getElementById("username")
+    .value
+    .trim()
+    .replace(/^@/,"")
+    .toLowerCase();
 
-  const ownerPassword =
-    document
-      .getElementById("ownerPassword")
-      .value;
+    loginNotice.textContent = "";
 
-  const notice =
-    document.getElementById(
-      "loginNotice"
-    );
+    if(!name || !username){
 
-  const button =
-    document.getElementById(
-      "registerButton"
-    );
+        loginNotice.textContent =
+        "لطفاً نام و نام کاربری را وارد کنید.";
 
-
-  if(!name || !username){
-
-    notice.textContent =
-      "لطفاً نام و نام کاربری را وارد کنید.";
-
-    return;
-  }
-
-
-  if(username.length < 3){
-
-    notice.textContent =
-      "نام کاربری باید حداقل ۳ حرف باشد.";
-
-    return;
-  }
-
-
-  button.disabled = true;
-
-  button.textContent =
-    "در حال ورود...";
-
-  notice.textContent =
-    "در حال اتصال به سامانه...";
-
-
-  try{
-
-    /*
-      ابتدا بررسی می‌کنیم آیا
-      نشست قبلی وجود دارد یا خیر.
-    */
-
-    let sessionResult =
-      await sb.auth.getSession();
-
-    if(sessionResult.error){
-      throw sessionResult.error;
+        return;
     }
 
-    let session =
-      sessionResult.data.session;
+    if(username.length < 3){
 
+        loginNotice.textContent =
+        "نام کاربری باید حداقل ۳ حرف باشد.";
 
-    /*
-      اگر نشست وجود نداشت،
-      ورود ناشناس انجام می‌شود.
-    */
-
-    if(!session){
-
-      const anonymous =
-        await sb.auth.signInAnonymously();
-
-      if(anonymous.error){
-        throw anonymous.error;
-      }
-
-      session =
-        anonymous.data.session;
+        return;
     }
 
+    loginNotice.textContent =
+    "در حال اتصال به LA3...";
 
-    if(!session || !session.user){
+    const button =
+    document.getElementById("registerBtn");
 
-      throw new Error(
-        "ورود به حساب ناشناس انجام نشد."
-      );
-    }
+    button.disabled = true;
+    button.textContent = "در حال ورود...";
+
+    try{
+
+        /* دریافت session فعلی */
+        let sessionResult =
+        await sb.auth.getSession();
+
+        let session =
+        sessionResult.data?.session;
+
+        /* اگر session نداریم، ورود ناشناس */
+        if(!session){
+
+            const anonymous =
+            await sb.auth.signInAnonymously();
+
+            if(anonymous.error){
+                throw anonymous.error;
+            }
+
+            session =
+            anonymous.data?.session;
+        }
+
+        if(!session){
+
+            throw new Error(
+                "ورود ناشناس انجام نشد. Anonymous Sign-Ins را در Supabase فعال کنید."
+            );
+        }
+
+        const uid =
+        session.user.id;
 
 
-    const uid =
-      session.user.id;
-
-
-    /*
-      پروفایل کاربر
-    */
-
-    let profileResult =
-      await sb
+        /* جستجوی پروفایل */
+        const existing =
+        await sb
         .from("profiles")
         .select("*")
         .eq("id",uid)
         .maybeSingle();
 
-
-    if(profileResult.error){
-
-      throw profileResult.error;
-    }
-
-
-    let profile =
-      profileResult.data;
-
-
-    /*
-      اگر پروفایل وجود داشته باشد
-    */
-
-    if(profile){
-
-      /*
-        اگر کاربر مسدود شده باشد.
-        اگر ستون is_banned در جدول شما
-        وجود نداشته باشد، این قسمت خطا نمی‌دهد
-        چون فقط وقتی مقدار وجود داشته باشد
-        بررسی می‌شود.
-      */
-
-      if(profile.is_banned === true){
-
-        notice.textContent =
-          "این کاربر مسدود شده است.";
-
-        return;
-      }
-
-
-      /*
-        به‌روزرسانی نام و نام کاربری
-      */
-
-      if(
-        profile.username !== username ||
-        profile.display_name !== name
-      ){
-
-        const updateResult =
-          await sb
-            .from("profiles")
-            .update({
-              username:username,
-              display_name:name
-            })
-            .eq("id",uid);
-
-
-        if(updateResult.error){
-
-          throw updateResult.error;
+        if(existing.error){
+            throw existing.error;
         }
 
 
-        profile = {
-          ...profile,
-          username:username,
-          display_name:name
-        };
-      }
+        let profile;
 
-    }
 
-    /*
-      اگر پروفایل وجود نداشت
-    */
+        /* پروفایل موجود است */
+        if(existing.data){
 
-    else{
+            profile =
+            existing.data;
 
-      const insertResult =
-        await sb
-          .from("profiles")
-          .insert({
+            if(profile.is_banned){
+
+                loginNotice.textContent =
+                "این کاربر مسدود شده است.";
+
+                return;
+            }
+
+            const updateData = {};
+
+            if(profile.username !== username){
+                updateData.username = username;
+            }
+
+            if(profile.display_name !== name){
+                updateData.display_name = name;
+            }
+
+            if(Object.keys(updateData).length){
+
+                const updated =
+                await sb
+                .from("profiles")
+                .update(updateData)
+                .eq("id",uid)
+                .select("*")
+                .single();
+
+                if(updated.error){
+                    throw updated.error;
+                }
+
+                profile =
+                updated.data;
+            }
+
+        }
+
+        /* ساخت پروفایل */
+        else{
+
+            const created =
+            await sb
+            .from("profiles")
+            .insert({
+
+                id:uid,
+
+                username:username,
+
+                display_name:name
+
+            })
+            .select("*")
+            .single();
+
+            if(created.error){
+                throw created.error;
+            }
+
+            profile =
+            created.data;
+        }
+
+
+        currentUser = {
+
             id:uid,
-            username:username,
-            display_name:name
-          })
-          .select("*")
-          .single();
+
+            name:
+            profile.display_name || name,
+
+            username:
+            profile.username || username,
+
+            verified:
+            !!profile.is_verified,
+
+            isOwner:
+            !!profile.is_owner
+
+        };
 
 
-      if(insertResult.error){
+        /* نمایش برنامه */
 
-        throw insertResult.error;
-      }
+        loginPage.classList.add("hidden");
 
+        adminPage.classList.add("hidden");
 
-      profile =
-        insertResult.data;
-    }
+        chatroomPage.classList.add("hidden");
 
-
-    /*
-      کاربر فعلی
-    */
-
-    currentUser = {
-
-      id:uid,
-
-      name:
-        profile.display_name,
-
-      username:
-        profile.username,
-
-      verified:
-        profile.is_verified === true,
-
-      isOwner:
-        profile.is_owner === true
-
-    };
+        app.classList.remove("hidden");
 
 
-    /*
-      رمز مالک فعلاً فقط برای جلوگیری
-      از ورود اشتباه در رابط کاربری است.
-      تشخیص واقعی مالک از is_owner می‌آید.
-    */
-
-    if(
-      ownerPassword &&
-      !currentUser.isOwner
-    ){
-
-      notice.textContent =
-        "رمز وارد شد، اما این حساب مالک نیست.";
-
-    }
-
-
-    /*
-      نمایش برنامه
-    */
-
-    document
-      .getElementById("loginPage")
-      .classList.add("hidden");
-
-    document
-      .getElementById("adminPage")
-      .classList.add("hidden");
-
-    document
-      .getElementById("chatroomPage")
-      .classList.add("hidden");
-
-    document
-      .getElementById("app")
-      .classList.remove("hidden");
-
-
-    document
-      .getElementById("currentUser")
-      .textContent =
+        document
+        .getElementById("currentUser")
+        .textContent =
         "@" +
-        profile.username +
+        currentUser.username +
         " — " +
-        profile.display_name;
+        currentUser.name;
 
 
-    document
-      .getElementById("adminButton")
-      .classList.toggle(
-        "hidden",
-        !profile.is_owner
-      );
+        document
+        .getElementById("adminButton")
+        .classList
+        .toggle(
+            "hidden",
+            !currentUser.isOwner
+        );
 
 
-    /*
-      دریافت اطلاعات
-    */
-
-    await loadTweetsFromDB();
-
-    await loadChatsFromDB();
-
-    setupRealtime();
+        loginNotice.textContent = "";
 
 
-  }catch(error){
+        /* بارگذاری اطلاعات */
 
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
+        await loadTweetsFromDB();
 
-    notice.textContent =
-      error.message ||
-      "خطا در اتصال به Supabase.";
+        await loadChatsFromDB();
 
-  }finally{
+        subscribeRealtime();
 
-    button.disabled = false;
+    }
 
-    button.textContent =
-      "ثبت";
-  }
+    catch(error){
 
+        console.error(error);
+
+        loginNotice.textContent =
+        error.message ||
+        "خطا در اتصال به Supabase.";
+
+    }
+
+    finally{
+
+        button.disabled = false;
+
+        button.textContent = "ثبت";
+
+    }
 }
 
 
-/* =========================
+/* ==============================
    TWEETS
-========================= */
+============================== */
 
 async function loadTweetsFromDB(){
 
-  const result =
+    const result =
     await sb
-      .from("tweets")
-      .select(`
+    .from("tweets")
+    .select(`
         id,
         author_id,
         content,
         image_url,
         created_at,
         profiles(
-          username,
-          display_name,
-          is_verified
+            username,
+            display_name,
+            is_verified
         )
-      `)
-      .order(
+    `)
+    .order(
         "created_at",
-        {
-          ascending:true
-        }
-      );
-
-
-  if(result.error){
-
-    console.error(
-      "TWEETS LOAD ERROR:",
-      result.error
+        {ascending:true}
     );
 
-    return;
-  }
+    if(result.error){
+
+        console.error(
+            "Tweets:",
+            result.error
+        );
+
+        renderTweets();
+
+        return;
+    }
 
 
-  tweets =
-    (result.data || []).map(item =>({
+    tweets =
+    (result.data || []).map(item => ({
 
-      id:item.id,
+        id:item.id,
 
-      author_id:
-        item.author_id,
+        author_id:item.author_id,
 
-      name:
+        name:
         item.profiles?.display_name ||
         "کاربر",
 
-      username:
+        username:
         item.profiles?.username ||
         "",
 
-      verified:
-        item.profiles?.is_verified === true,
+        verified:
+        !!item.profiles?.is_verified,
 
-      text:
+        text:
         item.content || "",
 
-      image_url:
+        image_url:
         item.image_url || ""
 
     }));
 
 
-  renderTweets();
+    renderTweets();
 }
 
 
-/* =========================
+/* ==============================
    ADD TWEET
-========================= */
+============================== */
 
 async function addTweet(){
 
-  if(!currentUser){
+    if(!currentUser){
 
-    alert(
-      "ابتدا وارد حساب شوید."
-    );
+        alert("ابتدا وارد حساب شوید.");
 
-    return;
-  }
+        return;
+    }
 
 
-  const input =
-    document.getElementById(
-      "tweetInput"
-    );
+    const input =
+    document.getElementById("tweetInput");
 
-  const text =
+    const text =
     input.value.trim();
 
 
-  if(!text && !selectedTweetImage){
+    if(!text){
 
-    alert(
-      "متن یا عکس وارد کنید."
-    );
+        alert("متن توییت را وارد کنید.");
 
-    return;
-  }
+        return;
+    }
 
 
-  let imageUrl = null;
+    const button =
+    document.getElementById("tweetSendBtn");
 
-
-  /*
-    اگر عکس انتخاب شده باشد
-    فعلاً به دلیل اینکه Storage ممکن است
-    روی پروژه متفاوت تنظیم شده باشد،
-    ابتدا متن توییت ارسال می‌شود.
-  */
-
-  if(selectedTweetImage){
+    button.disabled = true;
 
     try{
 
-      const file =
-        selectedTweetImage;
+        const result =
+        await sb
+        .from("tweets")
+        .insert({
 
-      const extension =
+            author_id:
+            currentUser.id,
+
+            content:
+            text
+
+        });
+
+
+        if(result.error){
+            throw result.error;
+        }
+
+
+        input.value = "";
+
+        await loadTweetsFromDB();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "ارسال توییت انجام نشد:\n" +
+            error.message
+        );
+
+    }
+
+    finally{
+
+        button.disabled = false;
+
+    }
+}
+
+
+/* ==============================
+   IMAGE TWEET
+============================== */
+
+function chooseTweetImage(){
+
+    document
+    .getElementById("tweetImageInput")
+    .click();
+
+}
+
+
+async function uploadTweetImage(){
+
+    const input =
+    document.getElementById("tweetImageInput");
+
+    const file =
+    input.files[0];
+
+    if(!file){
+        return;
+    }
+
+
+    document
+    .getElementById("tweetFileName")
+    .textContent =
+    "در حال آپلود: " +
+    file.name;
+
+
+    if(!currentUser){
+
+        alert("ابتدا وارد شوید.");
+
+        return;
+    }
+
+
+    try{
+
+        const extension =
         file.name
-          .split(".")
-          .pop();
+        .split(".")
+        .pop()
+        .toLowerCase();
 
-      const fileName =
+
+        const filePath =
+        "tweets/" +
         currentUser.id +
         "_" +
         Date.now() +
@@ -1278,145 +1105,120 @@ async function addTweet(){
         extension;
 
 
-      const upload =
-        await sb.storage
-          .from("tweet-images")
-          .upload(
-            fileName,
+        const upload =
+        await sb
+        .storage
+        .from("la3-media")
+        .upload(
+            filePath,
             file,
             {
-              upsert:false
+                cacheControl:"3600",
+                upsert:false
             }
-          );
-
-
-      if(upload.error){
-
-        console.error(
-          "IMAGE UPLOAD:",
-          upload.error
         );
+
+
+        if(upload.error){
+            throw upload.error;
+        }
+
+
+        const publicUrl =
+        sb
+        .storage
+        .from("la3-media")
+        .getPublicUrl(filePath)
+        .data
+        .publicUrl;
+
+
+        const text =
+        document
+        .getElementById("tweetInput")
+        .value
+        .trim();
+
+
+        const inserted =
+        await sb
+        .from("tweets")
+        .insert({
+
+            author_id:
+            currentUser.id,
+
+            content:
+            text || "📷 تصویر",
+
+            image_url:
+            publicUrl
+
+        });
+
+
+        if(inserted.error){
+            throw inserted.error;
+        }
+
+
+        document
+        .getElementById("tweetInput")
+        .value = "";
+
+        input.value = "";
+
+        document
+        .getElementById("tweetFileName")
+        .textContent =
+        "عکس با موفقیت ارسال شد ✅";
+
+
+        await loadTweetsFromDB();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document
+        .getElementById("tweetFileName")
+        .textContent = "";
 
         alert(
-          "آپلود عکس انجام نشد: " +
-          upload.error.message
+            "آپلود عکس انجام نشد:\n" +
+            error.message
         );
+    }
+}
+
+
+/* ==============================
+   RENDER TWEETS
+============================== */
+
+function renderTweets(){
+
+    const feed =
+    document.getElementById("tweetFeed");
+
+
+    if(!tweets.length){
+
+        feed.innerHTML =
+        '<div class="empty">هنوز توییتی وجود ندارد.</div>';
 
         return;
-      }
-
-
-      const publicUrl =
-        sb.storage
-          .from("tweet-images")
-          .getPublicUrl(
-            fileName
-          );
-
-
-      imageUrl =
-        publicUrl.data.publicUrl;
-
-    }catch(error){
-
-      console.error(error);
-
-      alert(
-        "خطا در آپلود عکس."
-      );
-
-      return;
     }
-  }
 
 
-  const result =
-    await sb
-      .from("tweets")
-      .insert({
+    feed.innerHTML =
+    tweets.map(tweet => `
 
-        author_id:
-          currentUser.id,
+        <div class="item">
 
-        content:
-          text || null,
+            <div class="meta">
 
-        image_url:
-          imageUrl
-
-      });
-
-
-  if(result.error){
-
-    console.error(
-      "TWEET ERROR:",
-      result.error
-    );
-
-    alert(
-      "ارسال توییت انجام نشد:\n" +
-      result.error.message
-    );
-
-    return;
-  }
-
-
-  input.value = "";
-
-  selectedTweetImage = null;
-
-  document
-    .getElementById(
-      "selectedImageName"
-    )
-    .textContent = "";
-
-
-  document
-    .getElementById(
-      "imageInput"
-    )
-    .value = "";
-
-
-  await loadTweetsFromDB();
-}
-
-
-/* =========================
-   IMAGE SELECT
-========================= */
-
-function selectTweetImage(){
-
-  document
-    .getElementById(
-      "imageInput"
-    )
-    .click();
-}
-
-
-function handleTweetImage(event){
-
-  const file =
-    event.target.files[0];
-
-
-  if(!file){
-
-    selectedTweetImage =
-      null;
-
-    return;
-  }
-
-
-  selectedTweetImage =
-    file;
-
-
-  document
-    .getElementBy
+                <b>
+                    ${clean(tweet.nam
