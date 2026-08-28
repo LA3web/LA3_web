@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<title>LA3 • LUX OWNER</title>
+<title>LA3</title>
 
 <style>
 *{
@@ -278,6 +278,24 @@ main{
     transform:scale(.97);
 }
 
+/* فقط استایل دکمه حذف توییت - بدون تغییر ظاهر اصلی سایت */
+.tweet-delete-row{
+    margin-top:8px;
+    display:flex;
+    justify-content:flex-end;
+}
+.tweet-delete-btn{
+    width:auto;
+    padding:7px 12px;
+    border:1px solid #ff1744;
+    border-radius:10px;
+    background:#24030a;
+    color:#fff;
+    font-size:12px;
+    cursor:pointer;
+}
+.tweet-delete-btn:active{transform:scale(.98);}
+
 .feed{
     max-height:440px;
     overflow:auto;
@@ -356,20 +374,7 @@ main{
 }
 
 .owner-input{width:100%;padding:11px;margin:6px 0;border-radius:10px;border:1px solid #333;background:#030303;color:#fff}
-#ownerUsers .user-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 8px;border-bottom:1px solid rgba(255,255,255,.07)}
-.row-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.danger{border-color:rgba(255,23,68,.55)!important;background:rgba(45,5,14,.8)!important}
-.chat-message-item{border-top:1px solid rgba(255,255,255,.07);padding:12px 4px;display:flex}
-.chat-message-item.self{justify-content:flex-start}
-.chat-message-item.other{justify-content:flex-end}
-.chat-bubble{width:min(88%,680px);padding:12px 14px;border-radius:17px;line-height:1.85;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-.chat-message-item.self .chat-bubble{background:linear-gradient(135deg,rgba(0,125,255,.20),rgba(0,52,95,.16));border:1px solid rgba(22,185,255,.42);border-right:3px solid var(--cyan);border-radius:17px 17px 5px 17px}
-.chat-message-item.other .chat-bubble{background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,23,68,.025));border:1px solid rgba(255,255,255,.11);border-right:3px solid rgba(255,23,68,.68);border-radius:17px 17px 17px 5px}
-.chat-message-item.self .message-author{color:#55caff}
-.chat-message-item.other .message-author{color:#ff819a}
-.message-author{font-size:12px;margin-bottom:5px;color:#9fb1c5}
-.owner-state{margin:10px 0;padding:10px 12px;border-radius:12px;background:rgba(22,185,255,.06);border:1px solid rgba(22,185,255,.15);color:#9fb1c5;font-size:12px;line-height:1.8}
-@media(max-width:700px){.chat-bubble{width:94%}.row-actions{width:100%}#ownerUsers .user-row{flex-direction:column;align-items:stretch}}
+#ownerUsers .user-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px;border-bottom:1px solid #222}
 
 .media-preview{margin-top:10px;padding:10px;border:1px dashed #00aaff55;border-radius:12px;background:#050b10}
 .media-preview img{display:block;max-width:100%;max-height:260px;margin:auto;border-radius:10px}
@@ -379,172 +384,165 @@ main{
 
 .media-error{color:#ff607b;text-align:center;padding:10px}.message-image img{display:block;max-width:100%;max-height:420px;margin:10px auto;border-radius:12px;object-fit:contain}.message-image img.hidden{display:none!important}
 
-/* ===== LA3 LUX VISUAL REFRESH ===== */
-:root{
-  --bg:#03060b;
-  --panel:rgba(7,12,20,.88);
-  --panel2:rgba(10,17,28,.92);
-  --cyan:#16b9ff;
-  --cyan2:#087dff;
-  --red:#ff1744;
-  --text:#f5f7fb;
-  --muted:#8d9aaa;
-  --line:rgba(22,185,255,.22);
+/* =========================
+   MODERN CHAT UI
+   ========================= */
+#chatroomPage .admin-panel{
+    background:
+      radial-gradient(circle at 100% 0%, rgba(0,170,255,.08), transparent 32%),
+      radial-gradient(circle at 0% 100%, rgba(255,23,68,.06), transparent 30%),
+      rgba(4,8,14,.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
-body{
-  background:
-    radial-gradient(circle at 12% 8%,rgba(0,153,255,.10),transparent 28%),
-    radial-gradient(circle at 88% 18%,rgba(255,23,68,.08),transparent 30%),
-    radial-gradient(circle at 50% 100%,rgba(0,92,255,.07),transparent 38%),
-    #03060b;
-  color:var(--text);
+
+#chatroomPage #chatFeed{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:12px 5px 18px;
+    scroll-behavior:smooth;
 }
-body:before{
-  content:"";
-  position:fixed; inset:0; pointer-events:none; z-index:-1;
-  background:linear-gradient(rgba(255,255,255,.012) 1px,transparent 1px),
-             linear-gradient(90deg,rgba(255,255,255,.010) 1px,transparent 1px);
-  background-size:42px 42px;
+
+#chatroomPage #chatFeed .chat-row{
+    display:flex;
+    width:100%;
+    animation: chatIn .22s ease-out;
 }
-header{
-  background:rgba(3,6,11,.84);
-  border-bottom:1px solid rgba(22,185,255,.20);
-  box-shadow:0 8px 35px rgba(0,0,0,.35);
+
+#chatroomPage #chatFeed .chat-row.mine{
+    justify-content:flex-end;
 }
-.brand{
-  text-shadow:0 0 10px var(--red),0 0 30px rgba(255,23,68,.35);
+
+#chatroomPage #chatFeed .chat-row.other{
+    justify-content:flex-start;
 }
-.panel,.admin-panel,.login-card,.ad-box{
-  background:linear-gradient(145deg,rgba(10,17,27,.92),rgba(3,7,13,.94));
-  border:1px solid rgba(22,185,255,.28);
-  box-shadow:0 10px 40px rgba(0,0,0,.28),0 0 24px rgba(22,185,255,.07);
+
+#chatroomPage #chatFeed .chat-bubble{
+    position:relative;
+    width:min(82%, 650px);
+    padding:11px 14px 12px;
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 8px 28px rgba(0,0,0,.22);
+    transition:transform .18s ease, box-shadow .18s ease;
 }
-.panel{
-  position:relative;
-  overflow:hidden;
+
+#chatroomPage #chatFeed .chat-bubble:hover{
+    transform:translateY(-1px);
 }
-.panel:after{
-  content:"";
-  position:absolute; inset:0; pointer-events:none;
-  border-radius:inherit;
-  background:linear-gradient(120deg,rgba(22,185,255,.045),transparent 35%,rgba(255,23,68,.035));
+
+#chatroomPage #chatFeed .chat-row.mine .chat-bubble{
+    background:linear-gradient(135deg, rgba(0,132,255,.25), rgba(0,48,90,.62));
+    border-color:rgba(0,174,255,.42);
+    box-shadow:0 8px 28px rgba(0,150,255,.10);
+    border-bottom-right-radius:6px;
 }
-.panel h2{
-  position:relative; z-index:1;
-  letter-spacing:.2px;
+
+#chatroomPage #chatFeed .chat-row.other .chat-bubble{
+    background:linear-gradient(135deg, rgba(42,48,58,.82), rgba(19,23,30,.94));
+    border-color:rgba(255,255,255,.11);
+    border-bottom-left-radius:6px;
 }
-.item{
-  border-top:1px solid rgba(255,255,255,.075);
-  padding:15px 8px;
-  transition:background .2s ease,transform .2s ease;
+
+#chatroomPage #chatFeed .chat-name{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:7px;
+    font-size:12px;
+    font-weight:700;
 }
-.item:hover{
-  background:rgba(255,255,255,.018);
+
+#chatroomPage #chatFeed .mine .chat-name{
+    color:#52c7ff;
+    justify-content:flex-end;
 }
-.message{
-  color:#eef4fb;
+
+#chatroomPage #chatFeed .other .chat-name{
+    color:#ff718d;
 }
-.meta{color:#778496}
-.feed{
-  scrollbar-width:thin;
-  scrollbar-color:rgba(22,185,255,.45) transparent;
+
+#chatroomPage #chatFeed .chat-avatar{
+    width:27px;
+    height:27px;
+    min-width:27px;
+    border-radius:50%;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:11px;
+    font-weight:900;
+    color:#fff;
+    background:linear-gradient(135deg,#147dff,#00c6ff);
+    box-shadow:0 0 12px rgba(0,174,255,.25);
 }
-.feed::-webkit-scrollbar{width:7px}
-.feed::-webkit-scrollbar-thumb{background:rgba(22,185,255,.35);border-radius:20px}
-.small-btn{
-  border:1px solid rgba(22,185,255,.65);
-  background:linear-gradient(180deg,rgba(10,27,43,.95),rgba(5,14,24,.95));
-  box-shadow:0 0 12px rgba(22,185,255,.07);
-  transition:transform .15s ease,box-shadow .2s ease,border-color .2s ease;
+
+#chatroomPage #chatFeed .other .chat-avatar{
+    background:linear-gradient(135deg,#8e1739,#ff315e);
+    box-shadow:0 0 12px rgba(255,35,86,.20);
 }
-.small-btn:hover{
-  border-color:var(--cyan);
-  box-shadow:0 0 18px rgba(22,185,255,.18);
+
+#chatroomPage #chatFeed .chat-username{
+    opacity:.72;
+    font-weight:500;
 }
-.btn{
-  background:linear-gradient(135deg,#ff1744,#e9003b);
-  box-shadow:0 0 18px rgba(255,23,68,.30);
+
+#chatroomPage #chatFeed .chat-text{
+    white-space:pre-wrap;
+    line-height:1.85;
+    font-size:14px;
+    color:#f3f7fb;
+    overflow-wrap:anywhere;
 }
-.ad-box{
-  border-color:rgba(22,185,255,.52);
-  box-shadow:0 0 26px rgba(22,185,255,.12),inset 0 0 30px rgba(22,185,255,.025);
+
+#chatroomPage #chatFeed .chat-time{
+    margin-top:7px;
+    font-size:10px;
+    color:rgba(255,255,255,.43);
 }
-.ad-slide img{
-  filter:saturate(1.08) contrast(1.04);
+
+#chatroomPage #chatFeed .mine .chat-time{
+    text-align:left;
 }
-.ad-caption{
-  background:linear-gradient(transparent,rgba(0,0,0,.88));
+
+#chatroomPage #chatFeed .other .chat-time{
+    text-align:right;
 }
-.media-preview{
-  border:1px dashed rgba(22,185,255,.55);
-  background:linear-gradient(145deg,rgba(7,22,35,.8),rgba(3,8,14,.9));
+
+#chatroomPage .compose{
+    padding:10px;
+    border:1px solid rgba(0,174,255,.18);
+    border-radius:18px;
+    background:rgba(3,8,14,.72);
+    box-shadow:0 10px 30px rgba(0,0,0,.20);
 }
-.message-image img{
-  border:1px solid rgba(22,185,255,.18);
-  box-shadow:0 8px 24px rgba(0,0,0,.28);
+
+#chatroomPage #chatInput{
+    border-radius:14px;
+    border-color:rgba(0,174,255,.20);
+    background:rgba(0,0,0,.30);
+    transition:border-color .2s, box-shadow .2s;
 }
-.blue-tick{
-  width:19px;height:19px;
-  background:linear-gradient(145deg,#22b8ff,#087dff);
-  box-shadow:0 0 10px rgba(22,185,255,.55);
+
+#chatroomPage #chatInput:focus{
+    border-color:rgba(0,174,255,.65);
+    box-shadow:0 0 0 3px rgba(0,174,255,.08), 0 0 18px rgba(0,174,255,.08);
 }
-.owner-input{
-  border:1px solid rgba(22,185,255,.25)!important;
-  background:rgba(2,7,12,.9)!important;
+
+@keyframes chatIn{
+    from{opacity:0;transform:translateY(7px) scale(.985)}
+    to{opacity:1;transform:translateY(0) scale(1)}
 }
-.owner-input:focus{
-  border-color:rgba(22,185,255,.75)!important;
-  box-shadow:0 0 14px rgba(22,185,255,.10);
+
+@media(max-width:600px){
+    #chatroomPage #chatFeed .chat-bubble{
+        width:min(88%, 650px);
+    }
+    #chatroomPage #chatFeed .chat-text{
+        font-size:13.5px;
+    }
 }
-.owner-card{
-  border:1px solid rgba(255,23,68,.20)!important;
-}
-.self-message{
-  margin-right:auto;
-  width:min(92%,680px);
-  background:linear-gradient(135deg,rgba(0,125,255,.17),rgba(0,46,90,.13));
-  border:1px solid rgba(22,185,255,.35);
-  border-right:3px solid var(--cyan);
-  border-radius:16px 16px 5px 16px;
-  padding:12px 14px;
-  box-shadow:0 7px 24px rgba(0,0,0,.18),0 0 18px rgba(22,185,255,.05);
-}
-.other-message{
-  width:min(92%,680px);
-  background:linear-gradient(135deg,rgba(255,255,255,.035),rgba(255,23,68,.025));
-  border:1px solid rgba(255,255,255,.10);
-  border-right:3px solid rgba(255,23,68,.65);
-  border-radius:16px 16px 16px 5px;
-  padding:12px 14px;
-  box-shadow:0 7px 24px rgba(0,0,0,.16);
-}
-.message-author{
-  font-size:12px;
-  margin-bottom:5px;
-  color:#9fb1c5;
-}
-.self-message .message-author{color:#55caff}
-.other-message .message-author{color:#ff7c97}
-.owner-section-title{
-  display:flex;align-items:center;gap:8px;
-  margin:0 0 12px;
-}
-.control-box{
-  padding:12px;
-  margin-top:10px;
-  border-radius:14px;
-  background:rgba(0,0,0,.20);
-  border:1px solid rgba(255,255,255,.07);
-}
-.file-btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:10px 13px;border-radius:10px;cursor:pointer;
-  border:1px solid rgba(22,185,255,.55);
-  background:#071019;color:#fff;
-}
-.file-btn input{display:none}
-.status-ok{color:#54e7a3!important}
-.status-bad{color:#ff718d!important}
 
 </style>
 </head>
@@ -584,7 +582,7 @@ header{
 
         <div class="field">
             <label for="ownerCode">کد مالکیت (فقط برای مالک)</label>
-            <input id="ownerCode" type="password" maxlength="40" placeholder="کد مالکیت را وارد کنید" autocomplete="off">
+            <input id="ownerCode" type="password" maxlength="40" placeholder="اگر مالک هستید کد را وارد کنید" autocomplete="off">
             <div id="ownerModeHint" class="notice hidden" style="margin-top:6px">کد مالکیت وارد شد؛ نام و نام کاربری برای مالک الزامی نیست.</div>
         </div>
 
@@ -828,38 +826,25 @@ header{
   <div class="admin-panel">
     <button id="ownerBackButton" class="small-btn back">← بازگشت</button>
     <h2 class="glow">👑 پنل مالک LA3</h2>
-    <div id="ownerPanelStatus" class="owner-state">احراز مالکیت از طریق Supabase انجام شده است. عملیات تبلیغ، کانال و مدیریت کاربران مستقیماً در دیتابیس ذخیره می‌شوند.</div>
     <div class="grid" style="margin-top:15px">
       <section class="panel"><h2>👥 کاربران</h2><div id="ownerUsers" class="admin-list"></div></section>
       <section class="panel"><h2>📢 تبلیغات</h2>
         <input id="adTitle" class="owner-input" placeholder="عنوان تبلیغ">
-        <input id="adImage" class="owner-input" placeholder="لینک تصویر تبلیغ (اختیاری)">
-        <label class="file-btn">📷 انتخاب تصویر تبلیغ
-          <input id="adImageFile" type="file" accept="image/*">
-        </label>
-        <input id="adLink" class="owner-input" placeholder="لینک مقصد (اختیاری)">
+        <input id="adImage" class="owner-input" placeholder="لینک تصویر تبلیغ">
+        <input id="adLink" class="owner-input" placeholder="لینک مقصد">
         <button id="saveAdButton" class="small-btn">افزودن تبلیغ</button>
-        <div id="adOwnerStatus" class="notice"></div>
         <div id="ownerAds" class="admin-list"></div>
       </section>
       <section class="panel"><h2>📣 کانال رسمی</h2>
         <input id="channelNameInput" class="owner-input" placeholder="نام کانال">
         <input id="channelBioInput" class="owner-input" placeholder="توضیحات">
         <input id="channelLinkInput" class="owner-input" placeholder="لینک کانال">
-        <input id="channelAvatarInput" class="owner-input" placeholder="لینک عکس پروفایل (اختیاری)">
-        <label class="file-btn">🖼️ انتخاب عکس پروفایل
-          <input id="channelAvatarFile" type="file" accept="image/*">
-        </label>
+        <input id="channelAvatarInput" class="owner-input" placeholder="لینک عکس پروفایل">
         <button id="saveChannelButton" class="small-btn">ذخیره اطلاعات کانال</button>
-        <div id="channelOwnerStatus" class="notice"></div>
         <hr style="border-color:#222;margin:15px 0">
         <input id="channelPostText" class="owner-input" placeholder="متن پست رسمی">
         <input id="channelPostImage" class="owner-input" placeholder="لینک تصویر پست (اختیاری)">
-        <label class="file-btn">📷 انتخاب تصویر پست
-          <input id="channelPostImageFile" type="file" accept="image/*">
-        </label>
         <button id="addChannelPostButton" class="small-btn">افزودن پست</button>
-        <div id="channelPostOwnerStatus" class="notice"></div>
         <div id="ownerChannelPosts" class="admin-list"></div>
       </section>
     </div>
@@ -917,19 +902,6 @@ const usernameInput =
 
 const ownerCodeInput =
     document.getElementById("ownerCode");
-
-const adTitle = document.getElementById("adTitle");
-const adImage = document.getElementById("adImage");
-const adLink = document.getElementById("adLink");
-const adImageFile = document.getElementById("adImageFile");
-const channelNameInput = document.getElementById("channelNameInput");
-const channelBioInput = document.getElementById("channelBioInput");
-const channelLinkInput = document.getElementById("channelLinkInput");
-const channelAvatarInput = document.getElementById("channelAvatarInput");
-const channelAvatarFile = document.getElementById("channelAvatarFile");
-const channelPostText = document.getElementById("channelPostText");
-const channelPostImage = document.getElementById("channelPostImage");
-const channelPostImageFile = document.getElementById("channelPostImageFile");
 
 let ownerLoginMode = false;
 
@@ -1437,16 +1409,26 @@ async function loadTweets(){
                 tweet.profiles || {};
 
 
-            const mine = currentUser && tweet.author_id === currentUser.id;
             return `
 
-                <div class="item ${mine ? 'self-message' : 'other-message'}">
+                <div class="item">
 
-                    <div class="message-author">
-                        <b>${escapeHTML(profile.display_name || "کاربر")}</b>
-                        ${profile.username ? " @" + escapeHTML(profile.username) : ""}
+                    <div class="meta">
+
+                        <b>
+                            ${escapeHTML(
+                                profile.display_name ||
+                                "کاربر"
+                            )}
+                        </b>
+
+                        @${escapeHTML(
+                            profile.username ||
+                            ""
+                        )}
+
                         ${renderVerified(profile)}
-                        ${mine ? '<span style="opacity:.75"> • شما</span>' : ''}
+
                     </div>
 
                     <div class="message">
@@ -1454,12 +1436,38 @@ async function loadTweets(){
                         ${renderMediaImage(tweet.image_url,"تصویر توییت")}
                     </div>
 
+                    ${currentUser && tweet.author_id === currentUser.id ? `
+                        <div class="tweet-delete-row">
+                            <button class="tweet-delete-btn" onclick="deleteTweet('${tweet.id}')">🗑️ حذف توییت</button>
+                        </div>
+                    ` : ""}
+
                 </div>
 
             `;
 
         }).join("");
     attachMediaErrorHandlers(feed);
+}
+
+
+async function deleteTweet(tweetId){
+    if(!currentUser || !tweetId || !sb) return;
+    if(!confirm("آیا از حذف توییت خودت مطمئنی؟")) return;
+
+    try{
+        const result = await sb
+            .from("tweets")
+            .delete()
+            .eq("id", tweetId)
+            .eq("author_id", currentUser.id);
+
+        if(result.error) throw result.error;
+        await loadTweets();
+    }catch(error){
+        console.error("TWEET DELETE ERROR:", error);
+        alert("حذف توییت انجام نشد:\n" + (error?.message || "خطای نامشخص"));
+    }
 }
 
 
@@ -1542,22 +1550,45 @@ function renderChats(chats){
     feed.innerHTML = chats.map(chat => {
 
         const profile = chat.profiles || {};
-        const mine = currentUser && chat.author_id === currentUser.id;
-        const who = profile.display_name || "کاربر";
-        const uname = profile.username ? " @" + profile.username : "";
-        const verified = renderVerified(profile);
+        const mine = currentUser && String(chat.author_id) === String(currentUser.id);
+
+        const displayName = profile.display_name || "کاربر";
+        const username = profile.username || "";
+        const firstChar = escapeHTML((displayName.trim() || "ک").charAt(0).toUpperCase());
+
+        let time = "";
+        if(chat.created_at){
+            try{
+                time = new Date(chat.created_at).toLocaleTimeString("fa-IR", {
+                    hour:"2-digit",
+                    minute:"2-digit"
+                });
+            }catch(e){}
+        }
 
         return `
-            <div class="chat-message-item ${mine ? "self" : "other"}">
+            <div class="chat-row ${mine ? "mine" : "other"}">
                 <div class="chat-bubble">
-                    <div class="message-author">
-                        <b>${escapeHTML(who)}</b>${escapeHTML(uname)} ${verified}
-                        ${mine ? '<span style="opacity:.75"> • شما</span>' : ''}
+
+                    <div class="chat-name">
+                        ${mine ? "" : `<span class="chat-avatar">${firstChar}</span>`}
+
+                        <span>
+                            ${escapeHTML(displayName)}
+                            ${renderVerified(profile)}
+                            ${username ? `<span class="chat-username">@${escapeHTML(username)}</span>` : ""}
+                        </span>
+
+                        ${mine ? `<span class="chat-avatar">${firstChar}</span>` : ""}
                     </div>
-                    <div class="message">
+
+                    <div class="chat-text">
                         ${escapeHTML(chat.content || "")}
                         ${renderMediaImage(chat.image_url,"تصویر پیام")}
                     </div>
+
+                    ${time ? `<div class="chat-time">${time}</div>` : ""}
+
                 </div>
             </div>
         `;
@@ -1676,303 +1707,88 @@ async function loadChannel(){
     }
 }
 function renderChannel(){loadChannel();}
-
 async function saveChannel(){
-    if(!isOwner){ alert("دسترسی مالک ندارید."); return; }
-    const status=document.getElementById("channelOwnerStatus");
-    try{
-        if(status){status.className="notice";status.textContent="در حال ذخیره...";}
-        let avatar=channelAvatarInput?.value.trim()||defaultChannel.avatar;
-        const file=channelAvatarFile?.files?.[0];
-        if(file) avatar=await uploadImage(file,"channel");
-        const c={
-          name:channelNameInput?.value.trim()||defaultChannel.name,
-          bio:channelBioInput?.value.trim()||defaultChannel.bio,
-          link:channelLinkInput?.value.trim()||"#",
-          avatar
-        };
-        localStorage.setItem("la3_channel",JSON.stringify(c));
-        if(!sb) throw new Error("اتصال Supabase برقرار نیست.");
-        const r=await sb.from("channel_settings").upsert(
-          {id:1,...c},{onConflict:"id"}
-        ).select().maybeSingle();
-        if(r.error) throw r.error;
-        if(status){status.className="notice status-ok";status.textContent="✓ اطلاعات کانال ذخیره شد.";}
-        if(channelAvatarFile) channelAvatarFile.value="";
-        await loadChannel();
-        await loadChannelPage();
-    }catch(e){
-        console.error("saveChannel",e);
-        if(status){status.className="notice status-bad";status.textContent="خطا: "+(e.message||e);}
-        else alert("ذخیره کانال انجام نشد: "+(e.message||e));
-    }
-}
-
-async function loadChannelPostsForOwner(){
-    const box=document.getElementById("ownerChannelPosts");
-    if(!box)return;
-    if(!sb){box.innerHTML='<div class="empty">Supabase متصل نیست.</div>';return;}
-    const r=await sb.from("channel_posts")
-      .select("id,content,image_url,created_at")
-      .order("created_at",{ascending:false}).limit(30);
-    if(r.error){
-      box.innerHTML='<div class="empty">خطا در دریافت پست‌ها: '+escapeHTML(r.error.message)+'</div>';
-      return;
-    }
-    box.innerHTML=(r.data||[]).map(x=>`
-      <div class="item">
-        <div class="meta">${new Date(x.created_at).toLocaleString("fa-IR")}</div>
-        <div class="message">${escapeHTML(x.content||"")}${renderMediaImage(x.image_url,"پست رسمی")}</div>
-        <button class="small-btn danger" onclick="deleteChannelPost('${x.id}')">حذف پست</button>
-      </div>`).join("")||'<div class="empty">پستی نیست.</div>';
-    attachMediaErrorHandlers(box);
-}
-
-const OFFICIAL_CHANNEL_ID = 1;
-
-async function addChannelPost(){
-    if(!isOwner){alert("دسترسی مالک ندارید.");return;}
-    if(!sb){alert("اتصال Supabase برقرار نیست.");return;}
-
-    const status=document.getElementById("channelPostOwnerStatus");
-
-    try{
-        if(status){
-            status.className="notice";
-            status.textContent="در حال انتشار پست و آپلود تصویر...";
-        }
-
-        const content=channelPostText?.value.trim()||"";
-        const file=channelPostImageFile?.files?.[0] || null;
-        let image_url=channelPostImage?.value.trim()||null;
-
-        // اگر فایل از گوشی انتخاب شده، حتماً آن را به Storage بفرست.
-        if(file){
-            image_url=await uploadImage(file,"channel-posts");
-            if(!image_url) throw new Error("آدرس تصویر ساخته نشد.");
-        }
-
-        if(!content && !image_url){
-            throw new Error("متن یا تصویر پست را وارد کنید.");
-        }
-
-        // اگر کاربر فایل انتخاب کرده ولی URL ساخته نشده، اجازه ثبت پست بدون عکس نده.
-        if(file && !image_url){
-            throw new Error("تصویر آپلود نشد؛ پست بدون تصویر ثبت نمی‌شود.");
-        }
-
-        const post={
-            channel_id:OFFICIAL_CHANNEL_ID,
-            author_id:currentUser.id,
-            content:content,
-            image_url:image_url
-        };
-
-        const r=await sb
-            .from("channel_posts")
-            .insert(post)
-            .select("id,channel_id,author_id,content,image_url,created_at")
-            .single();
-
-        if(r.error) throw r.error;
-
-        // بررسی نهایی: اگر فایل انتخاب شده بود باید image_url در رکورد وجود داشته باشد.
-        if(file && !r.data?.image_url){
-            throw new Error("پست ثبت شد ولی image_url خالی است؛ تصویر در رکورد ذخیره نشده است.");
-        }
-
-        if(channelPostText) channelPostText.value="";
-        if(channelPostImage) channelPostImage.value="";
-        if(channelPostImageFile) channelPostImageFile.value="";
-
-        if(status){
-            status.className="notice status-ok";
-            status.textContent=file
-                ? "✓ پست رسمی همراه با تصویر با موفقیت منتشر شد."
-                : "✓ پست رسمی با موفقیت منتشر شد.";
-        }
-
-        await loadChannel();
-        await loadChannelPostsForOwner();
-        await loadChannelPage();
-
-    }catch(e){
-        console.error("addChannelPost",e);
-        const message=e?.message||"خطای نامشخص";
-        if(status){
-            status.className="notice status-bad";
-            status.textContent="خطا در انتشار پست: "+message;
-        }else{
-            alert("انتشار پست انجام نشد: "+message);
-        }
-    }
-}
-
-async function deleteChannelPost(id){
     if(!isOwner)return;
-    const r=await sb.from("channel_posts").delete().eq("id",id);
-    if(r.error) alert("حذف پست انجام نشد: "+r.error.message);
-    else {await loadChannel();await loadChannelPostsForOwner();await loadChannelPage();}
+    const c={name:channelNameInput.value.trim()||defaultChannel.name,bio:channelBioInput.value.trim()||defaultChannel.bio,link:channelLinkInput.value.trim()||defaultChannel.link,avatar:channelAvatarInput.value.trim()||defaultChannel.avatar};
+    localStorage.setItem("la3_channel",JSON.stringify(c));
+    if(sb){const r=await sb.from("channel_settings").upsert({id:1,...c},{onConflict:"id"}); if(r.error) alert("ذخیره دیتابیس انجام نشد: "+r.error.message);}
+    await loadChannel(); alert("اطلاعات کانال ذخیره شد.");
 }
-
+async function loadChannelPostsForOwner(){
+    const box=document.getElementById("ownerChannelPosts"); if(!box)return;
+    if(!sb){box.innerHTML='';return;}
+    const r=await sb.from("channel_posts").select("id,content,created_at").order("created_at",{ascending:false}).limit(20);
+    if(r.error){box.innerHTML='<div class="empty">جدول پست‌های کانال را با SQL همراه فایل بسازید.</div>';return;}
+    box.innerHTML=(r.data||[]).map(x=>`<div class="item">${escapeHTML(x.content||"")} <button class="small-btn danger" onclick="deleteChannelPost('${x.id}')">حذف</button></div>`).join("")||'<div class="empty">پستی نیست.</div>';
+}
+async function addChannelPost(){
+    if(!isOwner||!sb)return;
+    const content=channelPostText.value.trim(), image_url=channelPostImage.value.trim()||null;
+    if(!content&&!image_url){alert("متن یا لینک تصویر را وارد کنید.");return;}
+    const r=await sb.from("channel_posts").insert({content,image_url}); if(r.error) alert(r.error.message); else {channelPostText.value="";channelPostImage.value="";await loadChannel();await loadChannelPostsForOwner();}
+}
+async function deleteChannelPost(id){if(!isOwner)return;const r=await sb.from("channel_posts").delete().eq("id",id);if(r.error)alert(r.error.message);else{await loadChannel();await loadChannelPostsForOwner();}}
 function openOwner(){
     if(!isOwner){alert("دسترسی مالک ندارید.");return;}
-    app.classList.add("hidden");
-    chatroomPage.classList.add("hidden");
-    channelPage.classList.add("hidden");
-    ownerPage.classList.remove("hidden");
-    const c=getChannel();
-    if(channelNameInput) channelNameInput.value=c.name||"";
-    if(channelBioInput) channelBioInput.value=c.bio||"";
-    if(channelLinkInput) channelLinkInput.value=c.link||"";
-    if(channelAvatarInput) channelAvatarInput.value=(c.avatar||"").startsWith("data:")?"":(c.avatar||"");
-    const state=document.getElementById("ownerPanelStatus");
-    if(state) state.textContent = "✓ مالک فعال است؛ تیک آبی، بن، تبلیغات و کانال رسمی از همین پنل قابل مدیریت‌اند.";
+    app.classList.add("hidden"); chatroomPage.classList.add("hidden"); channelPage.classList.add("hidden"); ownerPage.classList.remove("hidden");
+    const c=getChannel(); channelNameInput.value=c.name; channelBioInput.value=c.bio; channelLinkInput.value=c.link; channelAvatarInput.value=c.avatar;
     loadOwnerUsers(); loadOwnerAds(); loadChannelPostsForOwner();
 }
-
 function closeOwner(){ownerPage.classList.add("hidden");app.classList.remove("hidden");}
 
 async function loadOwnerUsers(){
     if(!isOwner || !sb)return;
-    const r=await sb.from("profiles")
-      .select("id,username,display_name,is_verified,is_banned,is_owner")
-      .order("created_at",{ascending:false});
+    const r=await sb.from("profiles").select("id,username,display_name,is_verified,is_banned,is_owner").order("created_at",{ascending:false});
     const box=document.getElementById("ownerUsers");
-    if(r.error){box.innerHTML='<div class="empty">خطا: '+escapeHTML(r.error.message)+'</div>';return;}
-    box.innerHTML=(r.data||[]).map(u=>`
-      <div class="user-row">
-        <div>
-          <b>${escapeHTML(u.display_name||"کاربر")}</b>
-          ${u.username?` @${escapeHTML(u.username)}`:""}
-          ${u.is_owner?' 👑':''} ${u.is_verified?' 🔵':''} ${u.is_banned?' 🚫':''}
-        </div>
-        <div class="row-actions">
-          <button class="small-btn" onclick="setUserVerified('${u.id}',${!u.is_verified})">${u.is_verified?'گرفتن تیک':'تیک آبی'}</button>
-          <button class="small-btn" onclick="setUserBanned('${u.id}',${!u.is_banned})">${u.is_banned?'رفع بن':'بن'}</button>
-        </div>
-      </div>`).join("") || '<div class="empty">کاربری نیست.</div>';
+    if(r.error){box.innerHTML='<div class="empty">برای مدیریت کاربران باید Policy مناسب profiles فعال باشد.</div>';return;}
+    box.innerHTML=(r.data||[]).map(u=>`<div class="user-row"><div><b>${escapeHTML(u.display_name||"کاربر")}</b> @${escapeHTML(u.username||"")} ${u.is_owner?'👑':''} ${u.is_verified?'🔵':''} ${u.is_banned?'🚫':''}</div><div class="row-actions"><button class="small-btn" onclick="setUserVerified('${u.id}',${!u.is_verified})">${u.is_verified?'گرفتن تیک':'تیک آبی'}</button><button class="small-btn" onclick="setUserBanned('${u.id}',${!u.is_banned})">${u.is_banned?'رفع بن':'بن'}</button></div></div>`).join("") || '<div class="empty">کاربری نیست.</div>';
 }
-
-async function setUserVerified(id,value){
-    if(!isOwner || !sb){alert("دسترسی مالک یا اتصال دیتابیس برقرار نیست.");return;}
-    const r=await sb.from("profiles").update({is_verified:value}).eq("id",id);
-    if(r.error){
-        console.error("setUserVerified",r.error);
-        alert("تغییر تیک انجام نشد:\n"+r.error.message);
-        return;
-    }
-    await loadOwnerUsers();
-    await loadTweets();
-    await loadChats();
-}
-async function setUserBanned(id,value){
-    if(!isOwner || !sb){alert("دسترسی مالک یا اتصال دیتابیس برقرار نیست.");return;}
-    const r=await sb.from("profiles").update({is_banned:value}).eq("id",id);
-    if(r.error){
-        console.error("setUserBanned",r.error);
-        alert("تغییر بن انجام نشد:\n"+r.error.message);
-        return;
-    }
-    await loadOwnerUsers();
-}
-
+async function setUserVerified(id,value){if(!isOwner)return; const r=await sb.from("profiles").update({is_verified:value}).eq("id",id); if(r.error)alert(r.error.message); else loadOwnerUsers();}
+async function setUserBanned(id,value){if(!isOwner)return; const r=await sb.from("profiles").update({is_banned:value}).eq("id",id); if(r.error)alert(r.error.message); else loadOwnerUsers();}
 async function getAds(){
     if(sb){
-        const r=await sb.from("advertisements")
-          .select("id,title,image_url,target_url,active,created_at")
-          .eq("active",true).order("created_at",{ascending:false});
+        const r=await sb.from("advertisements").select("id,title,image_url,target_url,active,created_at").eq("active",true).order("created_at",{ascending:false});
         if(!r.error) return r.data||[];
     }
-    return JSON.parse(localStorage.getItem("la3_ads")||"[]")
-      .map((a,i)=>({id:"local-"+i,title:a.title,image_url:a.image,target_url:a.link,active:true}));
+    return JSON.parse(localStorage.getItem("la3_ads")||"[]").map((a,i)=>({id:"local-"+i,title:a.title,image_url:a.image,target_url:a.link,active:true}));
 }
-
 async function loadOwnerAds(){
     const box=document.getElementById("ownerAds");
     if(!box)return;
-    let ads=[];
-    if(sb){
-      const r=await sb.from("advertisements")
-        .select("id,title,image_url,target_url,active,created_at")
-        .order("created_at",{ascending:false});
-      if(r.error){
-        box.innerHTML='<div class="empty">خطا در تبلیغات: '+escapeHTML(r.error.message)+'</div>';
-        return;
-      }
-      ads=r.data||[];
-    }else ads=await getAds();
-    box.innerHTML=ads.map(a=>`
-      <div class="item">
-        <b>${escapeHTML(a.title||"بدون عنوان")}</b>
-        ${a.image_url?renderMediaImage(a.image_url,"تبلیغ"):""}
-        <div><small>${escapeHTML(a.target_url||"بدون لینک")}</small></div>
-        <button class="small-btn danger" onclick="deleteAd('${a.id}')">حذف</button>
-      </div>`).join("")||'<div class="empty">تبلیغی ثبت نشده.</div>';
-    attachMediaErrorHandlers(box);
+    const ads=await getAds();
+    box.innerHTML=ads.map(a=>`<div class="item"><b>${escapeHTML(a.title)}</b><br><small>${escapeHTML(a.target_url||"")}</small><br><button class="small-btn danger" onclick="deleteAd('${escapeHTML(a.id)}')">حذف</button></div>`).join("")||'<div class="empty">تبلیغی ثبت نشده.</div>';
 }
-
 async function saveAd(){
-    if(!isOwner){alert("دسترسی مالک ندارید.");return;}
-    const status=document.getElementById("adOwnerStatus");
-    try{
-      if(status){status.className="notice";status.textContent="در حال افزودن تبلیغ...";}
-      const title=adTitle?.value.trim()||"";
-      const link=adLink?.value.trim()||null;
-      let image=adImage?.value.trim()||"";
-      const file=adImageFile?.files?.[0];
-      if(file) image=await uploadImage(file,"ads");
-      if(!title||!image) throw new Error("عنوان و تصویر تبلیغ لازم است.");
-      const r=await sb.from("advertisements").insert({
-        title,image_url:image,target_url:link,active:true
-      });
-      if(r.error) throw r.error;
-      if(adTitle)adTitle.value="";
-      if(adImage)adImage.value="";
-      if(adLink)adLink.value="";
-      if(adImageFile)adImageFile.value="";
-      if(status){status.className="notice status-ok";status.textContent="✓ تبلیغ با موفقیت اضافه شد.";}
-      await loadOwnerAds();
-      await renderAdsFromOwner();
-    }catch(e){
-      console.error("saveAd",e);
-      if(status){status.className="notice status-bad";status.textContent="خطا: "+(e.message||e);}
-      else alert("ذخیره تبلیغ انجام نشد: "+(e.message||e));
+    if(!isOwner)return;
+    const title=adTitle.value.trim(),image=adImage.value.trim(),link=adLink.value.trim();
+    if(!title||!image){alert("عنوان و تصویر را وارد کنید.");return;}
+    if(sb){
+        const r=await sb.from("advertisements").insert({title,image_url:image,target_url:link||null,active:true});
+        if(r.error){alert("ذخیره تبلیغ انجام نشد: "+r.error.message);return;}
+    }else{
+        const ads=JSON.parse(localStorage.getItem("la3_ads")||"[]"); ads.unshift({title,image,link}); localStorage.setItem("la3_ads",JSON.stringify(ads));
     }
+    adTitle.value=adImage.value=adLink.value="";
+    await loadOwnerAds(); await renderAdsFromOwner();
 }
-
 async function deleteAd(id){
     if(!isOwner)return;
     if(sb && !String(id).startsWith("local-")){
-      const r=await sb.from("advertisements").delete().eq("id",id);
-      if(r.error){alert("حذف تبلیغ انجام نشد: "+r.error.message);return;}
+        const r=await sb.from("advertisements").delete().eq("id",id);
+        if(r.error){alert("حذف تبلیغ انجام نشد: "+r.error.message);return;}
     }else{
-      const i=Number(String(id).replace("local-",""));
-      const ads=JSON.parse(localStorage.getItem("la3_ads")||"[]");
-      ads.splice(i,1);localStorage.setItem("la3_ads",JSON.stringify(ads));
+        const i=Number(String(id).replace("local-","")); const ads=JSON.parse(localStorage.getItem("la3_ads")||"[]"); ads.splice(i,1); localStorage.setItem("la3_ads",JSON.stringify(ads));
     }
     await loadOwnerAds(); await renderAdsFromOwner();
 }
-
 async function renderAdsFromOwner(){
     const ads=await getAds();
     const box=document.querySelector('.ad-box'); if(!box)return;
-    if(!ads.length){
-      box.innerHTML='<div class="ad-slide active" style="display:block"><div style="height:170px;display:flex;align-items:center;justify-content:center;color:#687789">هنوز تبلیغی ثبت نشده است.</div></div>';
-      return;
-    }
-    box.innerHTML=ads.slice(0,5).map((a,i)=>`
-      <div class="ad-slide ${i===0?'active':''}">
-        <a href="${escapeHTML(a.target_url||'#')}" target="_blank" rel="noopener">
-          <img src="${escapeHTML(a.image_url||"")}" alt="${escapeHTML(a.title||"تبلیغ")}">
-          <div class="ad-caption">${escapeHTML(a.title||"تبلیغ")}</div>
-        </a>
-      </div>`).join('')+
-      `<div class="dots">${ads.slice(0,5).map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('')}</div>`;
+    if(!ads.length)return;
+    box.innerHTML=ads.slice(0,5).map((a,i)=>`<div class="ad-slide ${i===0?'active':''}"><a href="${escapeHTML(a.target_url||'#')}" target="_blank" rel="noopener"><img src="${escapeHTML(a.image_url||"")}" alt="تبلیغ"><div class="ad-caption">${escapeHTML(a.title)}</div></a></div>`).join('')+'<div class="dots">'+ads.slice(0,5).map((_,i)=>`<span class="dot ${i===0?'active':''}"></span>`).join('')+'</div>';
     startAds();
     attachMediaErrorHandlers(box);
 }
-
 let pendingTweetImage = null;
 let pendingChatImage = null;
 
@@ -2062,7 +1878,6 @@ async function restoreSession(){
         app.classList.remove("hidden");
         document.getElementById("currentUser").innerHTML=currentUser.isOwner ? "👑 مالک — "+escapeHTML(currentUser.name)+" "+renderVerified(currentUser) : "@"+escapeHTML(currentUser.username)+" — "+escapeHTML(currentUser.name)+" "+renderVerified(currentUser);
         ownerButton.classList.toggle("hidden",!isOwner);
-        document.getElementById("ownerAccessButton")?.classList.toggle("hidden",isOwner);
         await loadTweets(); await loadChats(); renderChannel(); renderAdsFromOwner(); startRealtime();
         return true;
     }catch(e){ console.error("restoreSession",e); return false; }
@@ -2085,7 +1900,6 @@ async function restorePreviousAccount(){
         loginPage.classList.add("hidden"); channelPage.classList.add("hidden"); app.classList.remove("hidden");
         document.getElementById("currentUser").innerHTML=currentUser.isOwner ? "👑 مالک — "+escapeHTML(currentUser.name)+" "+renderVerified(currentUser) : "@"+escapeHTML(currentUser.username)+" — "+escapeHTML(currentUser.name)+" "+renderVerified(currentUser);
         ownerButton.classList.toggle("hidden",!isOwner);
-        document.getElementById("ownerAccessButton")?.classList.toggle("hidden",isOwner);
         await loadTweets(); await loadChats(); renderChannel(); renderAdsFromOwner(); startRealtime();
     }catch(e){console.error(e);showNotice("ورود قبلی انجام نشد: "+e.message);}
 }
@@ -2112,18 +1926,7 @@ function startRealtime(){
       .on("postgres_changes",{event:"*",schema:"public",table:"channel_settings"},()=>{loadChannel();loadChannelPage()})
       .on("postgres_changes",{event:"*",schema:"public",table:"channel_posts"},()=>{loadChannel();loadChannelPage();loadChannelPostsForOwner()})
       .subscribe();
-    const profileCh = sb.channel("la3-profiles-live")
-      .on("postgres_changes",{event:"*",schema:"public",table:"profiles"},(payload)=>{
-          if(currentUser && payload.new && payload.new.id === currentUser.id){
-              currentUser.verified=!!payload.new.is_verified || !!payload.new.is_owner;
-              currentUser.isOwner=!!payload.new.is_owner;
-              isOwner=!!payload.new.is_owner;
-              document.getElementById("ownerButton")?.classList.toggle("hidden",!isOwner);
-          }
-          loadTweets(); loadChats();
-      })
-      .subscribe();
-    realtimeSubscriptions=[chatCh,tweetCh,adsCh,channelCh,profileCh];
+    realtimeSubscriptions=[chatCh,tweetCh,adsCh,channelCh];
 }
 
 /* =========================
@@ -2144,6 +1947,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateOwnerModeUI();
     // اگر نشست قبلی روی همین دستگاه وجود داشته باشد، خودکار برگردانده می‌شود.
     restoreSession();
+    document.getElementById("restoreButton")?.addEventListener("click", restorePreviousAccount);
     document.getElementById("ownerButton")?.addEventListener("click", openOwner);
     document.getElementById("ownerBackButton")?.addEventListener("click", closeOwner);
     document.getElementById("saveChannelButton")?.addEventListener("click", saveChannel);
@@ -2153,22 +1957,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("chatImageButton")?.addEventListener("click",()=>document.getElementById("chatImageInput").click());
     document.getElementById("tweetImageInput")?.addEventListener("change",e=>selectTweetImage(e.target.files[0]));
     document.getElementById("chatImageInput")?.addEventListener("change",e=>selectChatImage(e.target.files[0]));
-    document.getElementById("adImageFile")?.addEventListener("change",e=>{
-      const f=e.target.files?.[0]; if(f && adImage) adImage.value="";
-    });
-    document.getElementById("channelAvatarFile")?.addEventListener("change",e=>{
-      const f=e.target.files?.[0]; if(f && channelAvatarInput) channelAvatarInput.value="";
-    });
-    document.getElementById("channelPostImageFile")?.addEventListener("change",e=>{
-      const f=e.target.files?.[0];
-      if(f && channelPostImage) channelPostImage.value="";
-
-      const status=document.getElementById("channelPostOwnerStatus");
-      if(f && status){
-        status.className="notice";
-        status.textContent="📷 تصویر انتخاب شد: "+f.name+" — هنگام افزودن پست آپلود می‌شود.";
-      }
-    });
     document.getElementById("openChannelButton")?.addEventListener("click",openChannelPage);
     document.getElementById("channelBackButton")?.addEventListener("click",closeChannelPage);
     loadChannel();
